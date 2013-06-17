@@ -1,0 +1,27 @@
+{
+  "build": {
+    "phonegap": {
+      "enabled": false,
+      "icon": {
+        "src": "icon.png",
+        "role": "default"
+      },
+      "preferences": {
+        "phonegap-version": "2.0.0"
+      },
+      "targets": {},
+      "appId": ""
+    }
+  },
+  "preview": {
+    "top_file": "debug.html"
+  },
+  "author": {
+    "name": "Medhi Widjaja",
+    "href": "medhiw@me.com"
+  },
+  "id": "19282",
+  "version": "0.1",
+  "name": "microtap",
+  "title": "MicroTap"
+}

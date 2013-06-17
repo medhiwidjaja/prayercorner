@@ -1,0 +1,148 @@
+/*
+	Put anything you reference with "url()" in ../assets/
+	This way, you can minify your application, and just remove the "source" folder for production
+*/
+
+// Grays
+// -------------------------
+@black:                 #06101D;
+@grayDarker:            #171F2D;
+@grayDark:              #242C41;
+@gray:                  #474F64;
+@grayLight:             #757E88;
+@grayLighter:           #CED2CB;
+@white:                 #FAFAFA;
+
+
+// Accent colors
+// -------------------------
+@blue:                  #006A9A;
+@blueDark:              #003B65;
+@green:                 #698733;
+@red:                   #A12416;
+@yellow:                #FFAE00;
+@orange:                #E5521D;
+@pink:                  #FFAAA1;
+@purple:                #624583;
+
+.foreplot-panels {
+	color: white;
+	background: #555;
+}
+.foreplot-panels > * {
+	width: 320px;
+	box-shadow: -4px 0px 4px rgba(0,0,0,0.3);
+	-moz-box-shadow: -4px 0px 4px rgba(0,0,0,0.3);
+	-webkit-box-shadow: -4px 0px 4px rgba(0,0,0,0.3);
+}
+
+.foreplot-groundfloor, .foreplot-levelone, .article-list {
+	background: url(/assets/bg.png);
+}
+
+.foreplot-groundfloor {
+	width: 200px;
+	min-width: 40px;
+}
+
+.foreplot-item {
+	position: relative;
+	border-top: 1px solid #444;
+	border-bottom: 1px solid #222;
+	padding: 10px;
+	background-color: #333333;
+}
+
+.foreplot-item.onyx-selected {
+	background-color: #00315d;
+}
+
+.foreplot-item-title {
+	position: absolute;
+	top: 6px;
+	right: 0;
+	left: 50px;
+	font-size: 16px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.foreplot-item-description {
+	position: absolute;
+	top: 28px;
+	right: 0;
+	left: 50px;
+	font-size: 11px;
+	color: #ccc;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.foreplot-item-thumbnail {
+	width: 30px;
+	height: 30px;
+}
+.foreplot-more-button {
+	color: white; margin: 10px;
+}
+.foreplot-more-spinner {
+	vertical-align: middle;
+	margin: -4px 0 0 4px;
+}
+
+.foreplot-menu-title {
+	position: absolute;
+	top: 16px;
+	right: 0;
+	left: 50px;
+	font-size: 16px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.foreplot-item > .icon {
+	font-size: 24px;
+	color: #8587ad;
+}
+
+.foreplot-header-row {
+	background-color: @gray;
+	color: @orange;
+	padding: 3px;
+	font-size: 14px;
+	padding-left: 10px;
+}
+
+.foreplot-center {
+	margin: auto;
+}
+
+.foreplot-main {
+	background-color: #333;
+}
+
+.foreplot-image {
+	box-sizing: border-box;
+	max-height: 90%;
+	max-width: 90%;
+	border: solid 5px #CCC;
+	box-shadow: 1px 1px 5px #999;
+	width: auto;
+	height: auto;
+}
+
+.foreplot-image.wide {
+	width: 100%;
+}
+
+
+@media all and (max-width: 800px) {
+	.foreplot-image.wide {
+		width: auto;
+	}
+}
+
+.foreplot-image.tall {
+	height: 100%;
+}
