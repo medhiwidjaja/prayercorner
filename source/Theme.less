@@ -14,14 +14,39 @@
 /* Onyx default variable definitions: */
 @import "../lib/onyx/css/onyx-variables.less";
 
+// Accent colors
+// -------------------------
+@black:                 #06101D;
+@grayDarker:            #171F2D;
+@grayDark:              #242C41;
+@gray:                  #474F64;
+@grayLight:             #757E88;
+@grayLighter:           #CED2CB;
+@white:                 #FAFAFA;
+
+@plBlue:                  #006A9A;
+@plBlueDark:              #003B65;
+@plGreen:                 #698733;
+@plRed:                   #A12416;
+@plYellow:                #FFAE00;
+@plOrange:                #E5521D;
+@plPink:                  #FFAAA1;
+@plPurple:                #624583;
+@darkRed:				#7d0000;
+@lightBackground:       #FDFFF7;
+
 /* Place your Onyx variable overrides here -------------------- */
 // @onyx-font-family: "Open Sans", Asap, Arial;
-@onyx-font-family: Asap, Arial;
-@onyx-text-color: pink;
-@onyx-toolbar-text-color: pink;
-@onyx-button-text-color: pink;
-@onyx-grabber-image: url(../lib/onyx/images/grabbutton.png);
-@onyx-gradient: url(../lib/onyx/images/gradient.png);
+@onyx-font-family: Alegreya, Kreon, Arial;
+@onyx-grabber-image: url(/assets/grabbutton.png);
+@onyx-gradient: url(/assets/toolbar.png);
+
+@onyx-toolbar-text-color: @darkRed;
+@onyx-text-color: @grayDark;
+
+@onyx-background: @lightBackground;
+@onyx-light-background: @lightBackground;
+@onyx-dark-background: @darkRed;
 
 /* ------------------------------------- end variable overrides */
 
@@ -31,6 +56,12 @@
 /* Place your Onyx rule overrides here ------------------------ */
 body {
 	font-family: @onyx-font-family;
+}
+
+.onyx-toolbar {
+	font-family: "Helvetica Neue", Arial, sans-serif;
+	border: none;
+	padding: 4px 8px;
 }
 
 /* ----------------------------------------- end rule overrides */

@@ -1,60 +1,53 @@
-enyo.kind({
-	name: "Foreplot.GroundFloor",
-	kind: "FittableRows",
-	classes: "foreplot-groundfloor enyo-unselectable enyo-fit",
-	events: {
-		onGFGrabberTap: ""
-	},
-	components: [{
-		kind: "onyx.Toolbar", 
-		components: [
-			{kind: "onyx.Grabber", ontap: "grabberTap"},
-			{content: "GroundFloor", fit: true}
-		]
-	},{
-		kind: "enyo.Repeater", 
-		fit: true, 
-		touch: true, 
-		count: 5,
-		onSetupItem: "setupItem", 
-		components: [{
-			name: "item",  
-			classes: "foreplot-item enyo-border-box", 
-			ontap: "itemTap", 
-			components: [
-				//{name: "thumbnail", kind: "Image", classes: "foreplot-thumbnail"},
-				{name: "icon", tag: "i", classes:"icon"},
-				{name: "title", classes: "foreplot-menu-title"},
-				{name: "description", classes: ""}
+enyo.kind({ 
+	name: "GroundFloor",
+	kind: "enyo.FittableRows",
+	classes: "plist-groundfloor wide",
+	draggable: false,
+	components: [
+		{ name: "GFTopToolbar", kind: "onyx.Toolbar", classes: "groundfloor-toolbar", components: [
+				{ kind: "onyx.Grabber" },
+				{ kind: "StylishHeader", title: "Family", watermark: true }
 			]
-		}]
-	},{
-		kind: "onyx.Toolbar", 
-		components: [
-			{kind: "onyx.IconButton", src: "assets/Onyx-Icons-Examples-DarkBkgrnd-Square.png"},
-			{kind: "onyx.IconButton", src: "assets/menu-icon-bookmark.png"},
-			{fit: true},
-			{name: "fetchSpinner", kind: "Image", src: "assets/spinner.gif", showing: false}
-		]
-	}],
-	renderRow: function() {
+		},
+		{ kind: "enyo.Scroller", 
+			strategyKind: "TouchScrollStrategy",
+			horizontal: "hidden",
+			fit: true,
+			components: [
+				{ kind: "GroupList", classes: "living-room" },
+				{ kind: "swash-big", classes: "swash-dark" },
+				{ style: "margin-top:20px" }
+			]
+		},
+		{ name: "GFBottomToolbar", kind: "onyx.Toolbar", classes: "groundfloor-toolbar", components: [
+				{ content: "＋" }
+			]
+		}
+	]
+});
+
+enyo.kind({
+	name: "GroupList",
+	components: [
+		{ kind: "Repeater", onSetupItem: "setupItem", components: [
+			{ name: "item", components: [
+				{ name: "title", classes: "prayer-list-item"},
+				{ kind: "swash-small", classes: "swash-dark" }
+			]}
+		]},
+	],
+	create: function() {
 		this.inherited(arguments);
+		this.$.repeater.setCount(this.list.length);
 	},
 	setupItem: function(inSender, inEvent) {
-		var menuList = [
-			{title: "Article", thumbnail: "icon-file"},
-			{title: "Alternatives", thumbnail: "icon-list-ul"},
-			{title: "Criteria", thumbnail: "icon-sitemap"},
-			{title: "Ratings", thumbnail: "icon-tasks"},
-			{title: "Results", thumbnail: "icon-bar-chart"},
-		];
-		var menu = menuList[inEvent.index];
+		var prayer = this.list[inEvent.index];
 		var item = inEvent.item;
-		item.$.title.setContent(menu.title);
-		item.$.icon.addClass('icon '+menu.thumbnail);
+		item.$.title.setContent(prayer.title);
 		return true;
 	},
-	grabberTap: function() {
-		this.doGFGrabberTap();
-	}
+	list: [
+		{title: "Vacation as a family"},
+		{title: "Guidance as we move to new city. Dad’s job, Mom’s coping with new responsibilities, Bob and Fiona’s schools" }
+	]
 });

@@ -1,5 +1,6 @@
 enyo.depends(
-	"ArticleSearch.js",
-	"Row.js",
-	"ViewStack.js"
+	"swashes.js",
+	"StylishHeader.js",
+	"CalDate.js",
+	"CalDate.css"
 );

@@ -1,14 +1,14 @@
 enyo.kind({
-	name: "Foreplot.Application",
+	name: "PrayerList.Application",
 	kind: "enyo.Application",
-	controllers: [{
-		name: "article",
-		kind: "Foreplot.ArticleController"
-	}, {
-		name: "articles",
-		kind: "Foreplot.ArticlesController"
-	}],
-	view: "Foreplot.RootView",
+	// controllers: [{
+	// 	name: "article",
+	// 	kind: "PrayerList.ArticleController"
+	// }, {
+	// 	name: "articles",
+	// 	kind: "PrayerList.ArticlesController"
+	// }],
+	view: "PrayerList.RootView",
 
 	// This function strips HTML codes from a string
 	// Note: Maybe unsafe if the string contains malicious codes

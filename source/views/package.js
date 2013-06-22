@@ -1,9 +1,8 @@
 enyo.depends(
 	"shared",
-	"articles",
-	"users",
+	"items",
+	"RootView.js",
 	"Basement.js",
 	"GroundFloor.js",
-	"LevelOne.js",
-	"RootView.js"
+	"UpperFloor.js"
 );

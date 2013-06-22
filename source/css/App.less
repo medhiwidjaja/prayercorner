@@ -25,27 +25,141 @@
 @pink:                  #FFAAA1;
 @purple:                #624583;
 
-.foreplot-panels {
-	color: white;
-	background: #555;
+@lightText:				#FFEFCB;
+@darkRed:				#7d0000;
+@darkerRed:				#2e0304;
+@lightBackground:       #FDFFF7;
+@lightGray:				#ccc;
+@darkGray:				#222;
+
+
+.onyx-toolbar-inline > *, .enyo-fittable-columns-layout.onyx-toolbar-inline > * {
+	margin: 1px 6px;
 }
-.foreplot-panels > * {
-	width: 320px;
+
+/* Basement */
+
+.basement-title {
+	font-family: Tangerine;
+	font-size: 32px;
+	text-align: center;
+	padding: 10px 5px;
+	color: @lightText;
+}
+
+.basement-header {
+	font-family: "Alegreya SC";
+	color: @lightText;
+	margin: 4px 25px;
+}
+
+.today-header {
+	font-family: "Alegreya SC";
+	color: @lightText;
+	margin: 4px 0 0 25px;
+}
+
+/* Common */
+
+.middle {
+	vertical-align: middle;
+}
+
+.plist-panels {
+
+}
+.plist-panels > * {
+	width: 300px;
+	min-width: 300px;
 	box-shadow: -4px 0px 4px rgba(0,0,0,0.3);
 	-moz-box-shadow: -4px 0px 4px rgba(0,0,0,0.3);
 	-webkit-box-shadow: -4px 0px 4px rgba(0,0,0,0.3);
+	background-color: @lightBackground;
 }
 
-.foreplot-groundfloor, .foreplot-levelone, .article-list {
-	background: url(/assets/bg.png);
+.plist-basement {
+    background: @darkerRed;
+    background-image: -moz-linear-gradient(top, @darkRed, @darkerRed);
+    background-image: -ms-linear-gradient(top, @darkRed, @darkerRed);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@darkRed), to(@darkerRed));
+    background-image: -webkit-linear-gradient(top, @darkRed, @darkerRed);
+    background-image: -o-linear-gradient(top, @darkRed, @darkerRed);
+    background-image: linear-gradient(top, @darkRed, @darkerRed);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darkRed', endColorstr='@darkerRed', GradientType=0);
 }
 
-.foreplot-groundfloor {
-	width: 200px;
-	min-width: 40px;
+.list-item-title {
+	font-family: "Alegreya";
+	color: @lightText;
+	margin: 4px 0 0 40px;
 }
 
-.foreplot-item {
+.list-item-count {
+	font-family: "Alegreya";
+	font-size: 14px;
+	color: @lightText;
+	background-color: #CD6264;
+	border-radius: 4px;
+	float: right;
+	margin: 4px 20px 0 0;
+	padding: 1px 4px;
+}
+
+/* Ground Floor */
+
+.groundfloor-toolbar {
+	background: @lightBackground;
+}
+.plist-groundfloor {
+	min-width: 300px;
+}
+
+.living-room {
+	padding: 16px 16px;
+}
+
+.prayer-list-item {
+	font-family: "Alegreya";
+	color: @darkGray;
+	margin: 4px 10px;
+	text-align: center
+}
+
+.prayer-list-divider {
+
+}
+
+.verse-item {
+	font-family: "Alegreya";
+	font-style: italic;
+	color: @darkGray;
+	margin: 4px 0 0 0px;
+}
+
+.verse-address {
+	font-family: "Alegreya SC";
+	font-size: 13px;
+	color: @darkGray;
+	text-align: right;
+	letter-spacing: 3px;
+	margin: 4px 4px 12px 0;
+}
+
+/* Upper Floor */
+.plist-upperfloor {
+	min-width: 300px;
+
+}
+
+.upperfloor-header {
+	font-family: "Alegreya SC";
+	color: @darkRed;
+	letter-spacing: 5px;
+	margin: 14px 0px;
+}
+
+.plist-item {
 	position: relative;
 	border-top: 1px solid #444;
 	border-bottom: 1px solid #222;
@@ -53,11 +167,17 @@
 	background-color: #333333;
 }
 
-.foreplot-item.onyx-selected {
+.plist-item.onyx-selected {
 	background-color: #00315d;
 }
 
-.foreplot-item-title {
+.journal-entry {
+	margin-left: 10px;
+	font-family: "Alegreya";
+	color: @darkGray;
+}
+
+.plist-item-title {
 	position: absolute;
 	top: 6px;
 	right: 0;
@@ -67,30 +187,9 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
-.foreplot-item-description {
-	position: absolute;
-	top: 28px;
-	right: 0;
-	left: 50px;
-	font-size: 11px;
-	color: #ccc;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-.foreplot-item-thumbnail {
-	width: 30px;
-	height: 30px;
-}
-.foreplot-more-button {
-	color: white; margin: 10px;
-}
-.foreplot-more-spinner {
-	vertical-align: middle;
-	margin: -4px 0 0 4px;
-}
 
-.foreplot-menu-title {
+
+.plist-menu-title {
 	position: absolute;
 	top: 16px;
 	right: 0;
@@ -101,12 +200,12 @@
 	text-overflow: ellipsis;
 }
 
-.foreplot-item > .icon {
+.plist-item > .icon {
 	font-size: 24px;
 	color: #8587ad;
 }
 
-.foreplot-header-row {
+.plist-header-row {
 	background-color: @gray;
 	color: @orange;
 	padding: 3px;
@@ -114,15 +213,15 @@
 	padding-left: 10px;
 }
 
-.foreplot-center {
+.plist-center {
 	margin: auto;
 }
 
-.foreplot-main {
+.plist-main {
 	background-color: #333;
 }
 
-.foreplot-image {
+.plist-image {
 	box-sizing: border-box;
 	max-height: 90%;
 	max-width: 90%;
@@ -132,17 +231,110 @@
 	height: auto;
 }
 
-.foreplot-image.wide {
+.plist-image.wide {
 	width: 100%;
 }
 
 
 @media all and (max-width: 800px) {
-	.foreplot-image.wide {
+	.plist-image.wide {
 		width: auto;
 	}
 }
 
-.foreplot-image.tall {
+.plist-image.tall {
 	height: 100%;
 }
+
+/* Calendar */
+
+.cal-month {
+	font-size: 10px;
+}
+
+.cal-date {
+	font-size: 18px;
+	margin-top: -5px;
+}
+
+
+/********* Typography *********/
+
+.dark-red {
+	color: @darkRed;
+}
+
+.swashy-script {
+	font-family: "Lovers Quarrel";
+}
+
+.script-text {
+	font-family: "Tangerine";
+	font-size: 28px;
+}
+
+.stylish-text:first-child:first-letter {
+	font-family: "Lovers Quarrel";
+}
+
+.dropcap-text:first-child:first-letter {
+	float: left; color: #903; 
+	font-size: 45px; 
+	line-height: 30px; 
+	padding: 4px 8px 4px 3px; 
+	font-family: "Lovers Quarrel";
+	color: @darkRed;
+}
+
+/* Watermark */
+
+.watermark {
+	font-family: "Tangerine";
+	font-size: 70px;
+	opacity:0.1;
+	filter:alpha(opacity=10); /* For IE8 and earlier */
+	position: absolute;
+	left: 30px;
+	padding-right: 23px;
+}
+
+.lined-header h2 {
+	border-top: 1px solid #222222;
+	color: #222;
+	font: 800 20px/20px "open sans";
+	margin: 0 0 20px 0;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.lined-header h2 span {
+	background: #ef4723;
+	padding: 0 20px;
+	position: relative;
+	top: -10px;
+}
+
+.swash {
+	font-size: 26px;
+	line-height: 10px;
+	padding-top: 10px;
+	margin-bottom: -5px;
+	color: @lightText;
+	text-align: center;
+}
+
+.swash-small {
+	font-family: "MT-Extra";
+}
+
+.swash-big {
+	font-family: "Wingdings";
+}
+
+.swash-dark {
+	color: @darkRed;
+}
+
+
+
+

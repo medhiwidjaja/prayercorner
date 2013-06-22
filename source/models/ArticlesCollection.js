@@ -1,10 +1,10 @@
 enyo.kind({
 	name: "ArticlesCollection",
 	kind: "enyo.Collection",
-	model: "Foreplot.ArticleModel",
+	model: "PrayerList.ArticleModel",
 
 	collectionProperties: {
-		// localStorage: new Store("foreplot")
+		// localStorage: new Store("plist")
 	},
 	published: {
 		filter: "all",

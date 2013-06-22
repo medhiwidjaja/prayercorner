@@ -1,3 +1,3 @@
 enyo.ready(function () {
-	new Foreplot.Application({name: "app", renderTarget: "port"});
+	new PrayerList.Application({name: "app", renderTarget: "port"});
 });

@@ -1,3 +1,4 @@
 enyo.depends(
-	"App.js"
+	"App.js",
+	"storage.js"
 );

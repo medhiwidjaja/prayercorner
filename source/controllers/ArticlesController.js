@@ -1,9 +1,9 @@
 enyo.kind({
-	name: "Foreplot.ArticleController",
+	name: "PrayerList.ArticleController",
 	kind: "enyo.Controller"
 });
 
 enyo.kind({
-	name: "Foreplot.ArticlesController",
+	name: "PrayerList.ArticlesController",
 	kind: "enyo.Controller"
 });

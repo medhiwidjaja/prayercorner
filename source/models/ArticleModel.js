@@ -1,5 +1,5 @@
 enyo.kind({
-	name: "Foreplot.ArticleModel",
+	name: "PrayerList.ArticleModel",
 	kind: "enyo.Model",
 	modelProperties: {
 		defaults: {
