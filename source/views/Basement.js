@@ -27,34 +27,6 @@ enyo.kind({
 	]
 });
 
-enyo.kind({
-	name: "Categories",
-	components: [
-		{ kind: "Repeater", onSetupItem: "setupItem", components: [
-			{ name: "item", components: [
-				{ name: "count", classes: "list-item-count" },
-				{ name: "title", classes: "list-item-title"}
-			]}
-		]},
-	],
-	create: function() {
-		this.inherited(arguments);
-		this.$.repeater.setCount(this.catlist.length);
-	},
-	setupItem: function(inSender, inEvent) {
-		var menu = this.catlist[inEvent.index];
-		var item = inEvent.item;
-		item.$.title.setContent(menu.title);
-		item.$.count.setContent(menu.count);
-		return true;
-	},
-	catlist: [
-		{title: "Family", count: 8 },
-		{title: "Personal", count: 3 },
-		{title: "Work", count: 2 },
-		{title: "Church", count: 5 }
-	]
-});
 
 enyo.kind({
 	name: "Today",

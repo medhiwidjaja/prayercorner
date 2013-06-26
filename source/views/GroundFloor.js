@@ -3,6 +3,10 @@ enyo.kind({
 	kind: "enyo.FittableRows",
 	classes: "plist-groundfloor wide",
 	draggable: false,
+	events: {
+		onEditGroup: "",
+		onAddPrayerItem: ""
+	},
 	components: [
 		{ name: "GFTopToolbar", kind: "onyx.Toolbar", classes: "groundfloor-toolbar", components: [
 				{ kind: "onyx.Grabber" },
@@ -19,33 +23,59 @@ enyo.kind({
 				{ style: "margin-top:20px" }
 			]
 		},
-		{ name: "GFBottomToolbar", kind: "onyx.Toolbar", classes: "groundfloor-toolbar", components: [
-				{ content: "＋" }
+		{ name: "GFBottomToolbar", 
+			kind: "onyx.Toolbar", 
+			classes: "groundfloor-toolbar", 
+			layoutKind: "FittableColumnsLayout",
+			components: [
+				{ content: "＋", ontap: "addPrayerItem" },
+				{ fit: true },
+				{ content: "✍", ontap: "editGroup" }
 			]
 		}
-	]
+	],
+
+	editGroup: function() {
+		this.doEditGroup();
+		this.log();
+	},
+
+	addPrayerItem: function() {
+		this.doAddPrayerItem();
+		this.log();
+	}
 });
 
 enyo.kind({
 	name: "GroupList",
+	events: {
+		onViewPrayerItem: ""
+	},
 	components: [
 		{ kind: "Repeater", onSetupItem: "setupItem", components: [
-			{ name: "item", components: [
-				{ name: "title", classes: "prayer-list-item"},
+			{ name: "item", ontap: "viewPrayerItem", components: [
+				{ name: "title", classes: "prayer-list-item" },
 				{ kind: "swash-small", classes: "swash-dark" }
 			]}
 		]},
 	],
+
 	create: function() {
 		this.inherited(arguments);
 		this.$.repeater.setCount(this.list.length);
 	},
+
 	setupItem: function(inSender, inEvent) {
 		var prayer = this.list[inEvent.index];
 		var item = inEvent.item;
 		item.$.title.setContent(prayer.title);
 		return true;
 	},
+
+	viewPrayerItem: function(inSender, inEvent) {
+		this.doViewPrayerItem({item: this.list[inEvent.index]});
+	},
+
 	list: [
 		{title: "Vacation as a family"},
 		{title: "Guidance as we move to new city. Dad’s job, Mom’s coping with new responsibilities, Bob and Fiona’s schools" }

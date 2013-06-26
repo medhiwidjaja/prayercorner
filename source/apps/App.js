@@ -9,7 +9,7 @@ enyo.kind({
 	// 	kind: "PrayerList.ArticlesController"
 	// }],
 	view: "PrayerList.RootView",
-
+	
 	// This function strips HTML codes from a string
 	// Note: Maybe unsafe if the string contains malicious codes
 	// See: http://stackoverflow.com/questions/822452/strip-html-from-text-javascript

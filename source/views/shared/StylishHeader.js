@@ -8,7 +8,7 @@ enyo.kind({
 		watermark: ""
 	},
 	components: [
-		{ name: "watermark", classes: "stylish-text watermark", showing: this.watermark },
+		{ name: "watermark", classes: "stylish-text watermark" },
 		//{ name: "headertext", classes: "stylish-text dark-red" },
 		{ tag: "span", name: "firstLetter", classes: "swashy-script dark-red" },
 		{ tag: "span", name: "theRest", classes: "dark-red" }
@@ -16,7 +16,9 @@ enyo.kind({
 	rendered: function() {
 		this.inherited(arguments);
 		//this.$.headertext.setContent(this.title);
-		this.$.watermark.setContent(this.title);
+		if (this.watermark) {
+			this.$.watermark.setContent(this.title);
+		};
 		this.$.firstLetter.setContent(this.title[0]);
 		this.$.theRest.setContent(this.title.slice(1));
 	}

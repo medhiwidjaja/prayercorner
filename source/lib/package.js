@@ -1,4 +1,6 @@
 enyo.depends(
-	"MenuPane.js",
-	"ViewStack.js"
+	"database-enyo.js"
+	// "localstorage.js"
+	//"MenuPane.js",
+	//"ViewStack.js"
 );

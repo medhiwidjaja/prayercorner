@@ -25,8 +25,8 @@ enyo.kind({
 					{ kind: "AddJournalButton" },
 					{ kind: "swash-small", classes: "swash-dark" },
 					
-					{ kind: "StylishText", title: "Bible Promises", classes: "watermark dark-red" },
-					{ content: "Bible Promises", classes: "upperfloor-header" },
+					{ kind: "StylishText", title: "Biblical Promises", classes: "watermark dark-red" },
+					{ content: "Biblical Promises", classes: "upperfloor-header" },
 					
 					{ kind: "BibleVerseList" },
 					{ kind: "swash-big", classes: "swash-dark" },
@@ -35,10 +35,15 @@ enyo.kind({
 			]
 		},
 		{ name: "UFBottomToolbar", kind: "onyx.Toolbar", classes: "groundfloor-toolbar", components: [
-				{ content: "＋" }
+				{ content: "＋" },
+				{ content: "Done", classes: "done-button", ontap: "close" }
 			]
 		}
-	]
+	],
+
+	close: function() {
+		this.destroy();
+	}
 });
 
 
