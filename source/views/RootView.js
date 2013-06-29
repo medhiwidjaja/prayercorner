@@ -15,13 +15,14 @@ enyo.kind({
                 {
                     name: "basement",
                     kind: "Basement",
-                    onViewGroupItem: "viewGroupItem"
+                    onSelectGroup: "viewGroupItem",
+
                 },
                 {
                     name: "groundFloor",
                     kind: "GroundFloor",
                     classes: "enyo-fit",
-                    title: "Category",
+                    title: "Today's Prayers",
                     onEditGroup: "editGroup",
                     onAddPrayerItem: "addPrayerItem",
                     onViewPrayerItem: "viewPrayerItem"
@@ -92,7 +93,7 @@ enyo.kind({
             this.$.rootPanels.render();
             this.$.rootPanels.setIndex(1);
         };
-        this.log(inEvent.item.title);
+        this.log();
     },
 
     viewGroupItem: function(inSender, inEvent) {
@@ -104,6 +105,8 @@ enyo.kind({
             newComponent.render();
             this.$.rootPanels.render();
             this.$.rootPanels.setIndex(1);
+        } else {
+            this.$.groundFloor.$.header.render();
         };
         this.log(inEvent);
     }

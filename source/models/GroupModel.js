@@ -3,8 +3,9 @@ enyo.kind({
 	name: "PrayerList.GroupModel",
 	kind: "enyo.Model",
 	attributes: {
-		groupid: null,
+		rowID: null,
 		title: "",
+		count: "",
 		answeredCount: "",
 		unansweredCount: "",
 		createdDate: ""

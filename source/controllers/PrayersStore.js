@@ -1,7 +1,7 @@
 enyo.kind({
-	name: "Categories",
+	name: "PrayersStore",
     events: {
-        onReadData: ""
+        onReadPrayerData: ""
     },
 	components: [
   		{
@@ -34,20 +34,14 @@ enyo.kind({
 		this.inherited(arguments);
 		
 		if (!localStorage["PrayerList.firstRun"] && !this.runningQuery) {
-            this.populateDatabase();
+//            this.populateDatabase();
         } else {
         	this.all(this.bound.setList, this.bound.handleAllError);
         }
 	},
 
 	setList: function(inSender, inEvent) {
-		for (var idx in inEvent) {
-			this.catlist.push({ 
-				title: inEvent[idx].title,
-				count: inEvent[idx].ct
-			});
-		};
-        this.doReadData(inSender, inEvent);
+        this.doReadPrayerData(inSender, inEvent);
 	},
 
 
@@ -71,12 +65,8 @@ enyo.kind({
         // this.all(this.bound.setList, this.bound.handleError);
     },
 
-    // viewGroupItem: function(inSender, inEvent) {
-    // 	this.doViewGroupItem(this.catlist[inEvent.index]);
-    // },
-
     all: function(handleSuccess, handleError) {
-        var sql = 'SELECT g.title, count(p.rowID) as count FROM groups g, prayers p WHERE p.category = g.rowID GROUP BY p.category';
+        var sql = 'SELECT g.title as cat, p.title, p.category FROM groups g, prayers p WHERE p.category = g.rowID';
         this.$.db.query(sql, { "onSuccess": handleSuccess, "onError": handleError });
     },
 
@@ -115,7 +105,5 @@ enyo.kind({
     handleSetListError: function() {
     	this.log("Error");
     },
-
-    catlist: [],
 
 });

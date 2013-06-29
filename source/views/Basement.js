@@ -36,9 +36,22 @@ enyo.kind({
 	name: "PrayerList.CatList",
 	kind: "enyo.DataRepeater", 
 	controller: "pl.groupsCollection", 
-	components: [
-		{ bindFrom: ".title", classes: "list-item-title" }
-	]
+	events: {
+		onSelectGroup: ""
+	},
+	components: [{
+		ontap: "itemTap",
+		layoutKind: "FittableColumnsLayout", components: [
+			{ bindFrom: ".title", classes: "list-item-title" },
+			{ bindFrom: ".count", classes: "list-item-count" }
+		]
+	}],
+
+	itemTap: function(inSender, inEvent) {
+		this.controller.setSelectedTitle(inEvent.model.title);
+		this.doSelectGroup(inEvent);
+		this.log(inEvent.model.rowID + " " + inEvent.model.title);
+	}
 })
 
 enyo.kind({

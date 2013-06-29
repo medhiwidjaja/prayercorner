@@ -76,7 +76,7 @@ enyo.kind({
     // },
 
     all: function(handleSuccess, handleError) {
-        var sql = 'SELECT g.title, count(p.rowID) as count FROM groups g, prayers p WHERE p.category = g.rowID GROUP BY p.category';
+        var sql = 'SELECT g.rowID, g.title, count(p.rowID) as count FROM groups g LEFT OUTER JOIN prayers p ON p.category = g.rowID GROUP BY p.category ORDER BY g.rowID';
         this.$.db.query(sql, { "onSuccess": handleSuccess, "onError": handleError });
     },
 

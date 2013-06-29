@@ -6,6 +6,11 @@ enyo.kind({
 			name: "pl.groupsCollection",
 			kind: "PrayerList.GroupsController",
 			global: true
+		},
+		{
+			name: "pl.itemsCollection",
+			kind: "PrayerList.PrayersController",
+			global: true
 		}
 	],
 	view: "PrayerList.RootView",
