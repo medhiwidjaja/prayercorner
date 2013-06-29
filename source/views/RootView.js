@@ -14,12 +14,14 @@ enyo.kind({
             components: [
                 {
                     name: "basement",
-                    kind: "Basement"
+                    kind: "Basement",
+                    onViewGroupItem: "viewGroupItem"
                 },
                 {
                     name: "groundFloor",
                     kind: "GroundFloor",
                     classes: "enyo-fit",
+                    title: "Category",
                     onEditGroup: "editGroup",
                     onAddPrayerItem: "addPrayerItem",
                     onViewPrayerItem: "viewPrayerItem"
@@ -29,10 +31,15 @@ enyo.kind({
                 //     kind: "UpperFloor",
                 //     classes: "wide"
                 // }
-               
+
             ]
         }
     ],
+
+    render: function() {
+        this.inherited(arguments);
+        this.$.basement.render();
+    },
 
     toggleBasement: function() {
         this.$.rootPanels.next();    
@@ -86,5 +93,18 @@ enyo.kind({
             this.$.rootPanels.setIndex(1);
         };
         this.log(inEvent.item.title);
+    },
+
+    viewGroupItem: function(inSender, inEvent) {
+        if (! this.$.groundFloor) {
+            var newComponent = this.$.rootPanels.createComponent(
+                {name: "groundFloor", title: inEvent.title, kind: "GroundFloor"}, 
+                {owner: this}
+            );
+            newComponent.render();
+            this.$.rootPanels.render();
+            this.$.rootPanels.setIndex(1);
+        };
+        this.log(inEvent);
     }
 });

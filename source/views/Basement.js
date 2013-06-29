@@ -12,7 +12,7 @@ enyo.kind({
 				{ kind: "Today" },
 				{ kind: "swash-small" },
 				{ content: "Categories", classes: "basement-header" },
-				{ kind: "Categories" },
+				{ name: "groups", kind: "PrayerList.CatList" },
 				{ kind: "swash-small" },
 				{ content: "Answered", classes: "basement-header" },
 				{ content: "Unanswered", classes: "basement-header" },
@@ -24,9 +24,22 @@ enyo.kind({
 				{ style: "margin-top:20px" }
 			]
 		}
-	]
+	],
+
+	render: function() {
+        this.inherited(arguments);
+        this.$.groups.render();
+    },
 });
 
+enyo.kind({
+	name: "PrayerList.CatList",
+	kind: "enyo.DataRepeater", 
+	controller: "pl.groupsCollection", 
+	components: [
+		{ bindFrom: ".title", classes: "list-item-title" }
+	]
+})
 
 enyo.kind({
 	name: "Today",

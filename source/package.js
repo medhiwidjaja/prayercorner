@@ -5,7 +5,7 @@ enyo.depends(
 	"lib",
 	"css",
 	"models",
-	//"controllers",
+	"controllers",
 	"views",
 	"apps",
 	// include our default entry point

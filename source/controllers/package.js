@@ -1,3 +1,3 @@
 enyo.depends(
-	"ArticlesController.js"
+	"GroupsController.js"
 );

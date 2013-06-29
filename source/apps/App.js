@@ -1,13 +1,13 @@
 enyo.kind({
 	name: "PrayerList.Application",
 	kind: "enyo.Application",
-	// controllers: [{
-	// 	name: "article",
-	// 	kind: "PrayerList.ArticleController"
-	// }, {
-	// 	name: "articles",
-	// 	kind: "PrayerList.ArticlesController"
-	// }],
+	controllers: [
+		{
+			name: "pl.groupsCollection",
+			kind: "PrayerList.GroupsController",
+			global: true
+		}
+	],
 	view: "PrayerList.RootView",
 	
 	// This function strips HTML codes from a string

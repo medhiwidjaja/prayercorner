@@ -1,25 +1,16 @@
 enyo.kind({
-	name: "Categories",
-	events: {
-		onViewGroupItem: ""
-	},
-	components: [
-		{ kind: "Repeater", onSetupItem: "setupItem", components: [
-			{ name: "item",
-				ontap: "viewGroupItem", 
-				components: [
-					{ name: "count", classes: "list-item-count" },
-					{ name: "title", classes: "list-item-title"}
-				]}
-		]},
-  		{
+    name: 'PrayerList.GroupsModel',
+    kind: enyo.Component,
+    components: [
+        {
             name: "db",
             kind: "onecrayon.Database",
             database: 'ext:com.prayerlist.db',
             version: "",
-            debug: true
+            //debug: (enyo.exists(enyo.fetchFrameworkConfig().debuggingEnabled) ? enyo.fetchFrameworkConfig().debuggingEnabled : false)
+            debug: false
         }
-	],
+    ],
 
     constructor: function() {
         this.inherited(arguments);
@@ -30,51 +21,26 @@ enyo.kind({
 
         // This is a common pattern for me; I do all my multi-use bindings in the constructor
         this.bound = {
-            finishFirstRun: enyo.bind(this, this.finishFirstRun),
-            setList: enyo.bind(this, this.setList),
-            handleAllError: enyo.bind(this, this.handleAllError),
-            handlePopulateError: enyo.bind(this, this.handlePopulateError),
-            handleSetListError: enyo.bind(this, this.handleSetListError)
+            finishFirstRun: enyo.bind(this, this.finishFirstRun)
         };
     },
 
-	create: function() {
-		this.inherited(arguments);
-		
-		if (!localStorage["PrayerList.firstRun"] && !this.runningQuery) {
+    create: function() {
+        // Components are not available until after this.inherited in create
+        this.inherited(arguments);
+
+        if (!localStorage["PrayerList.firstRun"] && !this.runningQuery) {
             this.populateDatabase();
-        } else {
-        	this.all(this.bound.setList, this.bound.handleAllError);
         }
-	},
+    },
 
-	setupItem: function(inSender, inEvent) {
-		var menu = this.catlist[inEvent.index];
-
-		var item = inEvent.item;
-		item.$.title.setContent(menu.title);
-		item.$.count.setContent(menu.count);
-		return true;
-	},
-
-	setList: function(results) {
-		for (var idx in results) {
-			this.catlist.push({ 
-				title: results[idx].title,
-				count: results[idx].ct
-			});
-		}
-		this.$.repeater.setCount(this.catlist.length);
-	},
-
+    // These methods are custom ones of my own, not standard Enyo overrides
 
     populateDatabase: function() {
         this.runningQuery = true;
         // Run the table creation schema and populate our items list
         this.$.db.setSchemaFromURL('/assets/db/PrayerListSchema.json', {
-        //this.$.db.setSchema(this.schema, {
-            onSuccess: this.bound.finishFirstRun,
-            onError: this.bound.handlePopulateError
+            onSuccess: this.bound.finishFirstRun
         });
     },
 
@@ -84,18 +50,12 @@ enyo.kind({
         // Set the database version (allows for schema upgrades down the road)
         this.$.db.changeVersion('1.0');
         this.runningQuery = false;
-
         // I proceed to refresh my document listings here
-        this.all(this.bound.setList, this.bound.handleError);
     },
 
-    viewGroupItem: function(inSender, inEvent) {
-    	this.doViewGroupItem(this.catlist[inEvent.index]);
-    },
-
-    all: function(handleSuccess, handleError) {
-        var sql = 'SELECT g.title, count(p.rowID) as ct FROM groups g, prayers p WHERE p.category = g.rowID GROUP BY p.category';
-        this.$.db.query(sql, { "onSuccess": handleSuccess, "onError": handleError });
+    all: function(callback) {
+        var sql = 'SELECT title FROM groups';
+        this.$.db.query(sql, { "onSuccess": callback });
     },
 
     findGroup: function(id, callback) {
@@ -120,20 +80,5 @@ enyo.kind({
         };
         // Run the query
         this.$.db.query(query, { "onSuccess": callback });
-    },
-
-    handlePopulateError: function() {
-    	this.log("Error");
-    },
-
-    handleAllError: function() {
-    	this.log("Error");
-    },
-
-    handleSetListError: function() {
-    	this.log("Error");
-    },
-
-    catlist: [],
-
+    }
 });

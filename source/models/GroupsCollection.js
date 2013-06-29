@@ -1,5 +1,5 @@
 enyo.kind({
-	name: "GroupsCollection",
+	name: "xGroupsCollection",
 	kind: "enyo.Collection",
 	model: "PrayerList.GroupItem",
 
@@ -19,7 +19,7 @@ enyo.kind({
 		return this.collection.get("answered");
 	}, "content"),
 	
-	publicCount: enyo.computed(function () {
+	answeredCount: enyo.computed(function () {
 		return this.get("answered").length;
 	}, "answered"),
 

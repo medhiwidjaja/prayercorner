@@ -3,6 +3,9 @@ enyo.kind({
 	kind: "enyo.FittableRows",
 	classes: "plist-groundfloor wide",
 	draggable: false,
+	published: {
+		title: ""
+	},
 	events: {
 		onEditGroup: "",
 		onAddPrayerItem: ""
@@ -10,7 +13,7 @@ enyo.kind({
 	components: [
 		{ name: "GFTopToolbar", kind: "onyx.Toolbar", classes: "groundfloor-toolbar", components: [
 				{ kind: "onyx.Grabber" },
-				{ kind: "StylishHeader", title: "Family", watermark: true }
+				{ name: "header", kind: "StylishHeader", title: this.title, watermark: true }
 			]
 		},
 		{ kind: "enyo.Scroller", 
@@ -48,21 +51,28 @@ enyo.kind({
 
 enyo.kind({
 	name: "GroupList",
+	published: {
+		list: ""
+	},
 	events: {
 		onViewPrayerItem: ""
 	},
 	components: [
-		{ kind: "Repeater", onSetupItem: "setupItem", components: [
-			{ name: "item", ontap: "viewPrayerItem", components: [
-				{ name: "title", classes: "prayer-list-item" },
-				{ kind: "swash-small", classes: "swash-dark" }
-			]}
+		{ name: "groups", 
+			kind: "Repeater", 
+			count: 2,
+			// controller: "pl.groupsCollection", 
+			components: [
+				{ ontap: "viewPrayerItem", components: [
+					{ name: "title", classes: "prayer-list-item" },
+					{ kind: "swash-small", classes: "swash-dark" }
+				]}
 		]},
 	],
 
-	create: function() {
+	render: function() {
 		this.inherited(arguments);
-		this.$.repeater.setCount(this.list.length);
+		this.$.groups.render();
 	},
 
 	setupItem: function(inSender, inEvent) {
