@@ -107,6 +107,7 @@ enyo.kind({
             this.$.rootPanels.setIndex(1);
         } else {
             this.$.groundFloor.$.header.render();
+            this.$.rootPanels.setIndex(1);
         };
         this.log(inEvent);
     }
