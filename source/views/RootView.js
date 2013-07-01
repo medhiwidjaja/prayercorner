@@ -15,7 +15,7 @@ enyo.kind({
                 {
                     name: "basement",
                     kind: "Basement",
-                    onSelectGroup: "viewGroupItem",
+                    onSelectGroup: "viewGroupItems",
 
                 },
                 {
@@ -96,10 +96,10 @@ enyo.kind({
         this.log();
     },
 
-    viewGroupItem: function(inSender, inEvent) {
+    viewGroupItems: function(inSender, inEvent) {
         if (! this.$.groundFloor) {
             var newComponent = this.$.rootPanels.createComponent(
-                {name: "groundFloor", title: inEvent.title, kind: "GroundFloor"}, 
+                {name: "groundFloor", title: inEvent.title, groupId: inEvent.model.rowID, kind: "GroundFloor"}, 
                 {owner: this}
             );
             newComponent.render();

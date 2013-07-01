@@ -1,5 +1,8 @@
 enyo.kind({
 	name: "PrayersStore",
+    published: {
+        groupID: ""
+    },
     events: {
         onReadPrayerData: ""
     },
@@ -36,7 +39,8 @@ enyo.kind({
 		if (!localStorage["PrayerList.firstRun"] && !this.runningQuery) {
 //            this.populateDatabase();
         } else {
-        	this.all(this.bound.setList, this.bound.handleAllError);
+        	this.forGroup(this.groupID, this.bound.setList, this.bound.handleAllError);
+            //this.forGroup(1, this.bound.setList, this.bound.handleAllError);
         }
 	},
 
@@ -68,6 +72,15 @@ enyo.kind({
     all: function(handleSuccess, handleError) {
         var sql = 'SELECT g.title as cat, p.title, p.category FROM groups g, prayers p WHERE p.category = g.rowID';
         this.$.db.query(sql, { "onSuccess": handleSuccess, "onError": handleError });
+    },
+
+    forGroup: function(id, handleSuccess, handleError) {
+        if (!id) {
+            this.all(handleSuccess, handleError);
+        } else {
+            var sql = 'SELECT g.title as cat, p.title, p.category FROM groups g, prayers p WHERE p.category = g.rowID AND g.rowID = ?';
+            this.$.db.query(sql, { values: [ id ], "onSuccess": handleSuccess, "onError": handleError });
+        }
     },
 
     findGroup: function(id, callback) {

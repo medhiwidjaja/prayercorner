@@ -23,8 +23,6 @@ enyo.kind({
     // }, "index"),
 
   	dataread: function(inSender, inEvent) {
-  		// FIX THIS: We need to removeAll first, because onReadData event is fired twice. Why?
-  		this.removeAll();
-  		this.add(inEvent);
+  		this.data(inEvent);
   	}
 });

@@ -23,7 +23,7 @@ enyo.kind({
         // This is a common pattern for me; I do all my multi-use bindings in the constructor
         this.bound = {
             finishFirstRun: enyo.bind(this, this.finishFirstRun),
-            setList: enyo.bind(this, this.setList),
+            handleSuccess: enyo.bind(this, this.handleSuccess),
             handleAllError: enyo.bind(this, this.handleAllError),
             handlePopulateError: enyo.bind(this, this.handlePopulateError),
             handleSetListError: enyo.bind(this, this.handleSetListError)
@@ -36,11 +36,11 @@ enyo.kind({
 		if (!localStorage["PrayerList.firstRun"] && !this.runningQuery) {
             this.populateDatabase();
         } else {
-        	this.all(this.bound.setList, this.bound.handleAllError);
+        	this.all(this.bound.handleSuccess, this.bound.handleAllError);
         }
 	},
 
-	setList: function(inSender, inEvent) {
+	handleSuccess: function(inSender, inEvent) {
 		for (var idx in inEvent) {
 			this.catlist.push({ 
 				title: inEvent[idx].title,

@@ -4,7 +4,8 @@ enyo.kind({
 	classes: "plist-groundfloor wide",
 	draggable: false,
 	published: {
-		title: ""
+		title: "",
+		groupId: ""
 	},
 	events: {
 		onEditGroup: "",
@@ -42,7 +43,7 @@ enyo.kind({
 		this.inherited(arguments);
 		var binding = new enyo.Binding({
 			from: ".selectedTitle", source: pl.groupsCollection,
-			to  : "title", 			target: this.$.header
+			to  : ".title", 		target: this.$.header
 		});
 	},
 

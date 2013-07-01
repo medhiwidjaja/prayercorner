@@ -3,13 +3,32 @@ enyo.kind({
 	name: "PrayerList.PrayersController",
 	kind: "enyo.Collection",
 	model: "PrayerList.PrayerModel",
-    components: [
-    	{ name: "pdb", kind: "PrayersStore", onReadPrayerData: "dataread" }
-    ],
+	components: [
+		{ name: "pdb", kind: "PrayersStore", onReadPrayerData: "dataRead" }
+	],
+	
+	constructor: function() {
+		this.inherited(arguments);
+		this.bound = {
+			dataRead: enyo.bind(this, this.dataRead),
+			handleFetchResults: enyo.bind(this, this.handleFetchResults),
+			handleError: enyo.bind(this, this.handleError),
+		}
+	},
 
-  	dataread: function(inSender, inEvent) {
-  		// FIX THIS: We need to removeAll first, because onReadData event is fired twice. Why?
-  		this.removeAll();
-  		this.add(inEvent);
-  	}
+	fetchList: function(id) {
+		this.$.pdb.forGroup(id, this.bound.handleFetchResults, this.bound.handleError);
+	},
+
+	handleFetchResults: function(inEvent) {
+		this.data(inEvent);
+	},
+
+	dataRead: function(inSender, inEvent) {
+		this.data(inEvent);
+	},
+
+	handleError: function() {
+    	this.log("Error");
+    }
 });

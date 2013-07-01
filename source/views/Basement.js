@@ -50,6 +50,7 @@ enyo.kind({
 	itemTap: function(inSender, inEvent) {
 		this.controller.setSelectedTitle(inEvent.model.title);
 		this.doSelectGroup(inEvent);
+		pl.itemsCollection.fetchList(inEvent.model.rowID);
 		this.log(inEvent.model.rowID + " " + inEvent.model.title);
 	}
 })
