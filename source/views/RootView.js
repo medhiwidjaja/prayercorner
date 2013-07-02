@@ -62,13 +62,21 @@ enyo.kind({
 
     editGroup: function(inSender, inEvent) {
         this.log();
-        var newComponent = this.$.contentPanels.createComponent(
-            {name: "editGroup", kind: "UpperGroundFloor", onDoneEditing: "hideEditGroup"}, 
-            {owner: this}
-        );
-        newComponent.render();
-        this.$.contentPanels.render();
-        this.$.contentPanels.setIndex(1);
+        if (! this.$.editGroup) {
+            var newComponent = this.$.contentPanels.createComponent(
+                {
+                    name: "editGroup", 
+                    kind: "UpperGroundFloor", 
+                    title: inSender.name === "basement" ? "Add a Category" : "Edit a Category" , 
+                    category: inSender.name === "groundFloor" ? inEvent : "",
+                    onDoneEditing: "hideEditGroup"
+                }, 
+                {owner: this}
+            );
+            newComponent.render();
+            this.$.contentPanels.render();
+            this.$.contentPanels.setIndex(1);
+        }
     },
 
     hideEditGroup: function() {

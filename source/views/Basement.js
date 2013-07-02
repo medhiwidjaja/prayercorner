@@ -57,10 +57,12 @@ enyo.kind({
 	}],
 
 	itemTap: function(inSender, inEvent) {
-		this.controller.setSelectedTitle(inEvent.model.title);
+		var group = inEvent.model;
+		this.controller.setSelectedTitle(group.title);
+		this.controller.setSelectedGroup(group);
 		this.doSelectGroup(inEvent);
-		pl.itemsCollection.fetchList(inEvent.model.rowID);
-		this.log(inEvent.model.rowID + " " + inEvent.model.title);
+		pl.itemsCollection.fetchList(group.rowID);
+		this.log(group.rowID + " " + group.title);
 	}
 })
 

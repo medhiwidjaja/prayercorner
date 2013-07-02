@@ -80,14 +80,14 @@ enyo.kind({
         this.$.db.query(sql, { "onSuccess": handleSuccess, "onError": handleError });
     },
 
-    findGroup: function(id, callback) {
+    forId: function(id, handleSuccess, handleError) {
         // Construct our query object
         var query = {
-            "sql": "SELECT title FROM groups WHERE rowID = ?",
+            "sql": "SELECT * FROM groups WHERE rowID = ?",
             "values": [ id ]
         };
         // Run the query
-        this.$.db.query(query, { "onSuccess": callback });
+        this.$.db.query(query, { "onSuccess": handleSuccess, "onError": handleError });
     },
 
     searchGroups: function(searchString, callback) {
@@ -102,6 +102,15 @@ enyo.kind({
         };
         // Run the query
         this.$.db.query(query, { "onSuccess": callback });
+    },
+
+    save: function(model, handleSuccess, handleError) {
+        var query = {
+            "sql": "UPDATE groups SET title = ? WHERE rowID = ?",
+            "values": [ model.title, model.rowID ]
+        };
+        // Run the query
+        this.$.db.query(query, { "onSuccess": handleSuccess, "onError": handleError });
     },
 
     handlePopulateError: function() {

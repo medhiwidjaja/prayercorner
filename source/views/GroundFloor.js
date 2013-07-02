@@ -5,7 +5,7 @@ enyo.kind({
 	draggable: false,
 	published: {
 		title: "",
-		groupId: ""
+		groupModel: ""
 	},
 	events: {
 		onEditGroup: "",
@@ -41,14 +41,18 @@ enyo.kind({
 
 	create: function() {
 		this.inherited(arguments);
-		var binding = new enyo.Binding({
-			from: ".selectedTitle", source: pl.groupsCollection,
-			to  : ".title", 		target: this.$.header
+		var titleBinding = new enyo.Binding({
+			from: ".selectedTitle", 	source: pl.groupsCollection,
+			to  : ".title", 			target: this.$.header
 		});
+		var modelBinding = new enyo.Binding({
+			from: ".selectedGroup", 	source: pl.groupsCollection,
+			to  : ".groupModel", 		target: this
+		})
 	},
 
-	editGroup: function() {
-		this.doEditGroup();
+	editGroup: function(inSender, inEvent) {
+		this.doEditGroup(inSender, inEvent);
 		this.log();
 	},
 
