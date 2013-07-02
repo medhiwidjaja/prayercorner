@@ -10,23 +10,32 @@ enyo.kind({
             classes: "plist-panels enyo-fit",
             realtimeFit: true,
             fit: true,
-            onTransitionFinish: "contentTransitionComplete", 
+            //onTransitionFinish: "contentTransitionComplete", 
             components: [
                 {
                     name: "basement",
                     kind: "Basement",
                     onSelectGroup: "viewGroupItems",
-
+                    onAddGroup: "editGroup"
                 },
                 {
-                    name: "groundFloor",
-                    kind: "GroundFloor",
-                    classes: "enyo-fit",
-                    title: "Today's Prayers",
-                    onEditGroup: "editGroup",
-                    onAddPrayerItem: "addPrayerItem",
-                    onViewPrayerItem: "viewPrayerItem"
-                },
+                    kind: "enyo.Panels", 
+                    name:"contentPanels", 
+                    arrangerKind:"CollapsingArranger", 
+                    draggable:false, 
+                    classes:"panels enyo-fit", 
+                    onTransitionFinish: "contentTransitionComplete", 
+                    components: [
+                        {
+                            name: "groundFloor",
+                            kind: "GroundFloor",
+                            classes: "enyo-fit",
+                            title: "Today's Prayers",
+                            onEditGroup: "editGroup",
+                            onAddPrayerItem: "addPrayerItem",
+                            onViewPrayerItem: "viewPrayerItem"
+                        }
+                ]}
                 // {
                 //     name: "upperFloor",
                 //     kind: "UpperFloor",
@@ -53,18 +62,18 @@ enyo.kind({
 
     editGroup: function(inSender, inEvent) {
         this.log();
-        var newComponent = this.$.rootPanels.createComponent(
+        var newComponent = this.$.contentPanels.createComponent(
             {name: "editGroup", kind: "UpperGroundFloor", onDoneEditing: "hideEditGroup"}, 
             {owner: this}
         );
         newComponent.render();
-        this.$.rootPanels.render();
-        this.$.rootPanels.setIndex(1);
+        this.$.contentPanels.render();
+        this.$.contentPanels.setIndex(1);
     },
 
     hideEditGroup: function() {
         this.hidingEditGroup = true;
-        this.$.rootPanels.setIndex(0);
+        this.$.contentPanels.setIndex(0);
     },
 
     contentTransitionComplete: function(inSender, inEvent) {

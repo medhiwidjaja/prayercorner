@@ -2,6 +2,9 @@ enyo.kind({
 	name: "Basement",
 	kind: "enyo.FittableRows",
 	classes: "plist-basement enyo-fit",
+	events: {
+		onAddGroup: ""
+	},
 	components: [
 		{ name: "BasementTitle", content: "Prayer Garden", classes: "basement-title" },
 		{ kind: "enyo.Scroller", 
@@ -13,6 +16,7 @@ enyo.kind({
 				{ kind: "swash-small" },
 				{ content: "Categories", classes: "basement-header" },
 				{ name: "groups", kind: "PrayerList.CatList" },
+				{ content: "＋", classes: "list-item-title", ontap: "addGroup" },
 				{ kind: "swash-small" },
 				{ content: "Answered", classes: "basement-header" },
 				{ content: "Unanswered", classes: "basement-header" },
@@ -30,6 +34,11 @@ enyo.kind({
         this.inherited(arguments);
         this.$.groups.render();
     },
+
+    addGroup: function() {
+    	this.doAddGroup();
+    	this.log()
+    }
 });
 
 enyo.kind({
