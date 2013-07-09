@@ -5,7 +5,8 @@ enyo.kind({
 	draggable: false,
 	published: {
 		title: "",
-		groupModel: ""
+		groupModel: "", 
+		titleBinding: ""
 	},
 	events: {
 		onEditGroup: "",
@@ -45,6 +46,7 @@ enyo.kind({
 			from: ".selectedTitle", 	source: pl.groupsCollection,
 			to  : ".title", 			target: this.$.header
 		});
+		this.titleBinding = titleBinding;
 		var modelBinding = new enyo.Binding({
 			from: ".selectedGroup", 	source: pl.groupsCollection,
 			to  : ".groupModel", 		target: this

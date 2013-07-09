@@ -10,7 +10,7 @@ enyo.kind({
             classes: "plist-panels enyo-fit",
             realtimeFit: true,
             fit: true,
-            //onTransitionFinish: "contentTransitionComplete", 
+            onTransitionFinish: "contentTransitionComplete", 
             components: [
                 {
                     name: "basement",
@@ -66,8 +66,8 @@ enyo.kind({
             var newComponent = this.$.contentPanels.createComponent(
                 {
                     name: "editGroup", 
-                    kind: "UpperGroundFloor", 
-                    title: inSender.name === "basement" ? "Add a Category" : "Edit a Category" , 
+                    kind: "UpperGroundFloor",  
+                    isAddingNew: inSender.name === "basement" ? true : false, 
                     category: inSender.name === "groundFloor" ? inEvent : "",
                     onDoneEditing: "hideEditGroup"
                 }, 
@@ -81,6 +81,7 @@ enyo.kind({
 
     hideEditGroup: function() {
         this.hidingEditGroup = true;
+        this.$.groundFloor.titleBinding.refresh();
         this.$.contentPanels.setIndex(0);
     },
 
@@ -124,8 +125,8 @@ enyo.kind({
             this.$.rootPanels.setIndex(1);
         } else {
             this.$.groundFloor.$.header.render();
-            this.$.rootPanels.setIndex(1);
+            // this.$.rootPanels.setIndex(1);
         };
-        this.log(inEvent);
+        this.log();
     }
 });

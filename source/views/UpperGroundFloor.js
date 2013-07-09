@@ -4,9 +4,9 @@ enyo.kind({
 	classes: "plist-groundfloor wide bg",
 	draggable: false,
 	published: {
-		title: "",
 		category: "",
-		groupModel: ""
+		groupModel: "",
+		isAddingNew: ""
 	},
 	events: {
 		onDoneEditing: ""
@@ -27,23 +27,51 @@ enyo.kind({
 				{ style: "margin-top:20px" }
 			]
 		},
-		{ name: "UGFBottomToolbar", kind: "onyx.Toolbar", classes: "groundfloor-toolbar", components: [
-				{ content: "Done", classes: "done-button", ontap: "done" }
+		{ name: "UGFBottomToolbar", 
+			kind: "onyx.Toolbar", 
+			classes: "groundfloor-toolbar", 
+			layoutKind: "FittableColumnsLayout",
+			components: [
+				{ content: "Done", classes: "done-button", ontap: "done" },
+				{ fit: true },
+				{ content: "Delete", classes: "done-button", ontap: "delete" }
 			]
 		}
 	],
 
 	create: function() {
 		this.inherited(arguments);
-		this.$.toolbarHeader.setTitle(this.title);
-		var modelBinding = new enyo.Binding({
-			from: ".selectedGroup", 	source: pl.groupsCollection,
-			to  : ".groupModel", 		target: this
-		})
+		if (this.isAddingNew) {
+			this.$.toolbarHeader.setTitle("Add a Category");
+			// this.groupModel = pl.groupsCollection.build({});
+			// var modelBinding = new enyo.Binding({
+			// 	from: ".$.groupName.value", source: this,
+			// 	to: ".groupModel.value", target: this
+			// });
+		} else {
+			this.$.toolbarHeader.setTitle("Edit Category");
+			var modelBinding = new enyo.Binding({
+				from: ".selectedGroup", 	source: pl.groupsCollection,
+				to  : ".groupModel", 		target: this
+			});
+		}
+		
 	},
 
 	done: function() {
-		pl.groupsCollection.save(this.groupModel);
+		if(this.isAddingNew) {
+			this.groupModel = pl.groupsCollection.build({title: this.$.groupEditFields.$.groupName.value});
+			pl.groupsCollection.createNew(this.groupModel);
+		} else {
+			pl.groupsCollection.save(this.groupModel);
+		}
+		// TODO: animate closing of the panel
+		this.doDoneEditing();
+		this.log();
+	},
+
+	delete: function() {
+		pl.groupsCollection.delete(this.groupModel);
 		// TODO: animate closing of the panel
 		this.doDoneEditing();
 		this.log();
@@ -64,7 +92,8 @@ enyo.kind({
 			{kind: "onyx.GroupboxHeader", content: "Category", classes: "pl-groupbox-header"},
 			{kind: "onyx.InputDecorator", classes: "pl-input-decorator", components: [
 				{name: "groupName", kind: "onyx.Input", classes: "pl-input",
-					value: this.model ? this.model.title : undefined
+					placeholder: "Name"
+					//value: this.model ? this.model.title : undefined
 				}
 			]},
 		// 	{kind: "onyx.InputDecorator", classes: "pl-input-decorator", components: [
@@ -87,5 +116,6 @@ enyo.kind({
 			to:   ".$.groupName.value", target: this,
 			oneWay: false
 		});
+
 	},
 })

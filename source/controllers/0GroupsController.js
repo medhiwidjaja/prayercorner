@@ -21,6 +21,7 @@ enyo.kind({
 			handleDeleteResult: enyo.bind(this, this.handleDeleteResult)
 		}
 	},
+
     // index: 0,
 
     // next: function () {
