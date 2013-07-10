@@ -1,5 +1,5 @@
 enyo.kind({ 
-	name: "GroundFloor",
+	name: "PrayerList.CategoryView",
 	kind: "enyo.FittableRows",
 	classes: "plist-groundfloor wide",
 	draggable: false,
@@ -12,16 +12,11 @@ enyo.kind({
 		onEditGroup: "",
 		onAddPrayerItem: ""
 	},
-	controller: "pl.prayersCollection",
-	bindings: [
-		{ 	from: ".selectedTitle", 	source: pl.categoriesCollection,
-			to  : ".title", 			target: this.$.header },
-		{ }
-	],
+	controller: "pl.categoriesCollection",
 	components: [
 		{ name: "GFTopToolbar", kind: "onyx.Toolbar", classes: "groundfloor-toolbar", components: [
 				{ kind: "onyx.Grabber" },
-				{ name: "header", kind: "StylishHeader", watermark: true }
+				{ name: "header", kind: "StylishHeader", bindFrom: ".selectedTitle", target: "title", watermark: true }
 			]
 		},
 		{ kind: "enyo.Scroller", 
@@ -29,7 +24,7 @@ enyo.kind({
 			horizontal: "hidden",
 			fit: true,
 			components: [
-				{ kind: "PrayerItems", classes: "living-room" },
+				{ name: "prayersList", kind: "PrayerItems", classes: "living-room" },
 				{ kind: "swash-big", classes: "swash-dark" },
 				{ style: "margin-top:20px" }
 			]
@@ -48,19 +43,22 @@ enyo.kind({
 
 	create: function() {
 		this.inherited(arguments);
-		this.refreshBindings();
-		this.$.items.controller.fetch();
-		this.$.items.refreshBindings();
-
-		var titleBinding = new enyo.Binding({
-			from: ".selectedTitle", 	source: pl.categoriesCollection,
-			to  : ".title", 			target: this.$.header
-		});
-		this.titleBinding = titleBinding;
+		
+		//this.refreshBindings();
+		// var titleBinding = new enyo.Binding({
+		// 	from: ".selectedTitle", 	source: pl.groupsCollection,
+		// 	to  : ".title", 			target: this.$.header
+		// });
+		//this.titleBinding = titleBinding;
 		var modelBinding = new enyo.Binding({
-			from: ".selectedGroup", 	source: pl.categoriesCollection,
+			from: ".selectedGroup", 	source: pl.groupsCollection,
 			to  : ".groupModel", 		target: this
 		})
+	},
+
+	render: function() {
+		this.inherited(arguments);
+		this.$.prayersList.render();
 	},
 
 	editGroup: function(inSender, inEvent) {
@@ -94,8 +92,15 @@ enyo.kind({
 		]},
 	],
 
+	create: function() {
+		this.inherited(arguments);
+
+	},
+
 	render: function() {
 		this.inherited(arguments);
+		this.$.items.controller.fetchAndReplace();
+		this.$.items.refreshBindings();
 		this.$.items.render();
 	},
 

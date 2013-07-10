@@ -30,6 +30,11 @@ enyo.kind({
 		}
 	],
 
+	create: function() {
+		this.inherited(arguments);
+
+	},
+
 	render: function() {
         this.inherited(arguments);
         this.$.groups.render();
@@ -44,7 +49,7 @@ enyo.kind({
 enyo.kind({
 	name: "PrayerList.CatList",
 	kind: "enyo.DataRepeater", 
-	controller: "pl.groupsCollection", 
+	controller: "pl.categoriesCollection", 
 	events: {
 		onSelectGroup: ""
 	},
@@ -52,17 +57,17 @@ enyo.kind({
 		ontap: "itemTap",
 		layoutKind: "FittableColumnsLayout", components: [
 			{ bindFrom: ".title", classes: "list-item-title" },
-			{ bindFrom: ".count", classes: "list-item-count" }
+			//{ bindFrom: ".count", classes: "list-item-count" }
 		]
 	}],
-
+	
 	itemTap: function(inSender, inEvent) {
 		var group = inEvent.model;
 		this.controller.setSelectedTitle(group.title);
-		this.controller.setSelectedGroup(group);
+		this.controller.setSelectedCategory(group);
 		this.doSelectGroup(inEvent);
-		pl.itemsCollection.fetchList(group.rowID);
-		this.log(group.rowID + " " + group.title);
+		pl.prayersCollection.selectedData = pl.prayersCollection.filter(group);
+		this.log(group.id + " " + group.title);
 	}
 })
 

@@ -3,17 +3,24 @@ enyo.kind({
 	kind: "enyo.Application",
 	controllers: [
 		{
-			name: "pl.groupsCollection",
-			kind: "PrayerList.GroupsController",
+			//name: "pl.groupsCollection",
+			name: "pl.categoriesCollection",
+			kind: "PrayerList.CategoryController",
 			global: true
 		},
 		{
-			name: "pl.itemsCollection",
+			name: "pl.prayersCollection",
 			kind: "PrayerList.PrayersController",
 			global: true
 		}
 	],
 	view: "PrayerList.RootView",
+
+	create: function() {
+		this.inherited(arguments);
+		pl.categoriesCollection.fetch();
+		//pl.prayersCollection.fetch();
+	},
 	
 	// This function strips HTML codes from a string
 	// Note: Maybe unsafe if the string contains malicious codes
@@ -24,3 +31,5 @@ enyo.kind({
 		return tmp.textContent||tmp.innerText;
 	}
 });
+
+new enyo.Store({source: "PrayerList.localSource"});

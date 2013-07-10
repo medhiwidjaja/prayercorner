@@ -27,8 +27,8 @@ enyo.kind({
                     onTransitionFinish: "contentTransitionComplete", 
                     components: [
                         {
-                            name: "groundFloor",
-                            kind: "GroundFloor",
+                            name: "categoryView",
+                            kind: "PrayerList.CategoryView",
                             classes: "enyo-fit",
                             title: "Today's Prayers",
                             onEditGroup: "editGroup",
@@ -49,6 +49,8 @@ enyo.kind({
     render: function() {
         this.inherited(arguments);
         this.$.basement.render();
+        this.$.categoryView.render();
+        this.$.categoryView.refreshBindings();
     },
 
     toggleBasement: function() {

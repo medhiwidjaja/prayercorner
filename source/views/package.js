@@ -3,7 +3,8 @@ enyo.depends(
 	"items",
 	"RootView.js",
 	"Basement.js",
-	"GroundFloor.js",
+	//"GroundFloor.js",
+	"CategoryView.js",
 	"UpperGroundFloor.js",
 	"UpperFloor.js",
 	"Mezzanine.js"

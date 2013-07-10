@@ -1,4 +1,4 @@
 enyo.depends(
-	"GroupModel.js",
-	"PrayerModel.js"
+	"Category.js",
+	"Prayer.js"
 );

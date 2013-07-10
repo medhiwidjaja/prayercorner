@@ -6,8 +6,8 @@ enyo.depends(
 	"css",
 	"models",
 	"controllers",
-	"views",
 	"apps",
+	"views",
 	// include our default entry point
 	"start.js"
 );
