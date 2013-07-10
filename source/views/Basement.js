@@ -66,7 +66,7 @@ enyo.kind({
 		this.controller.setSelectedTitle(group.title);
 		this.controller.setSelectedCategory(group);
 		this.doSelectGroup(inEvent);
-		pl.prayersCollection.selectedData = pl.prayersCollection.filter(group);
+		pl.prayersCollection.filterCategory(group);
 		this.log(group.id + " " + group.title);
 	}
 })

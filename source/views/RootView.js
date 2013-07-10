@@ -117,16 +117,16 @@ enyo.kind({
     },
 
     viewGroupItems: function(inSender, inEvent) {
-        if (! this.$.groundFloor) {
+        if (! this.$.categoryView) {
             var newComponent = this.$.rootPanels.createComponent(
-                {name: "groundFloor", title: inEvent.title, groupId: inEvent.model.rowID, kind: "GroundFloor"}, 
+                {name: "categoryView", title: inEvent.title, groupId: inEvent.model.rowID, kind: "PrayerList.CategoryView"}, 
                 {owner: this}
             );
             newComponent.render();
             this.$.rootPanels.render();
             this.$.rootPanels.setIndex(1);
         } else {
-            this.$.groundFloor.$.header.render();
+            this.$.categoryView.$.header.render();
             // this.$.rootPanels.setIndex(1);
         };
         this.log();

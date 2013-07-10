@@ -4,7 +4,8 @@ enyo.kind({
 	kind: "enyo.Collection",
 	model: "PrayerList.Prayer",
 
-	whereCategoryIs: function(cat) {
-		return this.filter(function(v,a) {return v.category===cat.id})
+	filterCategory: function(cat) {
+		this.fetchAndReplace();
+		this.data(this.filter(function(v,a) {return v.category===cat.id}))
 	}
 });
