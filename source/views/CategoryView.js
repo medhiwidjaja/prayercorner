@@ -12,11 +12,13 @@ enyo.kind({
 		onEditGroup: "",
 		onAddPrayerItem: ""
 	},
+	mixins: ["enyo.AutoBindingSupport"],
+	bindSource: "controller",
 	controller: "pl.categoriesCollection",
 	components: [
 		{ name: "GFTopToolbar", kind: "onyx.Toolbar", classes: "groundfloor-toolbar", components: [
 				{ kind: "onyx.Grabber" },
-				{ name: "header", kind: "StylishHeader", bindFrom: ".selectedTitle", target: "title", watermark: true }
+				{ name: "header", kind: "StylishHeader", bindFrom: ".selectedTitle", bindTo: "title", watermark: true }
 			]
 		},
 		{ kind: "enyo.Scroller", 
