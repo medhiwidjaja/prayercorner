@@ -24,16 +24,11 @@ enyo.kind({
 				{ kind: "swash-small" },
 				{ content: "Settings", classes: "basement-header" },
 				{ fit: true },
-				{ kind: "swash-big" },
+				{ kind: "swash-big", ontap: "refresh" },
 				{ style: "margin-top:20px" }
 			]
 		}
 	],
-
-	create: function() {
-		this.inherited(arguments);
-
-	},
 
 	render: function() {
         this.inherited(arguments);
@@ -41,8 +36,14 @@ enyo.kind({
     },
 
     addGroup: function() {
+    	var group = new PrayerList.Category();
+    	pl.selectedCategoryController.set("model", group);
     	this.doAddGroup();
     	this.log()
+    },
+
+    refresh: function() {
+    	this.log();
     }
 });
 
@@ -57,14 +58,16 @@ enyo.kind({
 		ontap: "itemTap",
 		layoutKind: "FittableColumnsLayout", components: [
 			{ bindFrom: ".title", classes: "list-item-title" },
-			//{ bindFrom: ".count", classes: "list-item-count" }
+			{ bindFrom: ".count", classes: "list-item-count" }
 		]
 	}],
 	
 	itemTap: function(inSender, inEvent) {
+		// FIXME: Close EditCategory panel first
 		var group = inEvent.model;
-		this.controller.setSelectedTitle(group.title);
-		this.controller.setSelectedCategory(group);
+		pl.selectedCategoryController.set("model", group);
+		// this.controller.setSelectedTitle(group.title);
+		// this.controller.setSelectedCategory(group);
 		this.doSelectGroup(inEvent);
 		pl.prayersCollection.filterCategory(group);
 		this.log(group.id + " " + group.title);

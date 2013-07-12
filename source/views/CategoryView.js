@@ -14,11 +14,14 @@ enyo.kind({
 	},
 	mixins: ["enyo.AutoBindingSupport"],
 	bindSource: "controller",
-	controller: "pl.categoriesCollection",
+	controller: "pl.selectedCategoryController",
 	components: [
 		{ name: "GFTopToolbar", kind: "onyx.Toolbar", classes: "groundfloor-toolbar", components: [
 				{ kind: "onyx.Grabber" },
-				{ name: "header", kind: "StylishHeader", bindFrom: ".selectedTitle", bindTo: "title", watermark: true }
+				{ bindFrom: ".title", classes: "stylish-text dark-red" },
+				{ bindFrom: ".title", classes: "stylish-text watermark" },
+				//{ name: "header", kind: "StylishHeader", bindFrom: ".title", bindTo: "title", watermark: true }
+				//{ name: "header", kind: "StylishHeader", watermark: true }
 			]
 		},
 		{ kind: "enyo.Scroller", 
@@ -45,11 +48,11 @@ enyo.kind({
 
 	create: function() {
 		this.inherited(arguments);
-		
+
 		//this.refreshBindings();
 		// var titleBinding = new enyo.Binding({
-		// 	from: ".selectedTitle", 	source: pl.groupsCollection,
-		// 	to  : ".title", 			target: this.$.header
+		// 	from: ".title", 	source: pl.categoriesCollection.selectedCategory,
+		// 	to  : ".title", 	target: this.$.header
 		// });
 		//this.titleBinding = titleBinding;
 		var modelBinding = new enyo.Binding({

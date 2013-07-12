@@ -68,9 +68,9 @@ enyo.kind({
             var newComponent = this.$.contentPanels.createComponent(
                 {
                     name: "editGroup", 
-                    kind: "UpperGroundFloor",  
+                    kind: "PrayerList.EditCategory",  
                     isAddingNew: inSender.name === "basement" ? true : false, 
-                    category: inSender.name === "groundFloor" ? inEvent : "",
+                    category: inSender.name === "editGroup" ? inEvent : "",
                     onDoneEditing: "hideEditGroup"
                 }, 
                 {owner: this}
@@ -83,7 +83,7 @@ enyo.kind({
 
     hideEditGroup: function() {
         this.hidingEditGroup = true;
-        this.$.groundFloor.titleBinding.refresh();
+        //this.$.editGroup.titleBinding.refresh();
         this.$.contentPanels.setIndex(0);
     },
 
@@ -126,7 +126,7 @@ enyo.kind({
             this.$.rootPanels.render();
             this.$.rootPanels.setIndex(1);
         } else {
-            this.$.categoryView.$.header.render();
+            //this.$.categoryView.$.header.render();
             // this.$.rootPanels.setIndex(1);
         };
         this.log();

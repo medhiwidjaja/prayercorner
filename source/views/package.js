@@ -5,7 +5,7 @@ enyo.depends(
 	"Basement.js",
 	//"GroundFloor.js",
 	"CategoryView.js",
-	"UpperGroundFloor.js",
+	"EditCategory.js",
 	"UpperFloor.js",
 	"Mezzanine.js"
 );

@@ -12,6 +12,11 @@ enyo.kind({
 			name: "pl.prayersCollection",
 			kind: "PrayerList.PrayersController",
 			global: true
+		},
+		{
+			name: "pl.selectedCategoryController",
+			kind: "PrayerList.SelectedCategoryController",
+			global: true
 		}
 	],
 	view: "PrayerList.RootView",
@@ -33,3 +38,15 @@ enyo.kind({
 });
 
 new enyo.Store({source: "PrayerList.localSource"});
+
+
+enyo.singleton({
+    name: "PrayerList.AllPrayers",
+    kind: "enyo.Collection",
+    model: "PrayerList.Prayer",
+
+    create: function() {
+        this.inherited(arguments);
+        this.fetch();
+    }
+})
