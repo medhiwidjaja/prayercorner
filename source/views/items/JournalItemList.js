@@ -1,10 +1,15 @@
 
 enyo.kind({
 	name: "JournalItemList",
+	// mixins: ["enyo.AutoBindingSupport"],
+	// bindSource: "model",
 	components: [
-		{ kind: "Repeater", onSetupItem: "setupItem", components: [
+		{ kind: "enyo.Repeater", onSetupItem: "setupItem", components: [
 			{ name: "item", style: "margin: 4px 0", layoutKind: "FittableColumnsLayout", components: [
-				{ name: "journalDate", kind: "CalDate", additionalStyles: "color: #7d0000;" },
+				{ name: "journalDate", 
+					kind: "CalDate", 
+					//bindFrom: ".",
+					additionalStyles: "color: #7d0000;" },
 				{ name: "journalEntry", fit: true, classes: "journal-entry middle" }
 			]}
 		]},

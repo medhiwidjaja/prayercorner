@@ -29,8 +29,9 @@ enyo.kind({
                         {
                             name: "categoryView",
                             kind: "PrayerList.CategoryView",
+                            mixins: ["enyo.AutoBindingSupport"],
                             classes: "enyo-fit",
-                            title: "Today's Prayers",
+                            controller: "pl.selectedCategoryController",
                             onEditGroup: "editGroup",
                             onAddPrayerItem: "addPrayerItem",
                             onViewPrayerItem: "viewPrayerItem"
@@ -64,12 +65,18 @@ enyo.kind({
 
     editGroup: function(inSender, inEvent) {
         this.log();
+        pl.editCategoryController.set("model", pl.selectedCategoryController.model);
+        pl.editCategoryController.set("isAddingNew", inSender.name === "basement" ? true : false); 
         if (! this.$.editGroup) {
             var newComponent = this.$.contentPanels.createComponent(
                 {
                     name: "editGroup", 
                     kind: "PrayerList.EditCategory",  
-                    isAddingNew: inSender.name === "basement" ? true : false, 
+                    mixins: ["enyo.AutoBindingSupport"],
+                    bindFrom: ".model",
+                    bindTo: "model",
+                    bindSource: "pl.selectedCategoryController",
+                    
                     category: inSender.name === "editGroup" ? inEvent : "",
                     onDoneEditing: "hideEditGroup"
                 }, 
@@ -103,12 +110,15 @@ enyo.kind({
         this.log();
     },
 
-    viewPrayerItem: function(inSender, inEvent) {
-        if (! this.$.prayerItem) {
+    viewPrayerItem: function(inSender, inModel) {
+        if (! this.$.prayerView) {
             var newComponent = this.$.rootPanels.createComponent(
-                {name: "prayerItem", kind: "UpperFloor"}, 
+                {name: "prayerView", 
+                    kind: "PrayerList.PrayerView",
+                }, 
                 {owner: this}
             );
+            newComponent.set("model", inModel);
             newComponent.render();
             this.$.rootPanels.render();
             this.$.rootPanels.setIndex(1);

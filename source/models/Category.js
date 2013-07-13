@@ -11,7 +11,13 @@ enyo.kind({
         createdDate: ""
     },
 
+    // Returns the number of prayer items under this category
     count: enyo.computed(function() {
-        return PrayerList.AllPrayers.filter(function(v,a) {return v.category === this.id}, this).length
+        return PrayerList.AllPrayers.filter(
+            function(v,a) {
+                return v.category === this.id
+            }, 
+            this
+        ).length
     }, "model" )
 });

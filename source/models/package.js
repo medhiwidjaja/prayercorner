@@ -1,4 +1,6 @@
 enyo.depends(
 	"Prayer.js",
-	"Category.js"
+	"Category.js",
+	"JournalEntry.js",
+	"Verse.js"
 );

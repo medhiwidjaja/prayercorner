@@ -2,13 +2,13 @@ enyo.kind({
 	name: "PrayerList.CategoryController",
 	kind: "enyo.Collection",
 	model: "PrayerList.Category",
-	published: {
-		selectedTitle: "Today",
-		selectedCategory: ""
-	},
 
-    findWithTitle: function(title) {
+    findByTitle: function(title) {
         return this.filter(function(v,a) {return v.title === title})
+    },
+
+	findById: function(id) {
+        return this.filter(function(v,a) {return v.id === id})
     },
 
     build: function(data) {

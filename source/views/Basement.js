@@ -15,7 +15,7 @@ enyo.kind({
 				{ kind: "Today" },
 				{ kind: "swash-small" },
 				{ content: "Categories", classes: "basement-header" },
-				{ name: "groups", kind: "PrayerList.CatList" },
+				{ name: "groups", kind: "PrayerList.CatList", onModelAdded: "modelsChanged" },
 				{ content: "＋", classes: "list-item-title", ontap: "addGroup" },
 				{ kind: "swash-small" },
 				{ content: "Answered", classes: "basement-header" },
@@ -44,7 +44,11 @@ enyo.kind({
 
     refresh: function() {
     	this.log();
-    }
+    },
+
+	modelsChanged: function(s,e) {
+		this.log(s,e);
+	}
 });
 
 enyo.kind({

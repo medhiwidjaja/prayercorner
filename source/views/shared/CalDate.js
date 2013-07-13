@@ -6,6 +6,10 @@ enyo.kind({
 		date:  "",
 		additionalStyles: ""
 	},
+	bindings: [
+		{from: "month", to: "$.month.content"},
+		{from: "date", to: "$.date.content"},
+	],
 	components: [
 		{ name: "month", classes: "cal-month" },
 		{ name: "date", classes: "cal-date" }
@@ -13,8 +17,6 @@ enyo.kind({
 
 	rendered: function() {
 		this.inherited(arguments);
-		this.$.month.setContent(this.month);
-		this.$.date.setContent(this.date);
 		this.addStyles(this.additionalStyles);
 	}
 });

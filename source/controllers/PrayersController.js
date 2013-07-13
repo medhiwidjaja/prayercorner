@@ -7,5 +7,9 @@ enyo.kind({
 	filterCategory: function(cat) {
 		this.fetchAndReplace();
 		this.data(this.filter(function(v,a) {return v.category===cat.id}))
-	}
+	},
+
+	findById: function(id) {
+        return this.filter(function(v,a) {return v.id === id})
+    },
 });

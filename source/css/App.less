@@ -33,9 +33,22 @@
 @darkGray:				#222;
 
 
+/* Toolbar */
+
 .onyx-toolbar-inline > *, .enyo-fittable-columns-layout.onyx-toolbar-inline > * {
 	margin: 1px 6px;
 }
+
+.bottom-toolbar {
+	box-shadow: 4px 0 10px;
+	background: @lightBackground;
+}
+
+.top-toolbar {
+	background: @lightBackground;
+}
+
+/* Background */
 
 .wallpaper {
 	background: url(/assets/bg.png);
@@ -113,9 +126,7 @@
 
 /* Ground Floor */
 
-.groundfloor-toolbar {
-	background: @lightBackground;
-}
+
 .plist-groundfloor {
 	min-width: 300px;
 }
@@ -285,16 +296,11 @@
 	font-family: "Lovers Quarrel";
 }
 
-.script-text {
-	font-family: "Tangerine";
-	font-size: 28px;
-}
-
-.stylish-text {
-	font-family: "Tangerine";
-	font-size: 28px;
-}
-.stylish-text:first-child:first-letter {
+// .stylish-text {
+// 	font-family: "Tangerine";
+// 	font-size: 28px;
+// }
+.stylish-text:first-letter {
 	font-family: "Lovers Quarrel";
 }
 
@@ -317,6 +323,10 @@
 	position: absolute;
 	left: 30px;
 	padding-right: 23px;
+}
+
+.watermark:first-letter {
+	font-family: "Lovers Quarrel";
 }
 
 .lined-header h2 {

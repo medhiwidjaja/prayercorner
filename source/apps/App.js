@@ -3,7 +3,6 @@ enyo.kind({
 	kind: "enyo.Application",
 	controllers: [
 		{
-			//name: "pl.groupsCollection",
 			name: "pl.categoriesCollection",
 			kind: "PrayerList.CategoryController",
 			global: true
@@ -16,6 +15,11 @@ enyo.kind({
 		{
 			name: "pl.selectedCategoryController",
 			kind: "PrayerList.SelectedCategoryController",
+			global: true
+		},
+		{
+			name: "pl.editCategoryController",
+			kind: "PrayerList.EditCategoryController",
 			global: true
 		}
 	],

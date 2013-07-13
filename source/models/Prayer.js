@@ -8,7 +8,21 @@ enyo.kind({
 		category: "",
 		createdDate: "",
 		answeredDate: "",
-		rowNo: ""
+		rowNo: "",
+		// journalEntries: {
+		// 	relation: enyo.toMany({
+		// 		inverseKey: "prayer",
+		// 		model: "PrayerList.JournalEntry",
+		// 		inCommit: true
+		// 	})
+		// },
+		// verses: {
+		// 	relation: enyo.toMany({
+		// 		inverseKey: "prayer",
+		// 		model: "PrayerList.BibleVerse",
+		// 		inCommit: true
+		// 	})
+		// }
 	}
 });
 

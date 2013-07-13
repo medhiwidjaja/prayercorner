@@ -4,5 +4,7 @@ enyo.depends(
 	//"GroupsController.js",
 	"CategoryController.js",
 	"PrayersController.js",
-	"SelectedCategoryController.js"
+	"SelectedCategoryController.js",
+	"EditCategoryController.js",
+	"PrayerViewController.js"
 );

@@ -6,6 +6,6 @@ enyo.depends(
 	//"GroundFloor.js",
 	"CategoryView.js",
 	"EditCategory.js",
-	"UpperFloor.js",
+	"PrayerView.js",
 	"Mezzanine.js"
 );
