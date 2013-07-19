@@ -5,7 +5,7 @@ enyo.kind({
 	draggable: false,
 	bindings: [
 		{from: ".model.title", to: ".$.prayerItem.content"},
-		{from: ".model", to: ".$.journals.model"}
+		//{from: ".model", to: ".$.journals.model"}
 	],
 	components: [
 		{ name: "PVTopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", components: [
@@ -25,14 +25,33 @@ enyo.kind({
 					{ kind: "StylishText", title: "Journal", classes: "watermark dark-red" },
 					{ content: "Journal", fit: true, classes: "upperfloor-header" },
 
-					{ name: "journals", kind: "JournalItemList" },
+					{ name: "journals", kind: "PrayerList.JournalItemList" },
+					// {	name: "journals",
+					// 	kind: "enyo.DataRepeater",
+					// 	controller: "pl.journalEntriesCollection",
+					// 	components: [
+					// 		{ bindFrom: ".content", classes: "journal-entry middle" },
+					// 		{ content: "title" },
+					// 		{ tag: "hr"}
+					// 		// { style: "margin: 4px 0", layoutKind: "FittableColumnsLayout", components: [
+					// 		// 	{ //name: "journalDate", 
+					// 		// 		kind: "CalDate", 
+					// 		// 		bindFrom: ".journalDate", bindTo: "calDate",
+					// 		// 		additionalStyles: "color: #7d0000;" },
+					// 		// 	{ //name: "journalEntry", 
+					// 		// 		fit: true, classes: "journal-entry middle",
+					// 		// 		bindFrom: ".content"
+					// 		// 	}
+					// 		// ]}
+					// 	]
+					// },
 					{ kind: "AddJournalButton" },
 					{ kind: "swash-small", classes: "swash-dark" },
 					
 					{ kind: "StylishText", title: "Biblical Promises", classes: "watermark dark-red" },
 					{ content: "Biblical Promises", classes: "upperfloor-header" },
 					
-					{ kind: "BibleVerseList" },
+					{ name: "verses", kind: "PrayerList.BibleVerseList" },
 					{ kind: "swash-big", classes: "swash-dark" },
 					{ style: "margin-top:20px" }
 				]}

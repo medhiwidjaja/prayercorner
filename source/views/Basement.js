@@ -84,16 +84,8 @@ enyo.kind({
 	style: "padding-bottom: 4px;",
 	components: [
 		{ content: "Today", fit: true, classes: "today-header middle" },
-		{ name: "cal", kind: "CalDate", additionalStyles: "color: #FFEFCB;" },
+		{ name: "cal", kind: "PrayerList.CalDate", calendarDate: new Date(), additionalStyles: "color: #FFEFCB;" },
 		{ style: "margin-right: 20px"}
-	],
-
-	create: function() {
-		this.inherited(arguments);
-		var today = new Date();
-		var els = today.toString().split(" ");
-		this.$.cal.setMonth(els[1]);
-		this.$.cal.setDate(els[2][0] == "0" ? els[2][1] : els[2]);
-	}
+	]
 })
 

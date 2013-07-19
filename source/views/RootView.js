@@ -111,19 +111,29 @@ enyo.kind({
     },
 
     viewPrayerItem: function(inSender, inModel) {
-        if (! this.$.prayerView) {
+        if (! this.$.prayerView) {  
             var newComponent = this.$.rootPanels.createComponent(
                 {name: "prayerView", 
                     kind: "PrayerList.PrayerView",
+                    mixins: ["enyo.AutoBindingSupport"]
                 }, 
                 {owner: this}
             );
             newComponent.set("model", inModel);
+            pl.journalEntriesCollection.filterPrayer(inModel);
+            pl.bibleVersesCollection.filterPrayer(inModel);
+            //newComponent.$.journals.set("controller", pl.journalEntriesCollection);
             newComponent.render();
             this.$.rootPanels.render();
             this.$.rootPanels.setIndex(1);
+            this.log("New: " + inModel.title);
+        } else {
+            this.$.prayerView.set("model", inModel);
+            pl.journalEntriesCollection.filterPrayer(inModel);
+            pl.bibleVersesCollection.filterPrayer(inModel);
+            //this.$.prayerView.$.journals.set("controller", pl.journalEntriesCollection);
+            this.log("Changed: " + inModel.title);
         };
-        this.log();
     },
 
     viewGroupItems: function(inSender, inEvent) {

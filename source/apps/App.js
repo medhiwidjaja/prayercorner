@@ -21,6 +21,16 @@ enyo.kind({
 			name: "pl.editCategoryController",
 			kind: "PrayerList.EditCategoryController",
 			global: true
+		},
+		{
+			name: "pl.journalEntriesCollection",
+			kind: "PrayerList.JournalEntriesController",
+			global: true
+		},
+		{
+			name: "pl.bibleVersesCollection",
+			kind: "PrayerList.BibleVersesController",
+			global: true
 		}
 	],
 	view: "PrayerList.RootView",

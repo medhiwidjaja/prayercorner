@@ -11,5 +11,17 @@ enyo.kind({
 		// 		isOwner: true
 		// 	})
 		// }
+	},
+
+	journalDate: function() {
+		return new Date(Date.parse(this.createdDate));
+	},
+
+	month: function() {
+		return this.journalDate().toString().slice(4,7);
+	},
+
+	date: function() {
+		return this.journalDate().getDate();
 	}
 });
