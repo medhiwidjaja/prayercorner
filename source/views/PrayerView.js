@@ -7,9 +7,13 @@ enyo.kind({
 		{from: ".model.title", to: ".$.prayerItem.content"},
 		//{from: ".model", to: ".$.journals.model"}
 	],
+    events: {
+    	onDoneEditing: "",
+    	onGrabberTap: ""
+    },
 	components: [
 		{ name: "PVTopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", components: [
-				{ kind: "onyx.Grabber"},
+				{ kind: "onyx.Grabber", ontap: "topToolbarGrabberTap" },
 				{ content: "Prayer", classes: "watermark" }
 			]
 		}, 
@@ -22,37 +26,18 @@ enyo.kind({
 				{ kind: "FittableRows", classes: "living-room", components: [
 					{ name: "prayerItem", classes: "dropcap-text" },
 					{ tag: "br" },
+					
 					{ kind: "StylishText", title: "Journal", classes: "watermark dark-red" },
 					{ content: "Journal", fit: true, classes: "upperfloor-header" },
-
 					{ name: "journals", kind: "PrayerList.JournalItemList" },
-					// {	name: "journals",
-					// 	kind: "enyo.DataRepeater",
-					// 	controller: "pl.journalEntriesCollection",
-					// 	components: [
-					// 		{ bindFrom: ".content", classes: "journal-entry middle" },
-					// 		{ content: "title" },
-					// 		{ tag: "hr"}
-					// 		// { style: "margin: 4px 0", layoutKind: "FittableColumnsLayout", components: [
-					// 		// 	{ //name: "journalDate", 
-					// 		// 		kind: "CalDate", 
-					// 		// 		bindFrom: ".journalDate", bindTo: "calDate",
-					// 		// 		additionalStyles: "color: #7d0000;" },
-					// 		// 	{ //name: "journalEntry", 
-					// 		// 		fit: true, classes: "journal-entry middle",
-					// 		// 		bindFrom: ".content"
-					// 		// 	}
-					// 		// ]}
-					// 	]
-					// },
 					{ kind: "AddJournalButton" },
-					{ kind: "swash-small", classes: "swash-dark" },
+					{ kind: "swash", type: "s", shade: "dark" },
 					
 					{ kind: "StylishText", title: "Biblical Promises", classes: "watermark dark-red" },
 					{ content: "Biblical Promises", classes: "upperfloor-header" },
 					
 					{ name: "verses", kind: "PrayerList.BibleVerseList" },
-					{ kind: "swash-big", classes: "swash-dark" },
+					{ kind: "swash", type: "w", shade: "dark" },
 					{ style: "margin-top:20px" }
 				]}
 			]
@@ -65,9 +50,20 @@ enyo.kind({
 	],
 
 	// TODO: create function(): setup journals controller
+	render: function() {
+		this.inherited(arguments);
+		this.$.journals.render();
+		this.$.verses.render();
+	},
 
 	close: function() {
-		this.destroy();
+		this.doDoneEditing();
+		this.log();
+	},
+
+	topToolbarGrabberTap: function() {
+		this.doGrabberTap();
+		this.log();
 	}
 });
 
@@ -77,7 +73,7 @@ enyo.kind({
 	name: "AddJournalButton",
 	classes: "dark-red",
 	components: [
-		{ tag: "span", content: "＋", style: "font-size: 24px; padding: 0px 5px; border-radius: 4px; border: 1px solid #FFEFCB" }
+		{ tag: "span", content: "＋", style: "font-size: 20px; padding: 0px 5px; border-radius: 4px; border: 1px solid #FFEFCB" }
 	]
 });
 

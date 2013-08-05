@@ -8,8 +8,9 @@ enyo.kind({
             kind: "enyo.Panels",
             arrangerKind: "enyo.CollapsingArranger",
             classes: "plist-panels enyo-fit",
-            realtimeFit: true,
+            realtimeFit: false,
             fit: true,
+            //wrap: true,
             onTransitionFinish: "contentTransitionComplete", 
             components: [
                 {
@@ -23,6 +24,7 @@ enyo.kind({
                     name:"contentPanels", 
                     arrangerKind:"CollapsingArranger", 
                     draggable:false, 
+                    //wrap: true,
                     classes:"panels enyo-fit", 
                     onTransitionFinish: "contentTransitionComplete", 
                     components: [
@@ -30,11 +32,12 @@ enyo.kind({
                             name: "categoryView",
                             kind: "PrayerList.CategoryView",
                             mixins: ["enyo.AutoBindingSupport"],
-                            classes: "enyo-fit",
+                            classes: "enyo-fit category-panel",
                             controller: "pl.selectedCategoryController",
                             onEditGroup: "editGroup",
                             onAddPrayerItem: "addPrayerItem",
-                            onViewPrayerItem: "viewPrayerItem"
+                            onViewPrayerItem: "viewPrayerItem",
+                            onGrabberTap: "toggleBasement"
                         }
                 ]}
                 // {
@@ -55,11 +58,21 @@ enyo.kind({
     },
 
     toggleBasement: function() {
-        this.$.rootPanels.next();    
+        if (this.$.rootPanels.index === 0) {
+            this.$.rootPanels.next();
+        } else {
+            this.$.rootPanels.previous();
+        }
+        this.log();  
     },
 
     toggleGF: function(inSender) {
-        inSender.parent.next();
+        if (inSender.parent.index === 0) {
+            inSender.parent.next();
+        } else {
+            inSender.parent.previous();
+        }
+        //inSender.parent.next();
         this.log();
     },
 
@@ -84,19 +97,34 @@ enyo.kind({
             );
             newComponent.render();
             this.$.contentPanels.render();
-            this.$.contentPanels.setIndex(1);
+            if (enyo.Panels.isScreenNarrow()) {
+                this.$.contentPanels.setIndex(1);
+            }
         }
     },
 
     hideEditGroup: function() {
         this.hidingEditGroup = true;
+        this.$.basement.$.groups.render();
+        this.$.categoryView.refreshBindings();
         //this.$.editGroup.titleBinding.refresh();
+        this.$.contentPanels.setIndex(0);
+    },
+
+    hidePrayerView: function() {
+        this.log();
+        this.hidingPrayerView = true;
+        //this.$.basement.$.groups.render();
         this.$.contentPanels.setIndex(0);
     },
 
     contentTransitionComplete: function(inSender, inEvent) {
         if(this.hidingEditGroup) {
             this.destroyEditGroup();
+            this.log("edit group")
+        } else if (this.hidingPrayerView) {
+            this.destroyPrayerView();
+            this.log("Prayerview")
         }
     },
 
@@ -104,6 +132,11 @@ enyo.kind({
         //this.$.rootPanels.setIndex(0);
         this.$.editGroup.destroy();
         this.hidingEditGroup = false;
+    },
+
+    destroyPrayerView: function() {
+        this.$.prayerView.destroy();
+        this.hidingPrayerView = false;
     },
 
     addPrayerItem: function(inSender, inEvent) {
@@ -115,7 +148,9 @@ enyo.kind({
             var newComponent = this.$.rootPanels.createComponent(
                 {name: "prayerView", 
                     kind: "PrayerList.PrayerView",
-                    mixins: ["enyo.AutoBindingSupport"]
+                    mixins: ["enyo.AutoBindingSupport"],
+                    onDoneEditing: "hidePrayerView",
+                    onGrabberTap: "toggleGF"
                 }, 
                 {owner: this}
             );
@@ -125,12 +160,17 @@ enyo.kind({
             //newComponent.$.journals.set("controller", pl.journalEntriesCollection);
             newComponent.render();
             this.$.rootPanels.render();
-            this.$.rootPanels.setIndex(1);
+            if (enyo.Panels.isScreenNarrow()) {
+                this.$.rootPanels.setIndex(2);
+            }
             this.log("New: " + inModel.title);
         } else {
             this.$.prayerView.set("model", inModel);
             pl.journalEntriesCollection.filterPrayer(inModel);
             pl.bibleVersesCollection.filterPrayer(inModel);
+            if (enyo.Panels.isScreenNarrow()) {
+                this.$.rootPanels.setIndex(2);
+            }
             //this.$.prayerView.$.journals.set("controller", pl.journalEntriesCollection);
             this.log("Changed: " + inModel.title);
         };
@@ -144,10 +184,14 @@ enyo.kind({
             );
             newComponent.render();
             this.$.rootPanels.render();
-            this.$.rootPanels.setIndex(1);
+            if (enyo.Panels.isScreenNarrow()) {
+                this.$.rootPanels.setIndex(1);
+            }
         } else {
             //this.$.categoryView.$.header.render();
-            // this.$.rootPanels.setIndex(1);
+            if (enyo.Panels.isScreenNarrow()) {
+                this.$.rootPanels.setIndex(1);
+            }    
         };
         this.log();
     }

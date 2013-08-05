@@ -22,6 +22,11 @@ enyo.kind({
 			kind: "PrayerList.EditCategoryController",
 			global: true
 		},
+		// {
+		// 	name: "pl.selectedPrayerController",
+		// 	kind: "PrayerList.selectedPrayerController",
+		// 	global: true
+		// },
 		{
 			name: "pl.journalEntriesCollection",
 			kind: "PrayerList.JournalEntriesController",

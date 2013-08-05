@@ -1,7 +1,7 @@
 enyo.kind({ 
 	name: "PrayerList.CategoryView",
 	kind: "enyo.FittableRows",
-	classes: "plist-groundfloor wide",
+	classes: "plist-groundfloor",
 	draggable: false,
 	published: {
 		title: "",
@@ -11,13 +11,14 @@ enyo.kind({
 	},
 	events: {
 		onEditGroup: "",
-		onAddPrayerItem: ""
+		onAddPrayerItem: "",
+		onGrabberTap: ""
 	},
 	bindSource: "controller",
 	controller: "pl.selectedCategoryController",
 	components: [
 		{ name: "GFTopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", components: [
-				{ kind: "onyx.Grabber" },
+				{ kind: "onyx.Grabber", ontap: "topToolbarGrabberTap" },
 				{ bindFrom: ".title", classes: "stylish-text" },
 				{ bindFrom: ".title", classes: "watermark" },
 				//{ name: "header", kind: "StylishHeader", bindFrom: ".title", bindTo: "title", watermark: true }
@@ -29,7 +30,7 @@ enyo.kind({
 			fit: true,
 			components: [
 				{ name: "prayersList", kind: "PrayerItems", classes: "living-room" },
-				{ kind: "swash-big", classes: "swash-dark" },
+				{ kind: "swash", type: "w", shade: "dark" },
 				{ style: "margin-top:20px" },
 				{ name: "extra" }
 			]
@@ -54,6 +55,11 @@ enyo.kind({
 	addPrayerItem: function() {
 		this.doAddPrayerItem();
 		this.log();
+	},
+
+	topToolbarGrabberTap: function() {
+		this.doGrabberTap();
+		this.log();
 	}
 });
 
@@ -70,13 +76,13 @@ enyo.kind({
 		bindTo: "modelId",
 		components: [
 			{ bindFrom: ".title", classes: "prayer-list-item" },
-			{ kind: "swash-small", classes: "swash-dark" }
+			{ kind: "swash", type: "s", shade: "dark" }
 		]
 	}],
 
 	viewPrayerItem: function(inSender, inEvent) {
-		this.doViewPrayerItem(this.controller.findById(inSender.modelId)[0]);
-		this.log(this.controller.findById(inSender.modelId)[0]);
+		this.doViewPrayerItem(this.controller.findById(inSender.modelId));
+		this.log(this.controller.findById(inSender.modelId));
 	}
 	// ,
 

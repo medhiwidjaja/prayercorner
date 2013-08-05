@@ -2,15 +2,15 @@ enyo.kind({
 	name: "PrayerList.EditCategoryController",
 	kind: "enyo.Collection",
 	mixins: ["enyo.AutoBindingSupport"],
-    bindFrom: ".model",
-    bindTo: "model",
-    bindSource: "pl.selectedCategoryController",
-    events: {
-    	onDoneEditing: "",
-    },
-    published: {
-    	isAddingNew: ""
-    },
+	bindFrom: ".model",
+	bindTo: "model",
+	bindSource: "pl.selectedCategoryController",
+	events: {
+		onDoneEditing: "",
+	},
+	published: {
+		isAddingNew: ""
+	},
 
 	done: function() {
 		if (this.model.title !== "") {
@@ -28,6 +28,7 @@ enyo.kind({
 
 	delete: function() {
 		pl.categoriesCollection.delete(this.model);
+		pl.selectedCategoryController.set("model", null);
 		// TODO: animate closing of the panel
 		this.doDoneEditing();
 		this.log();

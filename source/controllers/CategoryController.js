@@ -4,11 +4,13 @@ enyo.kind({
 	model: "PrayerList.Category",
 
     findByTitle: function(title) {
-        return this.filter(function(v,a) {return v.title === title})
+        var m = this.filter(function(v,a) {return v.title === title});
+        return m[0];
     },
 
 	findById: function(id) {
-        return this.filter(function(v,a) {return v.id === id})
+        var m = this.filter(function(v,a) {return v.id === id});
+        return m[0];
     },
 
     build: function(data) {

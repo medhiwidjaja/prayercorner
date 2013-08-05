@@ -26,7 +26,7 @@ enyo.kind({
 			fit: true,
 			components: [
 				{ kind: "GroupEditFields", classes: "living-room" },
-				{ kind: "swash-big", classes: "swash-dark" },
+				{ kind: "swash", type: "w", shade: "dark" },
 				{ style: "margin-top:20px" }
 			]
 		},

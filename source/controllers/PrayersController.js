@@ -3,6 +3,7 @@ enyo.kind({
 	name: "PrayerList.PrayersController",
 	kind: "enyo.Collection",
 	model: "PrayerList.Prayer",
+	selected: null,
 
 	filterCategory: function(cat) {
 		this.fetchAndReplace();
@@ -10,6 +11,16 @@ enyo.kind({
 	},
 
 	findById: function(id) {
-        return this.filter(function(v,a) {return v.id === id})
+        var m = this.filter(function(v,a) {return v.id === id});
+        return m[0];
     },
+
+    select: function(id) {
+    	this.selected = this.findById(id);
+    	return this.selected;
+    },
+
+	saveSelected: function() {
+		this.selected.commit();
+	}
 });
