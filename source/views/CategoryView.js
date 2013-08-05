@@ -10,7 +10,7 @@ enyo.kind({
 		extraTitle: ""
 	},
 	events: {
-		onEditGroup: "",
+		onEditCategory: "",
 		onAddPrayerItem: "",
 		onGrabberTap: ""
 	},
@@ -42,13 +42,14 @@ enyo.kind({
 			components: [
 				{ content: "＋", ontap: "addPrayerItem" },
 				{ fit: true },
-				{ content: "✍", ontap: "editGroup" }
+				{ content: "✍", ontap: "editCategory" }
+				//{ kind: "enyo.Button", content: "✍", ontap: "editGroup" }
 			]
 		}
 	],
 
-	editGroup: function(inSender, inEvent) {
-		this.doEditGroup(inSender, inEvent);
+	editCategory: function(inSender, inEvent) {
+		this.doEditCategory(inSender, inEvent);
 		this.log();
 	},
 

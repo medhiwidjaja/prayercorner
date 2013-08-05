@@ -11,13 +11,13 @@ enyo.kind({
             realtimeFit: false,
             fit: true,
             //wrap: true,
-            onTransitionFinish: "contentTransitionComplete", 
+            onTransitionFinish: "rootTransitionComplete", 
             components: [
                 {
                     name: "basement",
                     kind: "Basement",
-                    onSelectGroup: "viewGroupItems",
-                    onAddGroup: "editGroup"
+                    onSelectCategory: "viewCategoryItems",
+                    onAddCategory: "editCategory"
                 },
                 {
                     kind: "enyo.Panels", 
@@ -32,9 +32,9 @@ enyo.kind({
                             name: "categoryView",
                             kind: "PrayerList.CategoryView",
                             mixins: ["enyo.AutoBindingSupport"],
-                            classes: "enyo-fit category-panel",
+                            classes: "enyo-fit",
                             controller: "pl.selectedCategoryController",
-                            onEditGroup: "editGroup",
+                            onEditCategory: "editCategory",
                             onAddPrayerItem: "addPrayerItem",
                             onViewPrayerItem: "viewPrayerItem",
                             onGrabberTap: "toggleBasement"
@@ -76,9 +76,8 @@ enyo.kind({
         this.log();
     },
 
-    editGroup: function(inSender, inEvent) {
+    editCategory: function(inSender, inEvent) {
         this.log();
-        pl.editCategoryController.set("model", pl.selectedCategoryController.model);
         pl.editCategoryController.set("isAddingNew", inSender.name === "basement" ? true : false); 
         if (! this.$.editGroup) {
             var newComponent = this.$.contentPanels.createComponent(
@@ -97,12 +96,13 @@ enyo.kind({
             );
             newComponent.render();
             this.$.contentPanels.render();
-            if (enyo.Panels.isScreenNarrow()) {
+            //if (enyo.Panels.isScreenNarrow()) {
                 this.$.contentPanels.setIndex(1);
-            }
+            //}
         }
     },
 
+    //FIXME: hiding Edit Group View doesn't animate
     hideEditGroup: function() {
         this.hidingEditGroup = true;
         this.$.basement.$.groups.render();
@@ -111,6 +111,7 @@ enyo.kind({
         this.$.contentPanels.setIndex(0);
     },
 
+    //FIXME: hiding PrayerView doesn't animate
     hidePrayerView: function() {
         this.log();
         this.hidingPrayerView = true;
@@ -118,13 +119,17 @@ enyo.kind({
         this.$.contentPanels.setIndex(0);
     },
 
+    rootTransitionComplete: function(inSender, inEvent) {
+        if (this.hidingPrayerView) {
+            this.destroyPrayerView();
+            this.log("Prayerview")
+        }
+    },
+
     contentTransitionComplete: function(inSender, inEvent) {
         if(this.hidingEditGroup) {
             this.destroyEditGroup();
             this.log("edit group")
-        } else if (this.hidingPrayerView) {
-            this.destroyPrayerView();
-            this.log("Prayerview")
         }
     },
 
@@ -176,7 +181,7 @@ enyo.kind({
         };
     },
 
-    viewGroupItems: function(inSender, inEvent) {
+    viewCategoryItems: function(inSender, inEvent) {
         if (! this.$.categoryView) {
             var newComponent = this.$.rootPanels.createComponent(
                 {name: "categoryView", title: inEvent.title, groupId: inEvent.model.rowID, kind: "PrayerList.CategoryView"}, 

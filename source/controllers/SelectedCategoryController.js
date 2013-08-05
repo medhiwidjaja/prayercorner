@@ -6,6 +6,12 @@ enyo.kind({
 		title: "Today's Prayers --",
 		model: ""
 	},
+	originalModelAttributes: "",
+
+	onModelChanged: function() {
+		this.log();
+		this.originalModelAttributes = JSON.parse(this.model.toJSON());
+	},
 
 	title: enyo.computed(function() {
 		if (! this.model) {

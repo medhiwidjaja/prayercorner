@@ -22,6 +22,9 @@ enyo.kind({
 	},
 
 	cancel: function() {
+		// Revert the model's attributes to saved values:
+		this.model.set("title", pl.selectedCategoryController.savedAttributes.title);
+		
 		this.doDoneEditing();
 		this.log();
 	},

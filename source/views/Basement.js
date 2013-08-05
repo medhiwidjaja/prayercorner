@@ -3,7 +3,7 @@ enyo.kind({
 	kind: "enyo.FittableRows",
 	classes: "plist-basement enyo-fit",
 	events: {
-		onAddGroup: ""
+		onAddCategory: ""
 	},
 	components: [
 		{ name: "BasementTitle", content: "Prayer Corner", classes: "basement-title" },
@@ -16,7 +16,7 @@ enyo.kind({
 				{ kind: "swash", type: "s", shade: "light" },
 				{ content: "Categories", classes: "basement-header" },
 				{ name: "groups", kind: "PrayerList.CatList", onModelAdded: "modelsChanged" },
-				{ content: "＋", classes: "list-item-title", ontap: "addGroup" },
+				{ content: "＋", classes: "list-item-title", ontap: "addCategory" },
 				{ kind: "swash", type: "s", shade: "light" },
 				{ content: "Answered", classes: "basement-header" },
 				{ content: "Unanswered", classes: "basement-header" },
@@ -35,10 +35,10 @@ enyo.kind({
         this.$.groups.render();
     },
 
-    addGroup: function() {
-    	var group = new PrayerList.Category();
-    	pl.selectedCategoryController.set("model", group);
-    	this.doAddGroup();
+    addCategory: function() {
+    	var category = new PrayerList.Category();
+    	pl.selectedCategoryController.set("model", category);
+    	this.doAddCategory();
     	this.log()
     },
 
@@ -86,7 +86,7 @@ enyo.kind({
 	kind: "enyo.DataRepeater", 
 	controller: "pl.categoriesCollection", 
 	events: {
-		onSelectGroup: ""
+		onSelectCategory: ""
 	},
 	components: [{
 		ontap: "itemTap",
@@ -98,13 +98,13 @@ enyo.kind({
 	
 	itemTap: function(inSender, inEvent) {
 		// FIXME: Close EditCategory panel first
-		var group = inEvent.model;
-		pl.selectedCategoryController.set("model", group);
-		// this.controller.setSelectedTitle(group.title);
-		// this.controller.setSelectedCategory(group);
-		this.doSelectGroup(inEvent);
-		pl.prayersCollection.filterCategory(group);
-		this.log(group.id + " " + group.title);
+		var category = inEvent.model;
+		pl.selectedCategoryController.set("model", category);
+		// Save the model's attributes in the controller:
+		pl.selectedCategoryController.set("savedAttributes", JSON.parse(category.toJSON()));
+		this.doSelectCategory(inEvent);
+		pl.prayersCollection.filterCategory(category);
+		this.log(category.id + " " + category.title);
 	}
 })
 

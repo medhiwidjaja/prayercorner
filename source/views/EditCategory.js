@@ -2,13 +2,11 @@ enyo.kind({
 	name: "PrayerList.EditCategory",
 	kind: "enyo.FittableRows",
 	classes: "plist-groundfloor wide bg",
-	draggable: false,
+	//draggable: false,
 	published: {
 
 	},
-	events: {
-		onDoneEditing: ""
-	},
+
 	controller: "pl.editCategoryController",
 	bindings: [
 		{from: ".model.title", to: "$.tbtitle.content"},
@@ -41,12 +39,7 @@ enyo.kind({
 				{ content: "Delete", classes: "done-button", ontap: "delete" }
 			]
 		}
-	],
-
-	// create: function() {
-	// 	this.inherited(arguments);
-	// 	this.$.groupEditFields.set("controller", pl.editCategoryController)
-	// }
+	]
 })
 
 
@@ -65,19 +58,5 @@ enyo.kind({
 				}
 			]},
 		]},
-	],
-
-	prettify: function(value) {
-		return value === null ? "" : value
-	}
-	
-	// create: function() {
-	// 	this.inherited(arguments);
-	// 	var binding = new enyo.Binding({
-	// 		from: ".title", 	source: this.controller,
-	// 		to:   ".value", 	target: this.$.groupName,
-	// 		oneWay: false
-	// 	});
-	// 	var m = 1;
-	// },
+	]
 })
