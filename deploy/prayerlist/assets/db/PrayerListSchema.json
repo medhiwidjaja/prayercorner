@@ -1,0 +1,34 @@
+[
+    {
+        "table": "prayers",
+        "columns": [
+            { "column": "rowID", "type": "INTEGER", "constraints": ["PRIMARY KEY"] },
+            { "column": "title", "type": "TEXT" },
+            { "column": "answered", "type": "INTEGER" },
+            { "column": "category", "type": "INTEGER" },
+            { "column": "createdDate", "type": "TEXT" },
+            { "column": "answeredDate", "type": "TEXT" }
+        ],
+        "data": [
+            { "rowID": 1, "title": "Vacation as a family", "category": 1 },
+            { "rowID": 2, "title": "Guidance as we move to new city. Dad’s job, Mom’s coping with new responsibilities, Bob and Fiona’s schools", "category": 1 },
+            { "rowID": 3, "title": "Wisdom in expanding the business", "category": 3 },
+            { "rowID": 4, "title": "Perseverance in finishing my book", "category": 2, "answeredDate": "25/02/2013" }
+        ]
+    },
+    {
+        "table": "groups",
+        "columns": [
+            { "column": "rowID", "type": "INTEGER", "constraints": ["PRIMARY KEY"] },
+            { "column": "title", "type": "TEXT" },
+            { "column": "answeredCount", "type": "INTEGER" },
+            { "column": "unansweredCount", "type": "INTEGER" }
+        ],
+        "data": [
+            { "rowID": 1, "title": "Family"},
+            { "rowID": 2, "title": "Personal" },
+            { "rowID": 3, "title": "Work" },
+            { "rowID": 4, "title": "Church" }
+        ]
+    }
+]

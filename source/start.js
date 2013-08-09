@@ -1,4 +1,4 @@
 enyo.ready(function () {
-	app = new PrayerList.Application({name: "app", renderTarget: "port"});
-	app.render();
+	App = new PrayerList.Application({name: "App", renderTarget: "port"});
+	App.render();
 });

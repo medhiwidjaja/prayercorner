@@ -14,7 +14,7 @@ enyo.kind({
 
 	create: function() {
 		this.inherited(arguments);
-		this.$.image.setSrc("/assets/"+this.shade+"-swash-"+this.type+".png");
+		this.$.image.setSrc("assets/"+this.shade+"-swash-"+this.type+".png");
 	}
 
 });
