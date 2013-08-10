@@ -40,7 +40,8 @@
 }
 
 .bottom-toolbar {
-	box-shadow: 4px 0 10px;
+	//box-shadow: 4px 0 10px;
+	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
 	background: @lightBackground;
 }
 
@@ -51,14 +52,14 @@
 /* Background */
 
 .wallpaper {
-	background: url(assets/bg.png);
+	background: url(../../assets/bg.png);
 }
 
 /* Basement */
 
 .basement-title {
 	font-family: Tangerine;
-	font-size: 32px;
+	font-size: 36px;
 	text-align: center;
 	padding: 10px 5px;
 	color: @lightText;
@@ -84,13 +85,14 @@
 
 .list-item-count {
 	font-family: "Alegreya";
-	font-size: 14px;
 	color: @lightText;
 	background-color: #CD6264;
-	border-radius: 4px;
+	border-radius: 6px;
 	float: right;
 	margin: 4px 20px 4px 0;
 	padding: 1px 4px;
+	min-width: 14px;
+	text-align: center;
 }
 
 /* Common */
@@ -124,6 +126,7 @@
     background-image: linear-gradient(top, @darkRed, @darkerRed);
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darkRed', endColorstr='@darkerRed', GradientType=0);
+    
 }
 
 #rootView_basement_groups_container {
@@ -169,7 +172,7 @@
 
 .verse-address {
 	font-family: "Alegreya SC";
-	font-size: 13px;
+	font-size: 0.9em;
 	color: @darkGray;
 	text-align: right;
 	letter-spacing: 3px;
@@ -188,7 +191,7 @@
 
 .done-button {
 	font-family: "Alegreya SC";
-	font-size: 16px;
+	font-size: 20px;
 }
 
 .bg {
@@ -235,7 +238,6 @@
 	top: 6px;
 	right: 0;
 	left: 50px;
-	font-size: 16px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -247,14 +249,13 @@
 	top: 16px;
 	right: 0;
 	left: 50px;
-	font-size: 16px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 }
 
 .plist-item > .icon {
-	font-size: 24px;
+	font-size: 20px;
 	color: #8587ad;
 }
 
@@ -262,7 +263,7 @@
 	background-color: @gray;
 	color: @orange;
 	padding: 3px;
-	font-size: 16px;
+	font-size: 36px;
 	padding-left: 10px;
 }
 
@@ -302,7 +303,7 @@
 /* Calendar */
 
 .cal-month {
-	font-size: 10px;
+	font-size: 12px;
 }
 
 .cal-date {
@@ -409,10 +410,10 @@
 	
 	
 	input {
-		font-size: 14px;
 		font-family: Alegreya;
 		width: 100%;
 		border-bottom: 1px dotted @grayDark;
+		font-size: 20px;
 	}
 }
 

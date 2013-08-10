@@ -2862,7 +2862,7 @@ ul.icons li [class*=" icon-"] {
 }
 /* Background */
 .wallpaper {
-  background: url(../source/css/assets/bg.png);
+  background: url(../assets/bg.png);
 }
 /* Basement */
 .basement-title {

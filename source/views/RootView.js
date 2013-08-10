@@ -86,7 +86,7 @@ enyo.kind({
         this.log();
         pl.editCategoryController.set("isAddingNew", inSender.name === "basement" ? true : false); 
         if (this.$.prayerView) {
-            this.$.rootPanels.removeControl(this.$.prayerView)
+            this.$.prayerView.destroy();
         }
         if (! this.$.editGroup) {
             var newComponent = this.$.rootPanels.createComponent(

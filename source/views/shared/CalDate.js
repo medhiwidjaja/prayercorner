@@ -1,6 +1,6 @@
 enyo.kind({
 	name: "PrayerList.CalDate",
-	style: "min-width: 30px; border: 1px solid; border-radius: 4px; padding: 3px 4px 1px; vertical-align: middle; text-align: center",
+	style: "min-width: 35px; border: 1px solid; border-radius: 4px; padding: 3px 4px 1px; vertical-align: middle; text-align: center",
 	published: {
 		calendarDate: "",
 		additionalStyles: ""
