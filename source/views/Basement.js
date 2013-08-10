@@ -107,8 +107,6 @@ enyo.kind({
 		pl.selectedCategoryController.set("savedAttributes", JSON.parse(category.toJSON()));
 		this.doSelectCategory(inSender, inEvent);
 		pl.prayersCollection.filterCategory(category);
-		enyo.forEach(this.controls, function(c) {c.removeClass("selected-category")});
-		inSender.addClass("selected-category");
 		this.log(category.id + " " + category.title);
 	}
 })
