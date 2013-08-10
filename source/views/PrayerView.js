@@ -23,7 +23,7 @@ enyo.kind({
 			horizontal: "hidden",
 			fit: true,
 			components: [
-				{ kind: "FittableRows", classes: "living-room", components: [
+				{ kind: "FittableRows", classes: "prayer-item-container", components: [
 					{ name: "prayerItem", classes: "dropcap-text" },
 					{ tag: "br" },
 					

@@ -29,7 +29,7 @@ enyo.kind({
 			horizontal: "hidden",
 			fit: true,
 			components: [
-				{ name: "prayersList", kind: "PrayerItems", classes: "living-room" },
+				{ name: "prayersList", kind: "PrayerItems", classes: "prayer-list-container" },
 				{ kind: "swash", type: "w", shade: "dark" },
 				{ style: "margin-top:20px" },
 				{ name: "extra" }

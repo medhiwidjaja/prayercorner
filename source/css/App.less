@@ -143,14 +143,15 @@
 	min-width: 300px;
 }
 
-.living-room {
-	padding: 16px 16px;
+.prayer-list-container {
+	padding: 16px 0px;
 }
 
 .prayer-list-item {
 	font-family: "Alegreya";
 	color: @darkGray;
-	margin: 4px 10px;
+	margin: 6px 0px;
+	padding: 4px 4px;
 	text-align: center
 }
 
@@ -174,6 +175,13 @@
 	margin: 4px 4px 12px 0;
 }
 
+#rootView_categoryView_prayersList_container {
+	.selected {
+		.prayer-list-item {
+			box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+		}
+	}
+}
 
 /* Upper Ground Floor */
 
@@ -190,6 +198,10 @@
 .plist-upperfloor {
 	min-width: 300px;
 
+}
+
+.prayer-item-container {
+	padding: 16px;
 }
 
 .upperfloor-header {
