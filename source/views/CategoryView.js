@@ -1,7 +1,6 @@
 enyo.kind({ 
 	name: "PrayerList.CategoryView",
 	kind: "enyo.FittableRows",
-	classes: "plist-groundfloor",
 	draggable: false,
 	published: {
 		title: "",

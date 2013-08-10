@@ -42,9 +42,14 @@ enyo.kind({
 				]}
 			]
 		},
-		{ name: "PVBottomToolbar", kind: "onyx.Toolbar", classes: "bottom-toolbar", components: [
+		{ name: "PVBottomToolbar", 
+			kind: "onyx.Toolbar", 
+			classes: "bottom-toolbar", 
+			layoutKind: "FittableColumnsLayout",
+			components: [
 				{ content: "＋" },
-				{ content: "Done", classes: "done-button", ontap: "close" }
+				{ content: "Done", classes: "done-button", ontap: "close" },
+				{ fit: true }
 			]
 		}
 	],

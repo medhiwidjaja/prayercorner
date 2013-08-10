@@ -26,7 +26,7 @@ enyo.kind({
                     arrangerKind:"CollapsingArranger", 
                     draggable:false, 
                     //wrap: true,
-                    classes:"panels enyo-fit", 
+                    classes:"panels enyo-fit plist-groundfloor", 
                     onTransitionFinish: "contentTransitionComplete", 
                     components: [
                         {
@@ -43,13 +43,18 @@ enyo.kind({
                 ]}
                 // {
                 //     name: "upperFloor",
-                //     kind: "UpperFloor",
+                    
                 //     classes: "wide"
                 // }
 
             ]
         }
     ],
+
+    // create: function() {
+    //     this.inherited(arguments);
+    //     this.$.rootPanels.getAnimator().setEasingFunction(enyo.easing.easeOutBounce);
+    // },
 
     render: function() {
         this.inherited(arguments);
@@ -80,8 +85,11 @@ enyo.kind({
     editCategory: function(inSender, inEvent) {
         this.log();
         pl.editCategoryController.set("isAddingNew", inSender.name === "basement" ? true : false); 
+        if (this.$.prayerView) {
+            this.$.rootPanels.removeControl(this.$.prayerView)
+        }
         if (! this.$.editGroup) {
-            var newComponent = this.$.contentPanels.createComponent(
+            var newComponent = this.$.rootPanels.createComponent(
                 {
                     name: "editGroup", 
                     kind: "PrayerList.EditCategory",  
@@ -96,9 +104,9 @@ enyo.kind({
                 {owner: this}
             );
             newComponent.render();
-            this.$.contentPanels.render();
+            this.$.rootPanels.render();
             //if (enyo.Panels.isScreenNarrow()) {
-                this.$.contentPanels.setIndex(1);
+                this.$.rootPanels.setIndex(2);
             //}
         }
     },
@@ -109,7 +117,11 @@ enyo.kind({
         this.$.basement.$.groups.render();
         this.$.categoryView.refreshBindings();
         //this.$.editGroup.titleBinding.refresh();
-        this.$.contentPanels.setIndex(0);
+        if (enyo.Panels.isScreenNarrow()) {
+            this.$.rootPanels.setIndex(1);
+        } else {
+            this.$.rootPanels.setIndex(0);
+        }
         //this.$.contentPanels.removeControl(inSender);
         this.log();
     },
@@ -119,13 +131,24 @@ enyo.kind({
         this.log();
         this.hidingPrayerView = true;
         //this.$.basement.$.groups.render();
-        this.$.contentPanels.setIndex(0);
+        //this.$.contentPanels.setIndex(0);
+        if (enyo.Panels.isScreenNarrow()) {
+            this.$.rootPanels.setIndex(1);
+        } else {
+            this.$.rootPanels.setIndex(0);
+        }
+        this.$.rootPanels.refresh();
     },
 
     rootTransitionComplete: function(inSender, inEvent) {
         if (this.hidingPrayerView) {
             this.destroyPrayerView();
             this.log("Prayerview")
+        } else { 
+            if(this.hidingEditGroup) {
+                this.destroyEditGroup();
+                this.log("edit group")
+            }
         }
     },
 
@@ -137,14 +160,15 @@ enyo.kind({
     },
 
     destroyEditGroup: function() {
-        //this.$.rootPanels.setIndex(0);
         this.$.editGroup.destroy();
         this.hidingEditGroup = false;
+        this.log();
     },
 
     destroyPrayerView: function() {
         this.$.prayerView.destroy();
         this.hidingPrayerView = false;
+        this.log();
     },
 
     addPrayerItem: function(inSender, inEvent) {
