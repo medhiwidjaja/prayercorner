@@ -2903,6 +2903,7 @@ ul.icons li [class*=" icon-"] {
 }
 .plist-panels > * {
   width: 320px;
+  min-width: 300px;
   box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: -4px 0px 4px rgba(0, 0, 0, 0.3);
@@ -2921,17 +2922,27 @@ ul.icons li [class*=" icon-"] {
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darkRed', endColorstr='@darkerRed', GradientType=0);
 }
+#rootView_basement_groups_container .selected {
+  background: #911;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
+}
+.selected-category {
+  background: #911;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.3);
+}
 /* Ground Floor */
 .plist-groundfloor {
   min-width: 300px;
+  max-width: 350px;
 }
-.living-room {
-  padding: 16px 16px;
+.prayer-list-container {
+  padding: 16px 0px;
 }
 .prayer-list-item {
   font-family: "Alegreya";
   color: #222222;
-  margin: 4px 10px;
+  margin: 6px 0px;
+  padding: 4px 16px;
   text-align: center;
 }
 .verse-item {
@@ -2948,6 +2959,9 @@ ul.icons li [class*=" icon-"] {
   letter-spacing: 3px;
   margin: 4px 4px 12px 0;
 }
+#rootView_categoryView_prayersList_container .selected .prayer-list-item {
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+}
 /* Upper Ground Floor */
 .done-button {
   font-family: "Alegreya SC";
@@ -2959,6 +2973,9 @@ ul.icons li [class*=" icon-"] {
 /* Upper Floor */
 .plist-upperfloor {
   min-width: 300px;
+}
+.prayer-item-container {
+  padding: 16px;
 }
 .upperfloor-header {
   font-family: "Alegreya SC";
