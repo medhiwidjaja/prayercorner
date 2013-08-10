@@ -9,6 +9,7 @@ enyo.kind({
             arrangerKind: "enyo.CollapsingArranger",
             classes: "plist-panels enyo-fit",
             realtimeFit: false,
+            narrowFit: false,
             fit: true,
             //wrap: true,
             onTransitionFinish: "rootTransitionComplete", 
@@ -103,12 +104,14 @@ enyo.kind({
     },
 
     //FIXME: hiding Edit Group View doesn't animate
-    hideEditGroup: function() {
+    hideEditGroup: function(inSender, inEvent) {
         this.hidingEditGroup = true;
         this.$.basement.$.groups.render();
         this.$.categoryView.refreshBindings();
         //this.$.editGroup.titleBinding.refresh();
         this.$.contentPanels.setIndex(0);
+        //this.$.contentPanels.removeControl(inSender);
+        this.log();
     },
 
     //FIXME: hiding PrayerView doesn't animate
