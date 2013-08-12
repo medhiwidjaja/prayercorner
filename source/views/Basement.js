@@ -117,7 +117,7 @@ enyo.kind({
 	style: "padding-bottom: 4px;",
 	components: [
 		{ content: "Today", fit: true, classes: "today-header middle" },
-		{ name: "cal", kind: "PrayerList.CalDate", calendarDate: new Date(), additionalStyles: "color: #FFEFCB;" },
+		{ name: "cal", kind: "PrayerList.CalDate", calendarDate: new Date(), additionalStyles: "background-color: #FFEFCB; color: #7d0000;" },
 		{ style: "margin-right: 20px"}
 	]
 })

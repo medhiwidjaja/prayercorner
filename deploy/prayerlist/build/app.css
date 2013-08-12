@@ -467,7 +467,7 @@
 .onyx {
   color: #242c41;
   font-family: Alegreya, Kreon, Arial;
-  font-size: 26px;
+  font-size: 36px;
   cursor: default;
   background-color: #fdfff7;
   /* remove automatic tap highlight color */
@@ -511,7 +511,7 @@
 .onyx-button {
   outline: 0;
   color: #292929;
-  font-size: 20px;
+  font-size: 26px;
   text-align: center;
   white-space: nowrap;
   margin: 0;
@@ -604,7 +604,7 @@
 }
 /* Popup.css */
 .onyx-popup {
-  font-size: 20px;
+  font-size: 26px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 8px;
@@ -629,7 +629,7 @@
 
   border-radius: 0;
   margin: 0;
-  font-size: 20px;
+  font-size: 26px;
 }
 .onyx-groupbox > *:first-child {
   border-top-color: #aaaaaa;
@@ -645,7 +645,7 @@
 .onyx-groupbox-header {
   padding: 2px 10px;
   color: #ffffff;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
   /**/
@@ -703,7 +703,7 @@
   cursor: pointer;
   background-color: transparent;
   background-image: none;
-  font-size: 20px;
+  font-size: 26px;
   box-shadow: none;
   /* FIXME: hack for styling reset on Android */
 
@@ -832,7 +832,7 @@
   cursor: pointer;
   background-color: transparent;
   background-image: none;
-  font-size: 20px;
+  font-size: 26px;
   box-shadow: none;
   /* Remove scrollbars and resize handle */
 
@@ -865,7 +865,7 @@
   cursor: pointer;
   background-color: transparent;
   background-image: none;
-  font-size: 20px;
+  font-size: 26px;
   min-height: 20px;
   min-width: 100px;
   box-shadow: none;
@@ -885,7 +885,7 @@
   padding: 8px 12px;
   margin: 0;
   outline: 0;
-  font-size: 20px;
+  font-size: 26px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   text-align: center;
   /**/
@@ -940,7 +940,7 @@
 /* TabButton.css */
 .onyx-radiobutton.onyx-tabbutton {
   padding: 8px 34px;
-  font-size: 26px;
+  font-size: 36px;
   border-radius: 0px;
 }
 /* TabBar.css */
@@ -1073,7 +1073,7 @@
   /* label */
 
   color: #ffffff;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -1133,7 +1133,7 @@
 
   white-space: nowrap;
   overflow-y: visible;
-  font-size: 28px;
+  font-size: 36px;
 }
 .onyx-toolbar-inline > *,
 .enyo-fittable-columns-layout.onyx-toolbar-inline > * {
@@ -1165,7 +1165,7 @@
 }
 .onyx-toolbar .onyx-input-decorator .onyx-input {
   color: #e5e5e5;
-  font-size: 16px;
+  font-size: 20px;
 }
 .onyx-toolbar .onyx-input-decorator .onyx-input:focus {
   color: #000000;
@@ -1302,7 +1302,7 @@
   height: 36px;
   line-height: 36px;
   color: #f1f1f1;
-  font-size: 20px;
+  font-size: 26px;
   text-overflow: ellipsis;
 }
 .onyx-progress-button-bar {
@@ -1706,6 +1706,7 @@
 /* Place your Onyx rule overrides here ------------------------ */
 body {
   font-family: Alegreya, Kreon, Arial;
+  font-size: 18px;
 }
 .onyx-input-decorator.onyx-focused {
   background-color: #ffffff;
@@ -2854,7 +2855,7 @@ ul.icons li [class*=" icon-"] {
   margin: 1px 6px;
 }
 .bottom-toolbar {
-  box-shadow: 4px 0 10px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
   background: #fdfff7;
 }
 .top-toolbar {
@@ -2867,7 +2868,7 @@ ul.icons li [class*=" icon-"] {
 /* Basement */
 .basement-title {
   font-family: Tangerine;
-  font-size: 32px;
+  font-size: 36px;
   text-align: center;
   padding: 10px 5px;
   color: #ffefcb;
@@ -2889,13 +2890,14 @@ ul.icons li [class*=" icon-"] {
 }
 .list-item-count {
   font-family: "Alegreya";
-  font-size: 14px;
   color: #ffefcb;
   background-color: #CD6264;
-  border-radius: 4px;
+  border-radius: 6px;
   float: right;
   margin: 4px 20px 4px 0;
   padding: 1px 4px;
+  min-width: 14px;
+  text-align: center;
 }
 /* Common */
 .middle {
@@ -2953,7 +2955,7 @@ ul.icons li [class*=" icon-"] {
 }
 .verse-address {
   font-family: "Alegreya SC";
-  font-size: 13px;
+  font-size: 0.9em;
   color: #222222;
   text-align: right;
   letter-spacing: 3px;
@@ -2965,7 +2967,7 @@ ul.icons li [class*=" icon-"] {
 /* Upper Ground Floor */
 .done-button {
   font-family: "Alegreya SC";
-  font-size: 16px;
+  font-size: 20px;
 }
 .bg {
   background: #fdfff7;
@@ -3003,7 +3005,6 @@ ul.icons li [class*=" icon-"] {
   top: 6px;
   right: 0;
   left: 50px;
-  font-size: 16px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -3013,20 +3014,19 @@ ul.icons li [class*=" icon-"] {
   top: 16px;
   right: 0;
   left: 50px;
-  font-size: 16px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 .plist-item > .icon {
-  font-size: 24px;
+  font-size: 20px;
   color: #8587ad;
 }
 .plist-header-row {
   background-color: #474f64;
   color: #e5521d;
   padding: 3px;
-  font-size: 16px;
+  font-size: 36px;
   padding-left: 10px;
 }
 .plist-center {
@@ -3057,7 +3057,7 @@ ul.icons li [class*=" icon-"] {
 }
 /* Calendar */
 .cal-month {
-  font-size: 10px;
+  font-size: 12px;
 }
 .cal-date {
   font-size: 18px;
@@ -3139,10 +3139,10 @@ ul.icons li [class*=" icon-"] {
 }
 /* Input Decorator */
 .pl-input-decorator input {
-  font-size: 14px;
   font-family: Alegreya;
   width: 100%;
   border-bottom: 1px dotted #242c41;
+  font-size: 20px;
 }
 /* Input */
 

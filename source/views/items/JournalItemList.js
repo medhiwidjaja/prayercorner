@@ -8,7 +8,7 @@ enyo.kind({
 			{ 
 				kind: "PrayerList.CalDate", 
 				bindFrom: ".createdDate", bindTo: "calendarDate",
-				additionalStyles: "color: #7d0000;" },
+				additionalStyles: "color: #fdfff7;background-color: #7d0000;" },
 			{  
 				fit: true, classes: "journal-entry middle",
 				bindFrom: ".content"
