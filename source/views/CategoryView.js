@@ -39,10 +39,10 @@ enyo.kind({
 			classes: "bottom-toolbar", 
 			layoutKind: "FittableColumnsLayout",
 			components: [
-				{ content: "＋", ontap: "addPrayerItem" },
+				{ kind: "enyo.Button", content: "＋", classes: "ding-button", ontap: "addPrayerItem" },
+				//{ kind: "onyx.Button", content: "＋", style: "font-size: 16px", ontap: "addPrayerItem" },
 				{ fit: true },
-				{ content: "✍", ontap: "editCategory" }
-				//{ kind: "enyo.Button", content: "✍", ontap: "editGroup" }
+				{ kind: "enyo.Button", content: "✍", classes: "ding-button", ontap: "editCategory" }
 			]
 		}
 	],

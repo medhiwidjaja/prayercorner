@@ -49,6 +49,70 @@
 	background: @lightBackground;
 }
 
+/* Button */
+
+.all-button {
+	outline: 0;
+	height: 34px !important;
+	color: #7d0000;
+	font-size: 26px;
+	text-align: center;
+	white-space: nowrap;
+	margin: 0;
+	overflow: hidden;
+	border-radius: 3px;
+	border: 1px solid #707070;
+	border: 1px solid rgba(15, 15, 15, 0.2);
+	background: none;
+}
+
+.text-button {
+	.all-button;
+	font-family: "Alegreya SC";
+	font-size: 16px !important;
+	line-height: 16px !important;
+	padding: 6px;
+}
+
+.ding-button {
+	.all-button;
+	width: 34px;
+	font-size: 20px !important;
+	line-height: 20px !important;
+	padding: 8px 6px 4px 6px;
+	//box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.2);
+	//background: #e1e1e1 url(http://localhost:8000/source/../assets/toolbar.png) repeat-x bottom;
+	//background-size: contain;
+	text-overflow: ellipsis;
+}
+
+.pressed-button {
+	//background-color: #FFEFCB;
+	background-image: url($lib/onyx/images/gradient.png);
+	background-position: top;
+	box-shadow: inset 0px 2px 6px rgba(0,0,0,0.4);
+}
+.ding-button.active, .ding-button.pressed {
+	.pressed-button
+}
+
+.ding-button:active:hover:not([disabled]) {
+	.pressed-button
+}
+
+.text-button.active, .text-button.pressed {
+	.pressed-button
+}
+
+.text-button:active:hover:not([disabled]) {
+	.pressed-button
+}
+
+.text-button.negative, .ding-button.negative {
+	background-color: #C51616;
+	color: #F2F2F2;
+}
+
 /* Background */
 
 .wallpaper {
@@ -188,11 +252,6 @@
 }
 
 /* Upper Ground Floor */
-
-.done-button {
-	font-family: "Alegreya SC";
-	font-size: 20px;
-}
 
 .bg {
 	background: @lightBackground;
@@ -387,10 +446,13 @@
 	color: @grayDark;
 	background-color: @lightBackground;
 	border: none;
+	font-size: 18px;
+	font-family: "Alegreya SC";
 };
 
 .pl-groupbox > * {
 	border: none;
+
 }
 
 
@@ -402,7 +464,7 @@
 		font-family: Alegreya;
 		width: 100%;
 		border-bottom: 1px dotted @grayDark;
-		font-size: 20px;
+		font-size: 18px;
 	}
 }
 
@@ -411,4 +473,6 @@
 .pl-input {
 
 }
+
+
 

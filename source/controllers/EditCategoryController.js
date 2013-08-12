@@ -12,6 +12,23 @@ enyo.kind({
 		isAddingNew: ""
 	},
 
+	showConfirm: function() {
+		navigator.notification.confirm(
+			'Deleting category will delete all related prayer items!',  // message
+			this.onConfirm,				// callback to invoke with index of button pressed
+			'Confirm delete',            // title
+			'Delete,Cancel'          // buttonLabels
+		);
+	},
+
+	onConfirm: function(buttonIndex) {
+		if (buttonIndex == 1) {
+			this.delete();
+		} else {
+			this.cancel();
+		}
+	},
+
 	done: function() {
 		if (this.model.title !== "") {
 			this.model.commit();

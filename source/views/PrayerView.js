@@ -47,8 +47,8 @@ enyo.kind({
 			classes: "bottom-toolbar", 
 			layoutKind: "FittableColumnsLayout",
 			components: [
-				{ content: "＋" },
-				{ content: "Done", classes: "done-button", ontap: "close" },
+				{ kind: "enyo.Button", content: "＋", classes: "ding-button" },
+				{ kind: "enyo.Button", content: "Done", classes: "text-button", ontap: "close" },
 				{ fit: true }
 			]
 		}

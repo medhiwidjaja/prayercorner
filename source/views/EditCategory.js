@@ -8,14 +8,18 @@ enyo.kind({
 	},
 
 	controller: "pl.editCategoryController",
-	bindings: [
-		{from: ".model.title", to: "$.tbtitle.content"},
-	],
+	// bindings: [
+	// 	{from: ".model.title", to: "$.tbtitle.content"},
+	// ],
 	components: [
-		{ name: "ECTopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", components: [
-				{ kind: "onyx.Grabber" },
-				{ name: "toolbarHeader", kind: "StylishHeader", title: "Edit Category:", watermark: false },
-				{ name: "tbtitle" }
+		{ name: "ECTopToolbar", 
+			kind: "onyx.Toolbar", 
+			classes: "top-toolbar", 
+			layoutKind: "FittableColumnsLayout",
+			components: [
+				{ kind: "enyo.Button", content: "Cancel", classes: "text-button", ontap: "cancel" },
+				{ name: "toolbarHeader", kind: "StylishHeader", title: "Edit Category", fit: true, watermark: false },
+				{ kind: "enyo.Button", content: "Done", classes: "text-button", ontap: "done" }
 			]
 		},
 		{ kind: "enyo.Scroller", 
@@ -23,6 +27,7 @@ enyo.kind({
 			horizontal: "hidden",
 			fit: true,
 			components: [
+				{ tag: "br" },
 				{ kind: "GroupEditFields", classes: "living-room" },
 				{ kind: "swash", type: "w", shade: "dark" },
 				{ style: "margin-top:20px" }
@@ -33,14 +38,28 @@ enyo.kind({
 			classes: "bottom-toolbar", 
 			layoutKind: "FittableColumnsLayout",
 			components: [
-				{ content: "Done", classes: "done-button", ontap: "done" },
-				{ content: "Cancel", classes: "done-button", ontap: "cancel" },
 				{ fit: true },
-				{ content: "Delete", classes: "done-button", ontap: "delete" }
+				{ kind: "enyo.Button", content: "Delete", classes: "text-button negative", ontap: "showConfirm" }
+				// { kind: "onyx.MenuDecorator", 
+				// 	//style: "display:inline-block;float:right",
+				// 	components: [
+				// 		{ kind: "enyo.Button", content: "Delete", classes: "text-button negative" },
+				// 		{ kind: "onyx.ContextualPopup",
+				// 			style: "width: 250px",
+				// 			title: "Confirm",
+				// 			floating: true,
+				// 			actionButtons: [
+				// 				{ kind: "enyo.Button", content: "Delete", classes: "text-button negative" },
+				// 				{ kind: "enyo.Button", content: "Cancel", classes: "text-button" }
+				// 			]
+				// 		}
+				// 	]
+				// }
 			]
 		}
 	]
 })
+
 
 
 enyo.kind({

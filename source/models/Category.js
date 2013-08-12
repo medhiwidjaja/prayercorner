@@ -8,7 +8,9 @@ enyo.kind({
         //count: "",
         answeredCount: "",
         unansweredCount: "",
-        createdDate: ""
+        createdDate: "",
+        scheduleDaily: true,
+        scheduleWeekly: ""
     },
 
     // Returns the number of prayer items under this category
