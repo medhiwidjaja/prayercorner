@@ -1,6 +1,6 @@
 enyo.depends(
 	"swashes.js",
 	"StylishHeader.js",
-	"CalDate.js",
-	"CalDate.css"
+	"CalDate.less",
+	"CalDate.js"
 );
