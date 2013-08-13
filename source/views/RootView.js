@@ -112,31 +112,44 @@ enyo.kind({
     },
 
     //FIXME: hiding Edit Group View doesn't animate
+    // hideEditGroup: function(inSender, inEvent) {
+    //     this.hidingEditGroup = true;
+    //     this.$.basement.$.groups.render();
+    //     this.$.categoryView.refreshBindings();
+    //     //this.$.editGroup.titleBinding.refresh();
+    //     if (enyo.Panels.isScreenNarrow()) {
+    //         this.$.rootPanels.setIndex(1);
+    //     } else {
+    //         this.$.rootPanels.setIndex(0);
+    //     }
+    //     //this.$.contentPanels.removeControl(inSender);
+    //     this.log();
+    // },
+
     hideEditGroup: function(inSender, inEvent) {
-        this.hidingEditGroup = true;
         this.$.basement.$.groups.render();
         this.$.categoryView.refreshBindings();
-        //this.$.editGroup.titleBinding.refresh();
-        if (enyo.Panels.isScreenNarrow()) {
-            this.$.rootPanels.setIndex(1);
-        } else {
-            this.$.rootPanels.setIndex(0);
-        }
-        //this.$.contentPanels.removeControl(inSender);
+        inSender.destroy();
         this.log();
     },
 
     //FIXME: hiding PrayerView doesn't animate
-    hidePrayerView: function() {
+    // hidePrayerView: function() {
+    //     this.log();
+    //     this.hidingPrayerView = true;
+    //     //this.$.basement.$.groups.render();
+    //     //this.$.contentPanels.setIndex(0);
+    //     if (enyo.Panels.isScreenNarrow()) {
+    //         this.$.rootPanels.setIndex(1);
+    //     } else {
+    //         this.$.rootPanels.setIndex(0);
+    //     }
+    //     this.$.rootPanels.refresh();
+    // },
+
+    hidePrayerView: function(inSender, inEvent) {
         this.log();
-        this.hidingPrayerView = true;
-        //this.$.basement.$.groups.render();
-        //this.$.contentPanels.setIndex(0);
-        if (enyo.Panels.isScreenNarrow()) {
-            this.$.rootPanels.setIndex(1);
-        } else {
-            this.$.rootPanels.setIndex(0);
-        }
+        inSender.destroy();
         this.$.rootPanels.refresh();
     },
 

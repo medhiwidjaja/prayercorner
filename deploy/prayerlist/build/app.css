@@ -1133,7 +1133,7 @@
 
   white-space: nowrap;
   overflow-y: visible;
-  font-size: 36px;
+  font-size: 26px;
 }
 .onyx-toolbar-inline > *,
 .enyo-fittable-columns-layout.onyx-toolbar-inline > * {
@@ -2861,6 +2861,85 @@ ul.icons li [class*=" icon-"] {
 .top-toolbar {
   background: #fdfff7;
 }
+/* Button */
+.all-button {
+  outline: 0;
+  height: 34px !important;
+  color: #7d0000;
+  font-size: 26px;
+  text-align: center;
+  white-space: nowrap;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 3px;
+  border: 1px solid #707070;
+  border: 1px solid rgba(15, 15, 15, 0.2);
+  background: none;
+}
+.text-button {
+  outline: 0;
+  height: 34px !important;
+  color: #7d0000;
+  font-size: 26px;
+  text-align: center;
+  white-space: nowrap;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 3px;
+  border: 1px solid #707070;
+  border: 1px solid rgba(15, 15, 15, 0.2);
+  background: none;
+  font-family: "Alegreya SC";
+  font-size: 16px !important;
+  line-height: 16px !important;
+  padding: 6px;
+}
+.ding-button {
+  outline: 0;
+  height: 34px !important;
+  color: #7d0000;
+  font-size: 26px;
+  text-align: center;
+  white-space: nowrap;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 3px;
+  border: 1px solid #707070;
+  border: 1px solid rgba(15, 15, 15, 0.2);
+  background: none;
+  width: 34px;
+  font-size: 20px !important;
+  line-height: 20px !important;
+  padding: 8px 6px 4px 6px;
+  text-overflow: ellipsis;
+}
+.pressed-button {
+  background-position: top;
+  box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.4);
+}
+.ding-button.active,
+.ding-button.pressed {
+  background-position: top;
+  box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.4);
+}
+.ding-button:active:hover:not([disabled]) {
+  background-position: top;
+  box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.4);
+}
+.text-button.active,
+.text-button.pressed {
+  background-position: top;
+  box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.4);
+}
+.text-button:active:hover:not([disabled]) {
+  background-position: top;
+  box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.4);
+}
+.text-button.negative,
+.ding-button.negative {
+  background-color: #C51616;
+  color: #F2F2F2;
+}
 /* Background */
 .wallpaper {
   background: url(../source/css/assets/bg.png);
@@ -2913,7 +2992,7 @@ ul.icons li [class*=" icon-"] {
 }
 /* Basement */
 .plist-basement {
-  max-width: 300px;
+  max-width: 290px;
   background: #2e0304;
   background-image: -moz-linear-gradient(top, #7d0000, #2e0304);
   background-image: -ms-linear-gradient(top, #7d0000, #2e0304);
@@ -2934,7 +3013,7 @@ ul.icons li [class*=" icon-"] {
 }
 /* Ground Floor */
 .plist-groundfloor {
-  min-width: 300px;
+  min-width: 320px;
   max-width: 350px;
 }
 .prayer-list-container {
@@ -2965,16 +3044,12 @@ ul.icons li [class*=" icon-"] {
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 }
 /* Upper Ground Floor */
-.done-button {
-  font-family: "Alegreya SC";
-  font-size: 20px;
-}
 .bg {
   background: #fdfff7;
 }
 /* Upper Floor */
 .plist-upperfloor {
-  min-width: 300px;
+  min-width: 320px;
 }
 .prayer-item-container {
   padding: 16px;
@@ -3055,24 +3130,6 @@ ul.icons li [class*=" icon-"] {
 .plist-image.tall {
   height: 100%;
 }
-/* Calendar */
-.calendar {
-  min-width: 27px;
-  height: 30px !important;
-  border-radius: 4px;
-  vertical-align: middle;
-  text-align: center;
-}
-.calendar .cal-month {
-  font-size: 17px;
-  position: relative;
-  top: -6px;
-}
-.calendar .cal-date {
-  font-size: 30px;
-  position: relative;
-  top: -23px;
-}
 /********* Typography *********/
 .dark-red {
   color: #7d0000;
@@ -3121,28 +3178,13 @@ ul.icons li [class*=" icon-"] {
   position: relative;
   top: -10px;
 }
-.swash {
-  font-size: 26px;
-  line-height: 10px;
-  padding-top: 10px;
-  margin-bottom: -5px;
-  color: #ffefcb;
-  text-align: center;
-}
-.swash-small {
-  font-family: "MT-Extra";
-}
-.swash-big {
-  font-family: "Wingdings";
-}
-.swash-dark {
-  color: #7d0000;
-}
 /* Groupbox */
 .pl-groupbox-header {
   color: #242c41;
   background-color: #fdfff7;
   border: none;
+  font-size: 18px;
+  font-family: "Alegreya SC";
 }
 .pl-groupbox > * {
   border: none;
@@ -3152,11 +3194,29 @@ ul.icons li [class*=" icon-"] {
   font-family: Alegreya;
   width: 100%;
   border-bottom: 1px dotted #242c41;
-  font-size: 20px;
+  font-size: 18px;
 }
 /* Input */
 
 
-/* source/views/shared/CalDate.css */
+/* source/views/shared/CalDate.less */
 
+/* Calendar */
+.calendar {
+  min-width: 27px;
+  height: 30px !important;
+  border-radius: 4px;
+  vertical-align: middle;
+  text-align: center;
+}
+.calendar .cal-month {
+  font-size: 17px;
+  position: relative;
+  top: -6px;
+}
+.calendar .cal-date {
+  font-size: 30px;
+  position: relative;
+  top: -23px;
+}
 
