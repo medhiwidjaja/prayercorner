@@ -105,9 +105,9 @@ enyo.kind({
             );
             newComponent.render();
             this.$.rootPanels.render();
-            //if (enyo.Panels.isScreenNarrow()) {
+            if (enyo.Panels.isScreenNarrow()) {
                 this.$.rootPanels.setIndex(2);
-            //}
+            }
         }
     },
 
@@ -189,6 +189,9 @@ enyo.kind({
     },
 
     viewPrayerItem: function(inSender, inModel) {
+        if (this.$.editGroup) {
+            this.$.editGroup.controller.cancel();
+        }
         if (! this.$.prayerView) {  
             var newComponent = this.$.rootPanels.createComponent(
                 {name: "prayerView", 
