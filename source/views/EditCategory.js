@@ -68,14 +68,14 @@ enyo.kind({
 	bindings: [
 		{ from: ".controller.model.title", to: ".$.groupName.value", oneWay: false, transform: "prettify" }
 	],
+	classes: "pl-input-container",
 	components: [
-		{kind: "onyx.Groupbox", classes: "pl-groupbox", components: [
-			{kind: "onyx.GroupboxHeader", content: "Category", classes: "pl-groupbox-header"},
-			{kind: "onyx.InputDecorator", classes: "pl-input-decorator", components: [
+		{kind: "onyx.InputDecorator", classes: "pl-input-decorator", 
+			components: [
 				{name: "groupName", kind: "onyx.Input", classes: "pl-input",
 					placeholder: "Name"
 				}
-			]},
-		]},
+			]
+		},
 	]
 })

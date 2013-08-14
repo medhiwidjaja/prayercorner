@@ -28,7 +28,15 @@ enyo.kind({
 			horizontal: "hidden",
 			fit: true,
 			components: [
-				{ name: "prayersList", kind: "PrayerItems", classes: "prayer-list-container" },
+				{ name: "prayersList", kind: "PrayerList.PrayerItems", classes: "prayer-list-container" },
+				{ name: "quickInputRow", showing: false,
+					components: [
+						{name: "quickInputControl", kind: "PrayerList.PrayerQuickInput", onCancel: "cancelPrayerItem", onSave: "savePrayerItem" }
+					]
+				},
+				// {
+				// 	kind: "CalliopeInput"
+				// },
 				{ kind: "swash", type: "w", shade: "dark" },
 				{ style: "margin-top:20px" },
 				{ name: "extra" }
@@ -42,7 +50,7 @@ enyo.kind({
 				{ kind: "enyo.Button", content: "＋", classes: "ding-button", ontap: "addPrayerItem" },
 				//{ kind: "onyx.Button", content: "＋", style: "font-size: 16px", ontap: "addPrayerItem" },
 				{ fit: true },
-				{ kind: "enyo.Button", content: "✍", classes: "ding-button", ontap: "editCategory" }
+				{ name: "catgEditButton", kind: "enyo.Button", content: "✍", classes: "ding-button", showing: true, ontap: "editCategory" }
 			]
 		}
 	],
@@ -53,6 +61,7 @@ enyo.kind({
 	},
 
 	addPrayerItem: function() {
+		this.$.quickInputRow.setShowing(true);
 		this.doAddPrayerItem();
 		this.log();
 	},
@@ -60,11 +69,22 @@ enyo.kind({
 	topToolbarGrabberTap: function() {
 		this.doGrabberTap();
 		this.log();
+	},
+
+	cancelPrayerItem: function() {
+		this.$.quickInputRow.setShowing(false);
+		this.log();
+	},
+
+	savePrayerItem: function(inSender, inEvent) {
+		this.controller.addItem(inEvent.title);
+		this.$.quickInputRow.setShowing(false);
+		this.log();
 	}
 });
 
 enyo.kind({
-	name: "PrayerItems",
+	name: "PrayerList.PrayerItems",
 	kind: "enyo.DataRepeater",
 	controller: "pl.prayersCollection",
 	events: {
@@ -84,10 +104,52 @@ enyo.kind({
 		this.doViewPrayerItem(this.controller.findById(inSender.modelId));
 		this.log(this.controller.findById(inSender.modelId));
 	}
-	// ,
 
-	// list: [
-	// 	{title: "Vacation as a family"},
-	// 	{title: "Guidance as we move to new city. Dad’s job, Mom’s coping with new responsibilities, Bob and Fiona’s schools" }
-	// ]
 });
+
+enyo.kind({
+	name: "PrayerList.PrayerQuickInput",
+	kind: "Control",
+	classes: "pl-input-container", 
+	events: {
+		onCancel: "",
+		onSave: ""
+	},
+	components: [
+		{ kind: "onyx.InputDecorator", 
+			classes: "pl-input-decorator", 
+			components: [
+				{ name: "quickInput", kind: "enyo.TextArea", allowHtml: false,
+					onchange: "saveInput",
+					defaultFocus: true,
+					style: "width:272px",
+					placeholder: "Enter prayer item"
+				}
+			]
+		},
+		{ //layoutKind: "FittableColumnsLayout", 
+			style: "margin: 4px 0px; width:100%",
+			components: [
+				{ kind: "enyo.Button", content: "Cancel", style: "float: left; width:68px", classes: "text-button", ontap: "cancelInput" },
+				//{ fit: true },
+				{ kind: "enyo.Button", content: "Save", style: "float: right; width:68px", classes: "text-button", ontap: "saveInput" }
+			]
+		}
+	],
+
+	cancelInput: function() {
+		this.log(this.$.quickInput.value);
+		this.$.quickInput.setValue("");
+		this.doCancel();
+	},
+
+	saveInput: function() {
+		this.log(this.$.quickInput.value);
+		var input = this.$.quickInput.value;
+		this.$.quickInput.setValue("");
+		this.doSave({title:input});
+	}
+
+});
+
+

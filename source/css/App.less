@@ -391,7 +391,7 @@
 
 .watermark {
 	font-family: "Tangerine";
-	font-size: 70px;
+	font-size: 68px;
 	opacity:0.1;
 	filter:alpha(opacity=10); /* For IE8 and earlier */
 	position: absolute;
@@ -440,6 +440,16 @@
 // 	color: @darkRed;
 // }
 
+
+.pl-input-container {
+	text-align: center;
+	margin: 0px 16px 16px 16px;
+	// * {
+	// 	width: 92%; // This is a hack. 100% gives 
+	// }
+}
+
+
 /* Groupbox */
 
 .pl-groupbox-header {
@@ -448,6 +458,7 @@
 	border: none;
 	font-size: 18px;
 	font-family: "Alegreya SC";
+	font-weight: normal;
 };
 
 .pl-groupbox > * {
@@ -458,14 +469,13 @@
 
 /* Input Decorator */
 .pl-input-decorator {
-	
-	
-	input {
+	input, .enyo-input {
 		font-family: Alegreya;
 		width: 100%;
 		border-bottom: 1px dotted @grayDark;
 		font-size: 18px;
 	}
+	border: none;
 }
 
 

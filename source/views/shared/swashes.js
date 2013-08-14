@@ -1,6 +1,6 @@
 enyo.kind({
 	name: "swash",
-	style: "text-align:center",
+	classes: "swash", 
 	components: [{
 		kind: "enyo.Image",
 		attributes: {

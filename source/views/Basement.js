@@ -108,6 +108,10 @@ enyo.kind({
 		this.doSelectCategory(inSender, inEvent);
 		pl.prayersCollection.filterCategory(category);
 		this.log(category.id + " " + category.title);
+	},
+
+	modelPropertyChanged: function(sender, event) {
+		this.log(event.model);
 	}
 })
 

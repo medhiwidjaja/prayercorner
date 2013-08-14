@@ -6,12 +6,7 @@ enyo.kind({
 		title: "Today's Prayers --",
 		model: ""
 	},
-	originalModelAttributes: "",
-
-	onModelChanged: function() {
-		this.log();
-		this.originalModelAttributes = JSON.parse(this.model.toJSON());
-	},
+	savedAttributes: "",
 
 	title: enyo.computed(function() {
 		if (! this.model) {
@@ -23,5 +18,12 @@ enyo.kind({
 
 	save: function() {
 		this.model.commit();
+	},
+
+	addItem: function(item) {
+		var prayerItem = new PrayerList.Prayer({title: item, category: this.model.id});
+		prayerItem.commit();
+		pl.prayersCollection.add(prayerItem);
+		this.log(pl.prayersCollection.at(pl.prayersCollection.length - 1))
 	}
 })
