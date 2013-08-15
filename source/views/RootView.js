@@ -203,6 +203,7 @@ enyo.kind({
                 {owner: this}
             );
             newComponent.set("model", inModel);
+            pl.prayersCollection.select(inModel.id);
             pl.journalEntriesCollection.filterPrayer(inModel);
             pl.bibleVersesCollection.filterPrayer(inModel);
             //newComponent.$.journals.set("controller", pl.journalEntriesCollection);
@@ -214,6 +215,7 @@ enyo.kind({
             this.log("New: " + inModel.title);
         } else {
             this.$.prayerView.set("model", inModel);
+            pl.prayersCollection.select(inModel.id);
             pl.journalEntriesCollection.filterPrayer(inModel);
             pl.bibleVersesCollection.filterPrayer(inModel);
             if (enyo.Panels.isScreenNarrow()) {

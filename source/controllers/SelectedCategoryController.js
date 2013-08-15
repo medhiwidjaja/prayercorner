@@ -24,6 +24,6 @@ enyo.kind({
 		var prayerItem = new PrayerList.Prayer({title: item, category: this.model.id});
 		prayerItem.commit();
 		pl.prayersCollection.add(prayerItem);
-		this.log(pl.prayersCollection.at(pl.prayersCollection.length - 1))
+		this.log();
 	}
 })

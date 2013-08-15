@@ -5,7 +5,8 @@ enyo.kind({
 		id: "",
 		content: "",
 		createdDate: "",
-		prayerId: ""
+		prayerId: "",
+		answer: false
 		// prayer: {
 		// 	relation: enyo.toOne({
 		// 		isOwner: true
