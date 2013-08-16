@@ -102,7 +102,7 @@ enyo.kind({
 
 	viewPrayerItem: function(inSender, inEvent) {
 		this.doViewPrayerItem(this.controller.findById(inSender.modelId));
-		this.log(this.controller.findById(inSender.modelId));
+		this.log();
 	}
 
 });

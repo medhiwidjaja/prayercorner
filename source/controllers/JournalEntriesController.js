@@ -14,8 +14,6 @@ enyo.kind({
 
 	addItem: function(item) {
 		var prayerId = pl.prayersCollection.selected.id;
-		// The following regexp will match the date ("20 Mar 2002") part of the UTC String
-		
 		var journalItem = new PrayerList.JournalEntry({content: item.title, prayerId: prayerId, createdDate: item.createdDate, answer: (item.answer ? true : false)});
 		journalItem.commit();
 		this.add(journalItem);

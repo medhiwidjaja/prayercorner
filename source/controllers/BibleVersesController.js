@@ -10,5 +10,13 @@ enyo.kind({
 
 	findById: function(id) {
         return this.filter(function(v,a) {return v.id === id})
-    }
+    },
+
+	addItem: function(item) {
+		var prayerId = pl.prayersCollection.selected.id;		
+		var verse = new PrayerList.BibleVerse({text: item.text, verse: item.verse, prayerId: prayerId})
+		verse.commit();
+		this.add(verse);
+		this.log()
+	}
 })

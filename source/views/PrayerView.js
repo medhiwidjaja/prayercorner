@@ -10,7 +10,8 @@ enyo.kind({
     events: {
     	onDoneEditing: "",
     	onGrabberTap: "",
-    	onAddJournalItem: ""
+    	onAddJournalItem: "",
+    	onAddVerseItem: ""
     },
 	components: [
 		{ name: "PVTopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", components: [
@@ -27,7 +28,7 @@ enyo.kind({
 				{ kind: "FittableRows", classes: "prayer-item-container", components: [
 					{ name: "prayerItem", classes: "dropcap-text" },
 					{ tag: "br" },
-					{ kind: "StylishText", title: "Journal", classes: "watermark dark-red" },
+					{ kind: "StylishText", title: "Journal", style:"left:50px", classes: "watermark dark-red" },
 					{ content: "Journal", fit: true, classes: "upperfloor-header" },
 					{ name: "journals", kind: "PrayerList.JournalItemList" },
 					{ name: "journalInputRow", showing: false,
@@ -39,6 +40,7 @@ enyo.kind({
 					},
 					{ tag: "div" },
 					{ name: "addJournalButton", kind: "enyo.Button", content: "＋", classes: "ding-button",
+						style: "background: #FDFFF7",
 						ontap: "showJournalInputArea" 
 					},
 					{ kind: "swash", type: "s", shade: "dark" },
@@ -57,9 +59,10 @@ enyo.kind({
 			classes: "bottom-toolbar", 
 			layoutKind: "FittableColumnsLayout",
 			components: [
-				{ kind: "enyo.Button", content: "＋", classes: "ding-button" },
-				{ kind: "enyo.Button", content: "Done", classes: "text-button", ontap: "close" },
-				{ fit: true }
+				{ kind: "enyo.Button", content: "＋Journal", classes: "text-button", ontap: "showJournalInputArea" },
+				{ kind: "enyo.Button", content: "＋Verse", classes: "text-button", ontap: "addVerse" },
+				{ fit: true },
+				{ kind: "enyo.Button", content: "Done", classes: "text-button", ontap: "close" }
 			]
 		}
 	],
@@ -101,6 +104,11 @@ enyo.kind({
 		this.$.journalInputRow.setShowing(false);
 		this.$.addJournalButton.setShowing(true);
 		this.log();
+	},
+
+	addVerse: function() {
+		this.doAddVerseItem({prayer: this.model});
+        this.log();
 	}
 });
 
@@ -136,11 +144,11 @@ enyo.kind({
 					components: [
 						{ name: "journalInput", kind: "enyo.TextArea", allowHtml: false,
 							defaultFocus: true,
-							style: "100%",
+							//style: "100%",
 							placeholder: "Enter journal item"
 						}
 					]
-				},
+				}
 			]
 		},
 		{ style:"margin-left: 35px", components: [

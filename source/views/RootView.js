@@ -149,7 +149,7 @@ enyo.kind({
 
     hidePrayerView: function(inSender, inEvent) {
         this.log();
-        inSender.destroy();
+        inSender.parent.destroy();
         this.$.rootPanels.refresh();
     },
 
@@ -170,6 +170,10 @@ enyo.kind({
             this.destroyEditGroup();
             this.log("edit group")
         }
+    },
+
+    prayerViewTransitionComplete: function(inSender, inEvent) {
+        this.log("prayerview panels")
     },
 
     destroyEditGroup: function() {
@@ -194,15 +198,25 @@ enyo.kind({
         }
         if (! this.$.prayerView) {  
             var newComponent = this.$.rootPanels.createComponent(
-                {name: "prayerView", 
-                    kind: "PrayerList.PrayerView",
-                    mixins: ["enyo.AutoBindingSupport"],
-                    onDoneEditing: "hidePrayerView",
-                    onGrabberTap: "toggleGF"
+                {name: "prayerViewPanels",
+                    kind: "enyo.Panels",
+                    arrangerKind:"CollapsingArranger", 
+                    draggable:false, 
+                    classes:"panels enyo-fit plist-groundfloor", 
+                    onTransitionFinish: "prayerViewPanelsTransitionComplete",
+                    components: [
+                        {name: "prayerView", 
+                            kind: "PrayerList.PrayerView",
+                            mixins: ["enyo.AutoBindingSupport"],
+                            onDoneEditing: "hidePrayerView",
+                            onGrabberTap: "toggleGF",
+                            onAddVerseItem: "addVerseItem"
+                        }
+                    ]
                 }, 
                 {owner: this}
             );
-            newComponent.set("model", inModel);
+            this.$.prayerView.set("model", inModel);
             pl.prayersCollection.select(inModel.id);
             pl.journalEntriesCollection.filterPrayer(inModel);
             pl.bibleVersesCollection.filterPrayer(inModel);
@@ -224,6 +238,49 @@ enyo.kind({
             //this.$.prayerView.$.journals.set("controller", pl.journalEntriesCollection);
             this.log("Changed: " + inModel.title);
         };
+    },
+
+    addVerseItem: function(inSender, inEvent) {
+        if (! this.$.verseInputView) {
+            var newComponent = this.$.prayerViewPanels.createComponent(
+                {name: "verseInputView", 
+                    prayerId: inEvent.prayer.id , 
+                    kind: "PrayerList.VerseInput",
+                    onCancel: "hideVerseInputView"
+                }, 
+                {owner: this}
+            );
+            newComponent.render();
+            this.$.prayerViewPanels.render();
+            //if (enyo.Panels.isScreenNarrow()) {
+                this.$.prayerViewPanels.setIndex(1);
+            //}
+        } else {
+            //if (enyo.Panels.isScreenNarrow()) {
+                this.$.prayerViewPanels.setIndex(1);
+            //}    
+        };
+        this.log();
+    },
+
+    hideVerseInputView: function(inSender, inEvent) {
+        this.log();
+        this.hidingVerseInput = true;
+        this.$.prayerViewPanels.setIndex(0);
+        //this.$.rootPanels.refresh();
+    },
+
+    prayerViewPanelsTransitionComplete: function(inSender, inEvent) {
+        if(this.hidingVerseInput) {
+            this.destroyVerseInput();
+            this.log("verse input")
+        }
+    },
+
+    destroyVerseInput: function() {
+        this.$.verseInputView.destroy();
+        this.hidingVerseInput = false;
+        this.log();
     },
 
     viewCategoryItems: function(inSender, inEvent) {

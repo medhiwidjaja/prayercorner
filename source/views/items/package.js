@@ -1,4 +1,5 @@
 enyo.depends(
 	"BibleVerseList.js",
-	"JournalItemList.js"
+	"JournalItemList.js",
+	"VerseInput.js"
 );
