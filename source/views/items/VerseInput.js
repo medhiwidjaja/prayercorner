@@ -30,7 +30,7 @@ enyo.kind({
 				components: [
 					{ name: "verseAddress", kind: "enyo.Input", 
 						style: "width:265px; font-size: 18px;font-family: 'Alegreya SC';font-size: 0.9em;text-align: right;", 
-						placeholder: "Enter Verse"
+						placeholder: "John 3:16"
 					}
 				]
 			}

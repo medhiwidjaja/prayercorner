@@ -3,6 +3,7 @@ enyo.depends(
 	"swashes.js",
 	"StylishHeader.js",
 	"CalDate.less",
-	"CalDate.js"
+	"CalDate.js",
+	"TwoPlyPanel.js"
 	//"RichTextEditor.js"
 );
