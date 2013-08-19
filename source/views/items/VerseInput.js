@@ -3,7 +3,7 @@ enyo.kind({
 	kind: "enyo.FittableRows",
 	classes: "plist-upperfloor wide",
 	events: {
-		onCancel: "",
+		onClose: "",
 		onSave: ""
 	},
 	components: [
@@ -19,7 +19,7 @@ enyo.kind({
 			{ kind: "onyx.InputDecorator", 
 				classes: "pl-input-decorator", 
 				components: [
-					{ name: "verseText", kind: "onyx.TextArea", allowHtml: true,
+					{ name: "verseText", kind: "onyx.RichText", allowHtml: true,
 						defaultFocus: true, style: "width:265px; height:200px;font-size: 18px;", classes: "verse-item",
 						placeholder: "Verse text"
 					}
@@ -30,28 +30,29 @@ enyo.kind({
 				components: [
 					{ name: "verseAddress", kind: "enyo.Input", 
 						style: "width:265px; font-size: 18px;font-family: 'Alegreya SC';font-size: 0.9em;text-align: right;", 
-						placeholder: "John 3:16"
+						placeholder: "Enter passage, e.g. John 3:16-17"
 					}
 				]
-			}
+			},
+			{ name: "copyright", allowHtml: true }
 		]},
 		{ fit: true },
-		// { name: "PVBottomToolbar", 
-		// 	kind: "onyx.Toolbar", 
-		// 	classes: "bottom-toolbar", 
-		// 	layoutKind: "FittableColumnsLayout",
-		// 	components: [
-		// 		{ fit: true },
-		// 		{ kind: "enyo.Button", content: "Get verse", classes: "text-button", ontap: "getVerse" }
-		// 	]
-		// }
+		{ name: "PVBottomToolbar", 
+			kind: "onyx.Toolbar", 
+			classes: "bottom-toolbar", 
+			layoutKind: "FittableColumnsLayout",
+			components: [
+				{ fit: true },
+				{ kind: "enyo.Button", content: "Get verse", classes: "text-button", ontap: "getVerse" }
+			]
+		}
 	],
 
 	cancelInput: function() {
-		this.log(this.$.verseText.value);
+		this.log(this.owner);
 		this.$.verseText.setValue("");
 		this.$.verseAddress.setValue("");
-		this.doCancel();
+		this.doClose();
 	},
 
 	saveInput: function() {
@@ -63,20 +64,24 @@ enyo.kind({
 		this.log({text:text, verse:verse});
 	},
 
-	// This doesn't work
 	getVerse: function() {
 		var passage = this.$.verseAddress.value;
-		var xmlHttp = null;
-		var theUrl = "http://www.esvapi.org/v2/rest/passageQuery?key=IP&passage="+passage+"&include-verse-numbers=false&include-footnotes=false&include-passage-references=false&include-headings=false&include-short-copyright=false&include-word-ids=false&include-audio-link=false"
-	    xmlHttp = new XMLHttpRequest();
-	    xmlHttp.open( "GET", theUrl, false );
-	    xmlHttp.send( null );
-	    this.$.verseText.setValue(xmlHttp.responseText);
+		var jsonp = new enyo.JsonpRequest({
+				url: "http://labs.bible.org/api/?passage="+passage+"&type=json",
+				callbackName: "callback"
+		});
+		jsonp.go();
+		jsonp.response(this, "processResponse");
 	},
 
 	processResponse: function(inSender, inResponse) {
-		// do something with it
-		this.$.verseText.setValue(inResponse);
+		var response = enyo.map(inResponse, function(o){return o.text})
+					.reduce(function(a, b) {return a.concat(b);})
+		var text = response.slice(0,response.search("\<a"))
+		var copy = response.slice(response.search("\<a"),response.length)
+		this.$.verseText.setValue(text);
+		this.$.copyright.setContent(copy);
+		this.render();
 	}
 });
 

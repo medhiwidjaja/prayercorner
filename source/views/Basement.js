@@ -92,14 +92,14 @@ enyo.kind({
 		onSelectCategory: ""
 	},
 	components: [{
-		ontap: "itemTap",
+		onSelected: "categorySelected",
 		layoutKind: "FittableColumnsLayout", components: [
 			{ components: [{bindFrom: ".title", classes: "list-item-title"}], fit: true },
 			{ components: [{bindFrom: ".count", classes: "list-item-count"}] }
 		]
 	}],
 	
-	itemTap: function(inSender, inEvent) {
+	categorySelected: function(inSender, inEvent) {
 		// FIXME: Close EditCategory panel first
 		var category = inEvent.model;
 		pl.selectedCategoryController.set("model", category);

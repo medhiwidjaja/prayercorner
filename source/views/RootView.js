@@ -13,6 +13,8 @@ enyo.kind({
 			fit: true,
 			//wrap: true,
 			onTransitionFinish: "rootTransitionComplete", 
+			onTogglePanel: "toggleGF", 
+			onClosePanel: "closePrayerPanels",
 			components: [
 				{
 					name: "basement",
@@ -41,14 +43,9 @@ enyo.kind({
 							onGrabberTap: "toggleBasement"
 						}
 				]}
-				// {
-				//     name: "upperFloor",
-					
-				//     classes: "wide"
-				// }
-
 			]
-		}
+		},
+		{ kind: "Signals", onClosePrayerPanels: "closePrayerPanels" }
 	],
 
 	// create: function() {
@@ -73,12 +70,17 @@ enyo.kind({
 	},
 
 	toggleGF: function(inSender) {
-		if (inSender.parent.index === 0) {
-			inSender.parent.next();
-		} else {
-			inSender.parent.previous();
-		}
+		// if (inSender.parent.index === 0) {
+		// 	inSender.parent.next();
+		// } else {
+		// 	inSender.parent.previous();
+		// }
 		//inSender.parent.next();
+		if (inSender.index === 0) {
+			inSender.next();
+		} else {
+			inSender.previous();
+		}
 		this.log();
 	},
 
@@ -111,41 +113,12 @@ enyo.kind({
 		}
 	},
 
-	//FIXME: hiding Edit Group View doesn't animate
-	// hideEditGroup: function(inSender, inEvent) {
-	//     this.hidingEditGroup = true;
-	//     this.$.basement.$.groups.render();
-	//     this.$.categoryView.refreshBindings();
-	//     //this.$.editGroup.titleBinding.refresh();
-	//     if (enyo.Panels.isScreenNarrow()) {
-	//         this.$.rootPanels.setIndex(1);
-	//     } else {
-	//         this.$.rootPanels.setIndex(0);
-	//     }
-	//     //this.$.contentPanels.removeControl(inSender);
-	//     this.log();
-	// },
-
 	hideEditGroup: function(inSender, inEvent) {
 		this.$.basement.$.groups.render();
 		this.$.categoryView.refreshBindings();
 		inSender.destroy();
 		this.log();
 	},
-
-	//FIXME: hiding PrayerView doesn't animate
-	// hidePrayerView: function() {
-	//     this.log();
-	//     this.hidingPrayerView = true;
-	//     //this.$.basement.$.groups.render();
-	//     //this.$.contentPanels.setIndex(0);
-	//     if (enyo.Panels.isScreenNarrow()) {
-	//         this.$.rootPanels.setIndex(1);
-	//     } else {
-	//         this.$.rootPanels.setIndex(0);
-	//     }
-	//     this.$.rootPanels.refresh();
-	// },
 
 	hidePrayerView: function(inSender, inEvent) {
 		this.log();
@@ -196,24 +169,22 @@ enyo.kind({
 		if (this.$.editGroup) {
 			this.$.editGroup.controller.cancel();
 		}
-		this.model = inModel;
 		if (! this.$.rootPanels.$.prayerPanels) {
 			var newComponent = this.$.rootPanels.createComponent(
-				{ name: "prayerPanels",
-					kind: "PrayerList.PrayerPanels",
-					// mixins: ["enyo.AutoBindingSupport"],
-					// bindFrom: ".model",
-					// bindTo: "model"
-					model: inModel
+				{ name: "prayerPanels", 
+					kind: "PrayerList.PrayerPanels", 
+					// onTogglePanel: "toggleGF", 
+					// onClosePanel: "closePrayerPanels" 
 				}
 			);
 			newComponent.render();
 			this.$.rootPanels.render();
 			this.log();
 		} else {
-			this.$.rootPanels.$.prayerPanels.set("model", inModel);
-			this.$.rootPanels.$.prayerPanels.render();
-			this.$.rootPanels.render();
+			// necessary for PrayerView to display the title:
+			this.$.rootPanels.$.prayerPanels.$.prayerView.rebuildBindings();
+			// necessary for Scroller in PrayerView to work right:
+			this.$.rootPanels.render();		
 		}
 		
 		// if (! this.$.prayerView) {  
@@ -261,6 +232,11 @@ enyo.kind({
 		// };
 	},
 
+	closePrayerPanels: function() {
+		this.log();
+		this.$.rootPanels.$.prayerPanels.destroy();
+	},
+
 	// addVerseItem: function(inSender, inEvent) {
 	//     if (! this.$.verseInputView) {
 	//         var newComponent = this.$.prayerViewPanels.createComponent(
@@ -305,22 +281,9 @@ enyo.kind({
 	// },
 
 	viewCategoryItems: function(inSender, inEvent) {
-		if (! this.$.categoryView) {
-			var newComponent = this.$.rootPanels.createComponent(
-				{name: "categoryView", title: inEvent.title, groupId: inEvent.model.rowID, kind: "PrayerList.CategoryView"}, 
-				{owner: this}
-			);
-			newComponent.render();
-			this.$.rootPanels.render();
-			if (enyo.Panels.isScreenNarrow()) {
-				this.$.rootPanels.setIndex(1);
-			}
-		} else {
-			//this.$.categoryView.$.header.render();
-			if (enyo.Panels.isScreenNarrow()) {
-				this.$.rootPanels.setIndex(1);
-			}    
-		};
+		if (enyo.Panels.isScreenNarrow()) {
+			this.$.rootPanels.setIndex(1);
+		}
 		this.log();
 	}
 });

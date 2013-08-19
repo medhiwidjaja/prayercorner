@@ -4,40 +4,31 @@ enyo.kind({
 	mixins: ["enyo.AutoBindingSupport"],
 	classes: "plist-upperfloor wide",
 	draggable: false,
-	// published: {
-	// 	model: ""
-	// },
-	bindings: [
-		{from: ".model.title", to: ".$.prayerItem.content"},
-		//{from: }
-		//{from: ".model", to: ".$.journals.model"}
-	],
+	bindSource: "controller",
+	controller: "pl.prayersCollection",
     events: {
-    	onDoneEditing: "",
+    	onClosePanel: "",
     	onGrabberTap: "",
-    	onAddJournalItem: "",
-    	onAddVerseItem: ""
+    	onOpenJournalPanel: "",
+    	onOpenVersePanel: ""
     },
 	components: [
 		{ name: "PVTopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", components: [
 				{ kind: "onyx.Grabber", ontap: "topToolbarGrabberTap" },
-				{ name: "testBinding", content: this.test2 },
 				{ content: "Prayer", classes: "watermark" }
 			]
 		}, 
 		{ name: "LivingRoom", 
-			kind: "enyo.Scroller",
-			mixins: ["enyo.AutoBindingSupport"], 
+			kind: "enyo.Scroller", 
 			strategyKind: "TouchScrollStrategy",
 			horizontal: "hidden",
 			fit: true,
 			components: [
 				{ kind: "FittableRows", classes: "prayer-item-container", components: [
-					//{ name: "prayerItem", classes: "dropcap-text", bindFrom: ".model.title", bindTo: "content" },
-					{ name: "prayerItem", classes: "dropcap-text" },
+					{ name: "prayerItem", bindFrom: ".selected.title", classes: "dropcap-text" },
 					{ tag: "br" },
 					{ kind: "StylishText", title: "Journal", style:"left:50px", classes: "watermark dark-red" },
-					{ content: "Journal", fit: true, classes: "upperfloor-header" },
+					{ content: "Journal", classes: "upperfloor-header" },
 					{ name: "journals", kind: "PrayerList.JournalItemList" },
 					// { name: "journalInputRow", showing: false,
 					// 	components: [
@@ -47,10 +38,10 @@ enyo.kind({
 					// 	]
 					// },
 					// { tag: "div" },
-					{ name: "addJournalButton", kind: "enyo.Button", content: "＋", classes: "ding-button",
-						style: "background: #FDFFF7",
-						ontap: "showJournalInputArea" 
-					},
+					// { name: "addJournalButton", kind: "enyo.Button", content: "＋", classes: "ding-button",
+					// 	style: "background: #FDFFF7",
+					// 	ontap: "showJournalInputArea" 
+					// },
 					{ kind: "swash", type: "s", shade: "dark" },
 					
 					{ kind: "StylishText", title: "Biblical Promises", classes: "watermark dark-red" },
@@ -58,6 +49,7 @@ enyo.kind({
 					
 					{ name: "verses", kind: "PrayerList.BibleVerseList" },
 					{ kind: "swash", type: "w", shade: "dark" },
+					{ fit: true }, 
 					{ style: "margin-top:20px" }
 				]}
 			]
@@ -67,7 +59,7 @@ enyo.kind({
 			classes: "bottom-toolbar", 
 			layoutKind: "FittableColumnsLayout",
 			components: [
-				{ kind: "enyo.Button", content: "＋Journal", classes: "text-button", ontap: "showJournalInputArea" },
+				{ kind: "enyo.Button", content: "＋Journal", classes: "text-button", ontap: "addJournal" },
 				{ kind: "enyo.Button", content: "＋Verse", classes: "text-button", ontap: "addVerse" },
 				{ fit: true },
 				{ kind: "enyo.Button", content: "Done", classes: "text-button", ontap: "close" }
@@ -83,7 +75,9 @@ enyo.kind({
 	},
 
 	close: function() {
-		this.doDoneEditing();
+		//this.doClosePanel();
+		this.bubble("onClosePanel");
+		//enyo.Signals.send("onClosePrayerPanels");
 		this.log();
 	},
 
@@ -115,11 +109,12 @@ enyo.kind({
 	// },
 
 	addJournal: function() {
-		this.doAddJournalItem({prayer: this.model});
+		this.doOpenJournalPanel({prayer: this.controller.selected});
         this.log();
 	},
 
 	addVerse: function() {
+		this.doOpenVersePanel({prayer: this.controller.selected});
 		this.log();
     },	
 });

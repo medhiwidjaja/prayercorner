@@ -29,7 +29,7 @@ enyo.kind({
     },
 
     destroyView: function() {
-        this.$.topview.destroy();
+        this.$.topView.destroy();
         this.hidingView = false;
     },
 });

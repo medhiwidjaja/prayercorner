@@ -3,9 +3,9 @@ enyo.kind({
 	kind: "enyo.Collection",
 	model: "PrayerList.BibleVerse",
 
-	filterPrayer: function(p) {
+	filterPrayer: function(id) {
 		this.fetchAndReplace();
-		this.data(this.filter(function(v,a) {return v.prayerId === p.id}))
+		this.data(this.filter(function(v,a) {return v.prayerId === id}))
 	},
 
 	findById: function(id) {

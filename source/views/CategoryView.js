@@ -91,7 +91,7 @@ enyo.kind({
 		onViewPrayerItem: ""
 	},
 	components: [{ 
-		ontap: "viewPrayerItem", 
+		onSelected: "viewPrayerItem", 
 		bindFrom: ".id",
 		bindTo: "modelId",
 		components: [
@@ -101,6 +101,9 @@ enyo.kind({
 	}],
 
 	viewPrayerItem: function(inSender, inEvent) {
+		pl.prayersCollection.select(inSender.modelId);
+		pl.journalEntriesCollection.filterPrayer(inSender.modelId);
+		pl.bibleVersesCollection.filterPrayer(inSender.modelId);
 		this.doViewPrayerItem(this.controller.findById(inSender.modelId));
 		this.log();
 	}

@@ -3,7 +3,7 @@ enyo.kind({
 	kind: "enyo.FittableRows",
 	classes: "plist-upperfloor wide",
 	events: {
-		onCancel: "",
+		onClose: "",
 		onSave: ""
 	},
 	components: [
@@ -46,7 +46,7 @@ enyo.kind({
 	cancelInput: function() {
 		this.log(this.$.journalInput.value);
 		this.$.journalInput.setValue("");
-		this.doCancel();
+		this.doClose();
 	},
 
 	saveInput: function() {
