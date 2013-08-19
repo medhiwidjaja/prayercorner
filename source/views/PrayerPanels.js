@@ -9,14 +9,15 @@ enyo.kind({
 		{ name: "prayerView", 
 			kind: "PrayerList.PrayerView",
 			onOpenVersePanel:   "openVersePanel",
-			onSaveVerseItem:    "saveVerseItem",
 			onOpenJournalPanel: "openJournalPanel",
-			onSaveJournalItem:  "saveJournalItem",
 			onGrabberTap: 		"toggleView"
 		}
 	],
-	onCancel: "closeTopPanel",
-
+	handlers: {
+		onCancel: 		"closeTopPanel",
+		onSaveVerse:    "saveVerseItem",
+		onSaveJournal:  "saveJournalItem"
+	},
 	openVersePanel: function(inSender, inEvent) {
 		this.log();
 		this.pushView(
@@ -36,6 +37,12 @@ enyo.kind({
 			},
 			{ owner: this }
 		)
+	},
+
+	saveVerseItem: function(inSender, inEvent) {
+		this.log();
+		pl.bibleVersesCollection.add(inEvent.model);
+		inEvent.model.commit();
 	},
 
 	toggleView: function() {

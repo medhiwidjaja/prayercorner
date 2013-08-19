@@ -5,7 +5,7 @@ enyo.kind({
 		id: "",
 		text: "",
 		version: "",
-		verse: "",
+		passage: "",
 		createdDate: "",
 		prayerId: ""
 		// prayer: {

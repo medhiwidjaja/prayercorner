@@ -4,7 +4,7 @@ enyo.kind({
 	classes: "plist-upperfloor wide",
 	events: {
 		onClose: "",
-		onSave: ""
+		onSaveVerse: ""
 	},
 	components: [
 		{ name: "VITopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", 
@@ -15,27 +15,35 @@ enyo.kind({
 				{ kind: "enyo.Button", content: "Save", classes: "text-button", ontap: "saveInput" }
 			]
 		},
-		{ classes: "prayer-item-container", components: [
-			{ kind: "onyx.InputDecorator", 
-				classes: "pl-input-decorator", 
-				components: [
-					{ name: "verseText", kind: "onyx.RichText", allowHtml: true,
-						defaultFocus: true, style: "width:265px; height:200px;font-size: 18px;", classes: "verse-item",
-						placeholder: "Verse text"
-					}
-				]
-			},
-			{ kind: "onyx.InputDecorator", 
-				//classes: "pl-input-decorator", 
-				components: [
-					{ name: "verseAddress", kind: "enyo.Input", 
-						style: "width:265px; font-size: 18px;font-family: 'Alegreya SC';font-size: 0.9em;text-align: right;", 
-						placeholder: "Enter passage, e.g. John 3:16-17"
-					}
-				]
-			},
-			{ name: "copyright", allowHtml: true }
-		]},
+		{ kind: "enyo.Scroller", 
+			strategyKind: "TouchScrollStrategy",
+			horizontal: "hidden",
+			//fit: true,
+			classes: "prayer-item-container", 
+			components: [
+				{ kind: "onyx.InputDecorator", 
+					classes: "pl-input-decorator", 
+					style: "width: 90%",
+					components: [
+						{ name: "verseText", kind: "onyx.RichText", allowHtml: true,
+							defaultFocus: true, style: "font-size: 18px;", classes: "verse-item",
+							placeholder: "Verse text"
+						}
+					]
+				},
+				{ kind: "onyx.InputDecorator", 
+					//classes: "pl-input-decorator", 
+					style: "width: 90%",
+					components: [
+						{ name: "verseAddress", kind: "enyo.Input", 
+							style: "width:100%;font-size: 18px;font-family: 'Alegreya SC';font-size: 0.9em;text-align: right;", 
+							placeholder: "Enter passage, e.g. John 3:16-17"
+						}
+					]
+				},
+				{ name: "copyright", allowHtml: true }
+			]
+		},
 		{ fit: true },
 		{ name: "PVBottomToolbar", 
 			kind: "onyx.Toolbar", 
@@ -57,11 +65,13 @@ enyo.kind({
 
 	saveInput: function() {
 		var text = this.$.verseText.value;
-		var verse = this.$.verseAddress.value;
+		var passage = this.$.verseAddress.value;
 		this.$.verseText.setValue("");
 		this.$.verseAddress.setValue("");
-		this.doSave({text:text, verse:verse});
-		this.log({text:text, verse:verse});
+		var verse = new PrayerList.BibleVerse({text:text, passage:passage, version: this.$.copyright.content, prayerId: this.prayerId});
+		this.doSaveVerse({model:verse});
+		this.doClose();
+		this.log({text:text, passage:passage});
 	},
 
 	getVerse: function() {

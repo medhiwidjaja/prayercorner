@@ -5,6 +5,6 @@ enyo.kind({
 	controller: "pl.bibleVersesCollection",
 	components: [
 		{ bindFrom: ".text", classes: "verse-item" },
-		{ bindFrom: ".verse", classes: "verse-address" }
+		{ bindFrom: ".passage", classes: "verse-address" }
 	],
 });

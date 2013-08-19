@@ -4,7 +4,7 @@ enyo.kind({
 	classes: "plist-upperfloor wide",
 	events: {
 		onClose: "",
-		onSave: ""
+		onSaveJournal: ""
 	},
 	components: [
 		{ name: "VITopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", 
@@ -53,7 +53,7 @@ enyo.kind({
 		var input = this.$.journalInput.value;
 		var date = this.$.journalDate.calendarDate;
 		this.$.journalInput.setValue("");
-		this.doSave({title:input, createdDate:date, answer:this.answer});
+		this.doSaveJournal({title:input, createdDate:date, answer:this.answer});
 		this.log({title:input, date:date, answer:this.answer});
 	},
 
