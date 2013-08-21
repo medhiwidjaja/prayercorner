@@ -15,15 +15,3 @@ enyo.kind({
 		// }
 	}
 });
-
-// var p1 = new PrayerList.Prayer({
-// 	title: "A little prayer", 
-// 	journalEntries: [
-// 		{title:"Journal 1"},
-// 		{title:"Entry no.2"}
-// 	],
-// 	verses: [
-// 		{text:"Rock & fortress",verse:"Psalms 31:3"},
-// 		{text:"Guidance",verse:"Isa 42"}
-// 	] 
-// });

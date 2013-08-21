@@ -2,13 +2,20 @@
 enyo.kind({
 	name: "PrayerList.JournalItemList",
 	kind: "enyo.DataRepeater", 
-	controller: "pl.journalEntriesCollection",		
+	controller: "pl.journalEntriesCollection",
+	events: {
+		onOpenJournalPanel: ""
+	},
 	components: [
-		{ style: "margin: 4px 0", layoutKind: "FittableColumnsLayout", components: [
+		{ layoutKind: "FittableColumnsLayout",  
+			classes: "journal-list-item decent-padding",
+			style: "padding-top: 4px; padding-bottom: 4px",
+			onSelected: "editJournal",
+			components: [
 			{ 
 				kind: "PrayerList.CalDate", 
-				bindFrom: ".createdDate", bindTo: "calendarDate",
-				additionalStyles: "color: #fdfff7;background-color: rgba(125,0,0,0.5);" 
+				bindFrom: ".entryDate", bindTo: "calendarDate",
+				additionalStyles: "color: #fdfff7;background-color: rgba(125,0,0,0.5);"
 			},
 			{
 				kind: "enyo.Image", src:"assets/star_24x24.png", attributes: { width:"24px", height: "24px"},
@@ -19,5 +26,10 @@ enyo.kind({
 				bindFrom: ".content"
 			}
 		]}
-	]
+	],
+
+	editJournal: function(inSender, inEvent) {
+		this.log();
+		this.doOpenJournalPanel({prayerId: inEvent.model.prayerId, journalItem: inEvent.model});
+	}
 });

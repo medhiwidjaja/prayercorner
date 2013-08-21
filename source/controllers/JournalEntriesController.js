@@ -14,9 +14,22 @@ enyo.kind({
 
 	addItem: function(item) {
 		var prayerId = pl.prayersCollection.selected.id;
-		var journalItem = new PrayerList.JournalEntry({content: item.title, prayerId: prayerId, createdDate: item.createdDate, answer: (item.answer ? true : false)});
+		var journalItem = new PrayerList.JournalEntry({
+			content: item.content, 
+			prayerId: prayerId, 
+			entryDate: item.entryDate, 
+			//answer: (item.answer ? true : false), 
+			answer: item.answer,
+			isPersisted: true
+		});
 		journalItem.commit();
 		this.add(journalItem);
 		this.log()
+	},
+
+	removeItem: function(item) {
+		this.remove(item);
+		item.destroy();
+		this.log();
 	}
 });

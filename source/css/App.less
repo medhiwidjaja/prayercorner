@@ -47,6 +47,10 @@
 
 .top-toolbar {
 	background: @lightBackground;
+	.close-button {
+		float: right;
+		margin: 3px 5px;
+	}
 }
 
 /* Button */
@@ -273,7 +277,11 @@
 }
 
 .prayer-item-container {
-	padding: 16px;
+	padding: 16px 0;
+}
+
+.decent-padding {
+	padding: 0 16px;
 }
 
 .upperfloor-header {
@@ -449,6 +457,13 @@
 // 	color: @darkRed;
 // }
 
+/* Journal Panel */
+#rootView_rootPanels_prayerPanels_prayerView_journals_container,
+#rootView_rootPanels_prayerPanels_prayerView_verses_container {
+	.selected {
+		box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+	}
+} 
 
 .pl-input-container {
 	text-align: center;

@@ -14,9 +14,21 @@ enyo.kind({
 
 	addItem: function(item) {
 		var prayerId = pl.prayersCollection.selected.id;		
-		var verse = new PrayerList.BibleVerse({text: item.text, verse: item.verse, prayerId: prayerId})
+		var verse = new PrayerList.BibleVerse({
+			text: item.text, 
+			passage: item.passage, 
+			prayerId: prayerId, 
+			version: item.version, 
+			isPersisted: true
+		});
 		verse.commit();
 		this.add(verse);
 		this.log()
+	},
+
+	removeItem: function(item) {
+		this.remove(item);
+		item.destroy();
+		this.log();
 	}
 })

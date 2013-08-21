@@ -9,6 +9,7 @@ enyo.kind({
 		createdDate: "",
 		answeredDate: "",
 		rowNo: "",
+		isPersisted: false
 		// journalEntries: {
 		// 	relation: enyo.toMany({
 		// 		inverseKey: "prayer",
@@ -23,5 +24,9 @@ enyo.kind({
 		// 		inCommit: true
 		// 	})
 		// }
+	},
+
+	destroyRelated: function() {
+
 	}
 });

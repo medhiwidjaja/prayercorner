@@ -6,12 +6,17 @@ enyo.kind({
 		onClose: "",
 		onSaveVerse: ""
 	},
+	bindings: [
+		{from: ".model.text", to: ".$.verseText.value", oneWay: true},
+		{from: ".model.passage", to: ".$.verseAddress.value", oneWay: true},
+		{from: ".model.version", to: ".$.version.content", oneWay: true},
+	],
 	components: [
 		{ name: "VITopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", 
 			layoutKind: "FittableColumnsLayout",
 			components: [
 				{ kind: "enyo.Button", content: "Back", classes: "text-button", ontap: "cancelInput" },
-				{ fit: true },
+				{ content: "Add verse", fit: true },
 				{ kind: "enyo.Button", content: "Save", classes: "text-button", ontap: "saveInput" }
 			]
 		},
@@ -19,11 +24,12 @@ enyo.kind({
 			strategyKind: "TouchScrollStrategy",
 			horizontal: "hidden",
 			//fit: true,
-			classes: "prayer-item-container", 
+			classes: "prayer-item-container decent-padding", 
 			components: [
+				{ tag: "br" },
 				{ kind: "onyx.InputDecorator", 
 					classes: "pl-input-decorator", 
-					style: "width: 90%",
+					style: "width: 95%",
 					components: [
 						{ name: "verseText", kind: "onyx.RichText", allowHtml: true,
 							defaultFocus: true, style: "font-size: 18px;", classes: "verse-item",
@@ -33,15 +39,15 @@ enyo.kind({
 				},
 				{ kind: "onyx.InputDecorator", 
 					//classes: "pl-input-decorator", 
-					style: "width: 90%",
+					style: "margin-top: 10px; width: 95%",
 					components: [
-						{ name: "verseAddress", kind: "enyo.Input", 
+						{ name: "verseAddress", kind: "onyx.Input", 
 							style: "width:100%;font-size: 18px;font-family: 'Alegreya SC';font-size: 0.9em;text-align: right;", 
-							placeholder: "Enter passage, e.g. John 3:16-17"
+							placeholder: "e.g. John 3:16-17"
 						}
 					]
 				},
-				{ name: "copyright", allowHtml: true }
+				{ name: "version", allowHtml: true }
 			]
 		},
 		{ fit: true },
@@ -50,8 +56,9 @@ enyo.kind({
 			classes: "bottom-toolbar", 
 			layoutKind: "FittableColumnsLayout",
 			components: [
+				{ kind: "enyo.Button", content: "Get verse", classes: "text-button", ontap: "getVerse" },
 				{ fit: true },
-				{ kind: "enyo.Button", content: "Get verse", classes: "text-button", ontap: "getVerse" }
+				{ kind: "enyo.Button", content: "Delete", classes: "text-button negative", ontap: "deleteVerse" }
 			]
 		}
 	],
@@ -66,12 +73,30 @@ enyo.kind({
 	saveInput: function() {
 		var text = this.$.verseText.value;
 		var passage = this.$.verseAddress.value;
+		var version = this.$.version.content;
+		if (this.model.isPersisted) {
+			this.model.set("text", text);
+			this.model.set("passage", passage);
+			this.model.set("version", version);	
+			this.model.commit();
+		} else {
+			// this.model.set("prayerId", this.prayerId);
+			// this.model.set("isPersisted", true);
+			// var params = JSON.parse(this.model.toJSON());
+			// var verse = new PrayerList.BibleVerse(params);
+			// verse.commit();
+			pl.bibleVersesCollection.addItem({text:text, passage:passage, version: this.$.version.content, prayerId: this.prayerId});
+		}
 		this.$.verseText.setValue("");
 		this.$.verseAddress.setValue("");
-		var verse = new PrayerList.BibleVerse({text:text, passage:passage, version: this.$.copyright.content, prayerId: this.prayerId});
-		this.doSaveVerse({model:verse});
 		this.doClose();
 		this.log({text:text, passage:passage});
+	},
+
+	deleteVerse: function() {
+		pl.bibleVersesCollection.removeItem(this.model);
+		this.doClose();
+		this.log();
 	},
 
 	getVerse: function() {
@@ -90,7 +115,7 @@ enyo.kind({
 		var text = response.slice(0,response.search("\<a"))
 		var copy = response.slice(response.search("\<a"),response.length)
 		this.$.verseText.setValue(text);
-		this.$.copyright.setContent(copy);
+		this.$.version.setContent(copy);
 		this.render();
 	}
 });

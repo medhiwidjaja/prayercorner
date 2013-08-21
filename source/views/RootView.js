@@ -179,12 +179,18 @@ enyo.kind({
 			);
 			newComponent.render();
 			this.$.rootPanels.render();
+			if (enyo.Panels.isScreenNarrow()) {
+				this.$.rootPanels.setIndex(2);
+			}
 			this.log();
 		} else {
 			// necessary for PrayerView to display the title:
 			this.$.rootPanels.$.prayerPanels.$.prayerView.rebuildBindings();
 			// necessary for Scroller in PrayerView to work right:
-			this.$.rootPanels.render();		
+			this.$.rootPanels.render();
+			if (enyo.Panels.isScreenNarrow()) {
+				this.$.rootPanels.setIndex(2);
+			}
 		}
 		
 		// if (! this.$.prayerView) {  

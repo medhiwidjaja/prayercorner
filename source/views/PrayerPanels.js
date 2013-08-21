@@ -15,15 +15,21 @@ enyo.kind({
 	],
 	handlers: {
 		onCancel: 		"closeTopPanel",
-		onSaveVerse:    "saveVerseItem",
-		onSaveJournal:  "saveJournalItem"
+		// onSaveVerse:    "saveVerseItem",
+		// onSaveJournal:  "saveJournalItem"
 	},
 	openVersePanel: function(inSender, inEvent) {
 		this.log();
+		var model;
+		if (inEvent.verseItem) {
+			model = inEvent.verseItem;
+		} else {
+			model = new PrayerList.BibleVerse({text:"",passage:"",version:""});
+		}
 		this.pushView(
 			{ kind: "PrayerList.VerseInput",
-				prayerId: inEvent.prayer.id,
-				onClosePanel: "close"
+				prayerId: inEvent.prayerId,
+				model: model
 			},
 			{ owner: this }
 		)
@@ -31,19 +37,26 @@ enyo.kind({
 
 	openJournalPanel: function(inSender, inEvent) {
 		this.log();
+		var model;
+		if (inEvent.journalItem) {
+			model = inEvent.journalItem;
+		} else {
+			model = new PrayerList.JournalEntry({content:"", entryDate:new Date(), answer: false});
+		}
 		this.pushView(
 			{ kind: "PrayerList.JournalInput",
-				prayerId: inEvent.prayer.id,
+				prayerId: inEvent.prayerId,
+				model: model
 			},
 			{ owner: this }
 		)
 	},
 
-	saveVerseItem: function(inSender, inEvent) {
-		this.log();
-		pl.bibleVersesCollection.add(inEvent.model);
-		inEvent.model.commit();
-	},
+	// saveVerseItem: function(inSender, inEvent) {
+	// 	this.log();
+	// 	pl.bibleVersesCollection.add(inEvent.model);
+	// 	inEvent.model.commit();
+	// },
 
 	toggleView: function() {
 		this.log();
