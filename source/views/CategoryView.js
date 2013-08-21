@@ -11,7 +11,8 @@ enyo.kind({
 	events: {
 		onEditCategory: "",
 		onAddPrayerItem: "",
-		onGrabberTap: ""
+		onGrabberTap: "",
+		onClosePanel: ""
 	},
 	bindSource: "controller",
 	controller: "pl.selectedCategoryController",
@@ -19,8 +20,7 @@ enyo.kind({
 		{ name: "GFTopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", components: [
 				{ kind: "onyx.Grabber", ontap: "topToolbarGrabberTap" },
 				{ bindFrom: ".title", classes: "stylish-text" },
-				{ bindFrom: ".title", classes: "watermark" },
-				//{ name: "header", kind: "StylishHeader", bindFrom: ".title", bindTo: "title", watermark: true }
+				{ bindFrom: ".title", classes: "watermark" }
 			]
 		},
 		{ kind: "enyo.Scroller", 
@@ -47,7 +47,7 @@ enyo.kind({
 			classes: "bottom-toolbar", 
 			layoutKind: "FittableColumnsLayout",
 			components: [
-				{ kind: "enyo.Button", content: "＋", classes: "ding-button", ontap: "addPrayerItem" },
+				{ kind: "enyo.Button", content: "＋Prayer", classes: "text-button", ontap: "addPrayerItem" },
 				//{ kind: "onyx.Button", content: "＋", style: "font-size: 16px", ontap: "addPrayerItem" },
 				{ fit: true },
 				{ name: "catgEditButton", kind: "enyo.Button", content: "✍", classes: "ding-button", showing: true, ontap: "editCategory" }
@@ -57,6 +57,7 @@ enyo.kind({
 
 	editCategory: function(inSender, inEvent) {
 		// TODO: close any open PrayerView panels first
+		this.doClosePanel();
 		this.doEditCategory(inSender, inEvent);
 		this.log();
 	},

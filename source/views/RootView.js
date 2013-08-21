@@ -240,56 +240,16 @@ enyo.kind({
 
 	closePrayerPanels: function() {
 		this.log();
-		this.$.rootPanels.$.prayerPanels.destroy();
+		var panels = this.$.rootPanels.$.prayerPanels;
+		if (panels) panels.destroy();
 	},
-
-	// addVerseItem: function(inSender, inEvent) {
-	//     if (! this.$.verseInputView) {
-	//         var newComponent = this.$.prayerViewPanels.createComponent(
-	//             {name: "verseInputView", 
-	//                 prayerId: inEvent.prayer.id , 
-	//                 kind: "PrayerList.VerseInput",
-	//                 onCancel: "hideVerseInputView"
-	//             }, 
-	//             {owner: this}
-	//         );
-	//         newComponent.render();
-	//         this.$.prayerViewPanels.render();
-	//         //if (enyo.Panels.isScreenNarrow()) {
-	//             this.$.prayerViewPanels.setIndex(1);
-	//         //}
-	//     } else {
-	//         //if (enyo.Panels.isScreenNarrow()) {
-	//             this.$.prayerViewPanels.setIndex(1);
-	//         //}    
-	//     };
-	//     this.log();
-	// },
-
-	// hideVerseInputView: function(inSender, inEvent) {
-	//     this.log();
-	//     this.hidingVerseInput = true;
-	//     this.$.prayerViewPanels.setIndex(0);
-	//     //this.$.rootPanels.refresh();
-	// },
-
-	// prayerViewPanelsTransitionComplete: function(inSender, inEvent) {
-	//     if(this.hidingVerseInput) {
-	//         this.destroyVerseInput();
-	//         this.log("verse input")
-	//     }
-	// },
-
-	// destroyVerseInput: function() {
-	//     this.$.verseInputView.destroy();
-	//     this.hidingVerseInput = false;
-	//     this.log();
-	// },
 
 	viewCategoryItems: function(inSender, inEvent) {
 		if (enyo.Panels.isScreenNarrow()) {
 			this.$.rootPanels.setIndex(1);
 		}
+		// This will make sure the categoryView's DOM dimensions are recomputed to fit the contents
+		this.$.rootPanels.render();
 		this.log();
 	}
 });

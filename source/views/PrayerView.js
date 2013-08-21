@@ -32,12 +32,12 @@ enyo.kind({
 				{ kind: "FittableRows", classes: "prayer-item-container", components: [
 					{ name: "prayerItem", bindFrom: ".selected.title", classes: "dropcap-text decent-padding" },
 					{ tag: "br" },
-					{ kind: "StylishText", title: "Journal", style:"left:50px", classes: "watermark dark-red" },
+					{ content: "Journal", style:"left:50px", classes: "watermark dark-red" },
 					{ content: "Journal", classes: "upperfloor-header decent-padding" },
 					{ name: "journals", kind: "PrayerList.JournalItemList" },
 					{ kind: "swash", type: "s", shade: "dark" },
 					
-					{ kind: "StylishText", title: "Biblical Promises", classes: "watermark dark-red" },
+					{ content: "Biblical Promises", classes: "watermark dark-red" },
 					{ content: "Biblical Promises", classes: "upperfloor-header decent-padding" },
 					
 					{ name: "verses", kind: "PrayerList.BibleVerseList" },
