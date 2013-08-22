@@ -10,7 +10,8 @@ enyo.kind({
     	onClosePanel: "",
     	onGrabberTap: "",
     	onOpenJournalPanel: "",
-    	onOpenVersePanel: ""
+    	onOpenVersePanel: "",
+    	onOpenEditPanel: ""
     },
 	components: [
 		{ name: "PVTopToolbar", 
@@ -30,7 +31,20 @@ enyo.kind({
 			fit: true,
 			components: [
 				{ kind: "FittableRows", classes: "prayer-item-container", components: [
-					{ name: "prayerItem", bindFrom: ".selected.title", classes: "dropcap-text decent-padding", ontap: "editItem" },
+					//{ kind: "FittableColumns", style: "vertical-align:middle", components: [
+					// { components: [
+					// 	{ name: "prayerItem", bindFrom: ".selected.title", classes: "dropcap-text decent-padding", ontap: "editItem" },
+					// 	//{ fit: true },
+					// 	{ kind: "onyx.IconButton", 
+					// 		src: "assets/Onyx-Icons-Examples-DarkBkgrnd-Forward.png",
+					// 		style: "float: right"
+					// 	}
+					// ]},
+					{ name: "prayerItem", bindFrom: ".selected.title", classes: "dropcap-text decent-padding", fit: true, ontap: "editItem" },
+					// { kind: "onyx.IconButton", 
+					// 	src: "assets/Onyx-Icons-Examples-DarkBkgrnd-Forward.png",
+					// 	style: "position:relative; right: 16px"
+					// },
 					{ name: "editFields", components: [
 							{ name: "prayerInput", kind: "onyx.Input", bindFrom: ".selected.title", bindTo: ".value", showing: false },
 							
@@ -86,7 +100,9 @@ enyo.kind({
 	},
 
 	editItem: function() {
-		this.$.editFields.showing = true;
+		//this.$.editFields.showing = true;
+		this.doOpenEditPanel({prayerItem: this.controller.selected});
+		this.log();
 	},
 
 	addJournal: function() {

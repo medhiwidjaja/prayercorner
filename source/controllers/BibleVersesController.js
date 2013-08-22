@@ -27,8 +27,8 @@ enyo.kind({
 	},
 
 	removeItem: function(item) {
-		//this.remove(item);
-		//item.destroy();
+		this.remove(item);
+		item.destroy();
 		this.log();
 	}
 })

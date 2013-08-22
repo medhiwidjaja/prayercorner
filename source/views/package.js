@@ -7,5 +7,6 @@ enyo.depends(
 	"CategoryView.js",
 	"EditCategory.js",
 	"PrayerView.js",
-	"PrayerPanels.js"
+	"PrayerPanels.js",
+	"EditPrayer.js"
 );

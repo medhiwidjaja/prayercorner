@@ -10,6 +10,7 @@ enyo.kind({
 			kind: "PrayerList.PrayerView",
 			onOpenVersePanel:   "openVersePanel",
 			onOpenJournalPanel: "openJournalPanel",
+			onOpenEditPanel:    "openEditPanel",
 			onGrabberTap: 		"toggleView"
 		}
 	],
@@ -46,6 +47,17 @@ enyo.kind({
 		this.pushView(
 			{ kind: "PrayerList.JournalInput",
 				prayerId: inEvent.prayerId,
+				model: model
+			},
+			{ owner: this }
+		)
+	},
+
+	openEditPanel: function(inSender, inEvent) {
+		this.log();
+		var model = inEvent.prayerItem;
+		this.pushView(
+			{ kind: "PrayerList.EditPrayer",
 				model: model
 			},
 			{ owner: this }
