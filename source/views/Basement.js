@@ -89,7 +89,8 @@ enyo.kind({
 	kind: "enyo.DataRepeater", 
 	controller: "pl.categoriesCollection", 
 	events: {
-		onSelectCategory: ""
+		onSelectCategory: "",
+		onCloseEditCategoryPanel: ""
 	},
 	components: [{
 		onSelected: "categorySelected",
@@ -100,7 +101,7 @@ enyo.kind({
 	}],
 	
 	categorySelected: function(inSender, inEvent) {
-		// FIXME: Close EditCategory panel first
+		this.doCloseEditCategoryPanel();
 		var category = inEvent.model;
 		pl.selectedCategoryController.set("model", category);
 		// Save the model's attributes in the controller:

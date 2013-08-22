@@ -6,11 +6,7 @@ enyo.kind({
 	published: {
 
 	},
-
 	controller: "pl.editCategoryController",
-	// bindings: [
-	// 	{from: ".model.title", to: "$.tbtitle.content"},
-	// ],
 	components: [
 		{ name: "ECTopToolbar", 
 			kind: "onyx.Toolbar", 
@@ -67,9 +63,9 @@ enyo.kind({
 	name: "GroupEditFields",
 	controller: "pl.editCategoryController",
 	bindings: [
-		{ from: ".controller.model.title", to: ".$.groupName.value", oneWay: false, transform: "prettify" },
-		{ from: ".controller.model.daily", to: ".$.groupEditFields.$.scheduleDailyCheckbox.checked", oneWay: false },
-		{ from: ".controller.model.weekly", to: ".$.groupEditFields.$.scheduleWeeklyCheckbox.checked", oneWay: false },
+		{ from: ".controller.model.title", to: ".$.groupName.value", oneWay: false },
+		{ from: ".controller.model.daily", to: ".$.scheduleDailyCheckbox.checked", oneWay: false },
+		{ from: ".controller.model.weekly", to: ".$.scheduleWeeklyCheckbox.checked", oneWay: false }
 	],
 	classes: "pl-input-container",
 	
@@ -127,6 +123,7 @@ enyo.kind({
 	
 	dailyCheckboxChanged: function(inSender, inEvent) {
 		var value = inSender.getValue();
+		// Two-way bindings don't seem to work for this. Set the values here:
 		this.controller.model.set("daily", value);
 		this.controller.model.set("weekly", !value);
 		this.log(inSender.name + ": " + inSender.getValue());
@@ -134,6 +131,7 @@ enyo.kind({
 
 	weeklyCheckboxChanged: function(inSender, inEvent) {
 		var value = inSender.getValue();
+		// Two-way bindings don't seem to work for this. Set the values here:
 		this.controller.model.set("daily", !value);
 		this.controller.model.set("weekly", value);
 		this.log(inSender.name + ": " + inSender.getValue());

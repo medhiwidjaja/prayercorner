@@ -20,7 +20,8 @@ enyo.kind({
 					name: "basement",
 					kind: "Basement",
 					onSelectCategory: "viewCategoryItems",
-					onAddCategory: "editCategory"
+					onAddCategory: "editCategory",
+					onCloseEditCategoryPanel: "destroyEditGroup"
 				},
 				{
 					kind: "enyo.Panels", 
@@ -150,8 +151,10 @@ enyo.kind({
 	},
 
 	destroyEditGroup: function() {
-		this.$.editGroup.destroy();
-		this.hidingEditGroup = false;
+		if (this.$.editGroup) {
+			this.$.editGroup.destroy();
+			this.hidingEditGroup = false;
+		}
 		this.log();
 	},
 
