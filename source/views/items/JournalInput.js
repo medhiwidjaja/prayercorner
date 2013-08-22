@@ -10,6 +10,7 @@ enyo.kind({
 		{from: ".model.entryDate", to: ".$.journalDate.calendarDate", oneWay: true},
 		{from: ".model.content", to: ".$.journalInput.value", oneWay: true},
 		{from: ".model.answer", to: ".$.answerCheckbox.checked", oneWay: true},
+		{from: ".model.entryDate", to: ".$.datePicker.value", transform: function(v) {return new Date(v)}}
 	],
 	components: [
 		{ name: "VITopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", 
