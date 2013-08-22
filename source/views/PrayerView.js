@@ -30,7 +30,12 @@ enyo.kind({
 			fit: true,
 			components: [
 				{ kind: "FittableRows", classes: "prayer-item-container", components: [
-					{ name: "prayerItem", bindFrom: ".selected.title", classes: "dropcap-text decent-padding" },
+					{ name: "prayerItem", bindFrom: ".selected.title", classes: "dropcap-text decent-padding", ontap: "editItem" },
+					{ name: "editFields", components: [
+							{ name: "prayerInput", kind: "onyx.Input", bindFrom: ".selected.title", bindTo: ".value", showing: false },
+							
+						]
+					},
 					{ tag: "br" },
 					{ content: "Journal", style:"left:50px", classes: "watermark dark-red" },
 					{ content: "Journal", classes: "upperfloor-header decent-padding" },
@@ -80,6 +85,10 @@ enyo.kind({
 		this.log();
 	},
 
+	editItem: function() {
+		this.$.editFields.showing = true;
+	},
+
 	addJournal: function() {
 		this.doOpenJournalPanel({prayerId: this.controller.selected.id});
         this.log();
@@ -91,6 +100,7 @@ enyo.kind({
     },	
 
     deleteItem: function() {
+    	this.controller.selected.destroyItem();
     	this.log();
     	this.close();
     }

@@ -25,8 +25,29 @@ enyo.kind({
 		// 	})
 		// }
 	},
+	
+	destroyItem: function(){
+		this.destroyRelated();
+		this.log(this.title);
+		this.destroy();
+	},
 
 	destroyRelated: function() {
-
+		pl.bibleVersesCollection.filterPrayer(this.id);
+		var verses = enyo.clone(pl.bibleVersesCollection.data());
+		pl.bibleVersesCollection.removeAll();
+		enyo.forEach(verses, function(item) {
+			//pl.bibleVersesCollection.removeItem(item);
+			item.destroy();
+			this.log(item.passage);
+		});
+		pl.journalEntriesCollection.filterPrayer(this.id);
+		journals = enyo.clone(pl.journalEntriesCollection.data());
+		pl.journalEntriesCollection.removeAll();
+		enyo.forEach(journals, function(item) {
+			//pl.journalEntriesCollection.removeItem(item);
+			item.destroy();
+			this.log(item.content);
+		})
 	}
 });

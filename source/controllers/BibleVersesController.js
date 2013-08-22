@@ -27,8 +27,10 @@ enyo.kind({
 	},
 
 	removeItem: function(item) {
-		this.remove(item);
-		item.destroy();
+		//this.remove(item);
+		//item.destroy();
 		this.log();
 	}
 })
+
+//7e8060e8-646b-5f09-aaf7-89e0f00a2669
