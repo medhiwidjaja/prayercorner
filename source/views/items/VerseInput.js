@@ -13,11 +13,11 @@ enyo.kind({
 	],
 	components: [
 		{ name: "VITopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", 
-			layoutKind: "FittableColumnsLayout",
+			//layoutKind: "FittableColumnsLayout",
 			components: [
 				{ kind: "enyo.Button", content: "Back", classes: "text-button", ontap: "cancelInput" },
-				{ content: "Add verse", fit: true },
-				{ kind: "enyo.Button", content: "Save", classes: "text-button", ontap: "saveInput" }
+				//{ content: "Add verse", fit: true },
+				{ kind: "enyo.Button", content: "Save", classes: "text-button pull-right", ontap: "saveInput" }
 			]
 		},
 		{ kind: "enyo.Scroller", 

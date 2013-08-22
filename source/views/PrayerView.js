@@ -19,8 +19,8 @@ enyo.kind({
 			components: [
 				{ kind: "onyx.Grabber", ontap: "topToolbarGrabberTap" },
 				{ content: "Prayer", classes: "watermark decent-padding" },
-				{ fit: true },
-				{ kind: "onyx.IconButton", src: "assets/Onyx-Icons-Examples-LightBkgrnd-Cross.png", classes: "close-button", ontap: "close" }
+				//{ fit: true },
+				{ kind: "onyx.IconButton", src: "assets/Onyx-Icons-Examples-LightBkgrnd-Cross.png", classes: "close-button pull-right", ontap: "close" }
 			]
 		}, 
 		{ name: "LivingRoom", 

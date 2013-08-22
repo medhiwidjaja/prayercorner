@@ -13,11 +13,11 @@ enyo.kind({
 	],
 	components: [
 		{ name: "VITopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", 
-			layoutKind: "FittableColumnsLayout",
+			//layoutKind: "FittableColumnsLayout",
 			components: [
 				{ kind: "enyo.Button", content: "Back", classes: "text-button", ontap: "cancelInput" },
-				{ fit: true },
-				{ kind: "enyo.Button", content: "Save", classes: "text-button", ontap: "saveInput" }
+				//{ fit: true },
+				{ kind: "enyo.Button", content: "Save", classes: "text-button pull-right", ontap: "saveInput" }
 			]
 		},
 		{ kind: "enyo.Scroller", 
@@ -75,14 +75,6 @@ enyo.kind({
 			]
 		}
 	],
-
-	// create: function() {
-	// 	this.inherited(arguments);
-	// 	if (this.journalItem) {
-	// 		this.$.journalDate.set("calendarDate", this.journalItem.entryDate);
-	// 		this.$.JournalInput.set("value", this.journalItem.content);
-	// 	}
-	// },
 
 	cancelInput: function() {
 		this.log(this.$.journalInput.value);
