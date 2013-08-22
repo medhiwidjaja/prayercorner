@@ -32,7 +32,8 @@ enyo.kind({
 					components: [
 						{ name: "journalDate", kind: "PrayerList.CalDate", 
 							calendarDate: (new Date()).toUTCString().match(/\d{1,2}\s\w{3}\s\d{4}/)[0],
-							additionalStyles: "margin-right:5px; color: #fdfff7;background-color: rgba(125,0,0,0.5);" 
+							additionalStyles: "margin-right:5px; color: #fdfff7;background-color: rgba(125,0,0,0.5);" ,
+							ontap: "showDateFields"
 						},
 						{ kind: "onyx.InputDecorator", 
 							classes: "pl-input-decorator", 
@@ -52,6 +53,14 @@ enyo.kind({
 						{ content: "Mark as answer", classes: "enyo-inline checkbox-label" }
 					]
 				},
+				{ style:"margin: 20px 35px", components: [
+					{ name:"datePicker", 
+						kind:"onyx.DatePicker", 
+						showing: false, 
+						minYear:1900, maxYear:2100,
+						onSelect: "setDate"
+					}
+				]}
 			]
 		},
 		{ tag: "br" },
@@ -99,6 +108,19 @@ enyo.kind({
 		this.$.journalInput.setValue("");
 		this.doClose();
 		this.log({title:input, date:date, answer:answer});
+	},
+
+	showDateFields: function() {
+		this.$.datePicker.set("showing", true)
+	},
+
+	formatDate: function(date) {
+		return date.toUTCString().match(/\d{1,2}\s\w{3}\s\d{4}/)[0]
+	},
+
+	setDate: function(inSender, inEvent) {
+		this.$.journalDate.set("calendarDate", this.formatDate(inEvent.value));
+		this.log(inEvent.value)
 	},
 
 	checkboxChanged: function() {

@@ -34,6 +34,7 @@
 @plPurple:              #624583;
 @darkRed:				#7d0000;
 @lightBackground:       #FDFFF7;
+@lightRed:              rgb(191, 129, 123);
 
 /* Place your Onyx variable overrides here -------------------- */
 // @onyx-font-family: "Open Sans", Asap, Arial;
@@ -52,6 +53,13 @@
 @onyx-background: @lightBackground;
 @onyx-light-background: @lightBackground;
 @onyx-dark-background: @darkRed;
+
+// Buttons (including date picker):
+@onyx-button-font-size: @onyx-font-size-small;
+@onyx-popup-font-size: @onyx-font-size-small;
+@onyx-picker-background: @lightRed;
+@onyx-picker-item-background: @plRed;
+@onyx-picker-text-color: @lightBackground;
 
 // Checkbox:
 @onyx-checkbox-image: url(../assets/checkbox.png);
@@ -81,4 +89,17 @@ body {
 	padding: 4px 8px;
 }
 
+// For date pickers:
+.onyx-picker-decorator .onyx-button {
+    padding: 6px 15px;
+    background: @lightBackground;
+}
+
+.onyx-menu-item {
+    padding: 6px;
+}
+
+.onyx-picker {
+    color: @lightBackground;
+}
 /* ----------------------------------------- end rule overrides */
