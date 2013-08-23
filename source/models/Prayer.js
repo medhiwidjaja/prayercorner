@@ -37,7 +37,6 @@ enyo.kind({
 		var verses = enyo.clone(pl.bibleVersesCollection.data());
 		pl.bibleVersesCollection.removeAll();
 		enyo.forEach(verses, function(item) {
-			//pl.bibleVersesCollection.removeItem(item);
 			item.destroy();
 			this.log(item.passage);
 		});
@@ -45,7 +44,6 @@ enyo.kind({
 		journals = enyo.clone(pl.journalEntriesCollection.data());
 		pl.journalEntriesCollection.removeAll();
 		enyo.forEach(journals, function(item) {
-			//pl.journalEntriesCollection.removeItem(item);
 			item.destroy();
 			this.log(item.content);
 		})

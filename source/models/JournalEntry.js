@@ -4,7 +4,7 @@ enyo.kind({
 	attributes: {
 		id: "",
 		content: "",
-		createdDate: "",
+		entryDate: "",
 		prayerId: "",
 		answer: false
 		// prayer: {
@@ -15,7 +15,7 @@ enyo.kind({
 	},
 
 	journalDate: function() {
-		return new Date(Date.parse(this.createdDate));
+		return new Date(Date.parse(this.entryDate));
 	},
 
 	month: function() {

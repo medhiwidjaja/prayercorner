@@ -32,7 +32,7 @@ enyo.kind({
 					style: "width: 100%",
 					components: [
 						{ name: "journalDate", kind: "PrayerList.CalDate", 
-							calendarDate: (new Date()).toUTCString().match(/\d{1,2}\s\w{3}\s\d{4}/)[0],
+							calendarDate: new Date(), // (new Date()).toUTCString().match(/\d{1,2}\s\w{3}\s\d{4}/)[0],
 							additionalStyles: "margin-right:5px; color: #fdfff7;background-color: rgba(125,0,0,0.5);" ,
 							ontap: "showDateFields"
 						},
@@ -112,7 +112,7 @@ enyo.kind({
 	},
 
 	setDate: function(inSender, inEvent) {
-		this.$.journalDate.set("calendarDate", this.formatDate(inEvent.value));
+		this.$.journalDate.set("calendarDate", inEvent.value); //this.formatDate(inEvent.value));
 		this.log(inEvent.value)
 	},
 

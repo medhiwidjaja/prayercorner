@@ -11,7 +11,7 @@ enyo.kind({
         createdDate: "",
         daily: true,
         weekly: false,
-        weekDays: ""
+        weekDays: 0
     },
 
     // Returns the number of prayer items under this category
