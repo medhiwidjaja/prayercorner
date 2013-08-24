@@ -4,6 +4,7 @@ enyo.depends(
 	"StylishHeader.js",
 	"CalDate.less",
 	"CalDate.js",
-	"TwoPlyPanel.js"
+	"TwoPlyPanel.js",
+	"ScheduledItemEdit.js"
 	//"RichTextEditor.js"
 );

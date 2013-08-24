@@ -2,8 +2,10 @@ enyo.kind({
 	name: "PrayerList.PrayerPanels",
 	kind: "PrayerList.TwoPlyPanel",
 	draggable:false, 
+	classes: "plist-landing",
 	events: {
-		onTogglePanel: ""
+		onTogglePanel: "",
+		onFocusEditPanel: ""
 	},
 	components: [
 		{ name: "prayerView", 
@@ -33,7 +35,8 @@ enyo.kind({
 				model: model
 			},
 			{ owner: this }
-		)
+		);
+		this.doFocusEditPanel();
 	},
 
 	openJournalPanel: function(inSender, inEvent) {
@@ -50,7 +53,8 @@ enyo.kind({
 				model: model
 			},
 			{ owner: this }
-		)
+		);
+		this.doFocusEditPanel();
 	},
 
 	openEditPanel: function(inSender, inEvent) {

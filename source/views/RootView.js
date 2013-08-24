@@ -28,7 +28,8 @@ enyo.kind({
 			fit: true,
 			//wrap: true,
 			onTransitionFinish: "rootTransitionComplete", 
-			onTogglePanel: "toggleGF", 
+			onTogglePanel: "toggleGroundFloor", 
+			onFocusEditPanel: "toggleUpperFloor",
 			onClosePanel: "closePrayerPanels",
 			components: [
 				{
@@ -85,7 +86,7 @@ enyo.kind({
 		this.log();  
 	},
 
-	toggleGF: function(inSender) {
+	toggleGroundFloor: function(inSender) {
 		// if (inSender.parent.index === 0) {
 		// 	inSender.parent.next();
 		// } else {
@@ -98,6 +99,15 @@ enyo.kind({
 			inSender.previous();
 		}
 		this.log();
+	},
+
+	toggleUpperFloor: function() {
+		//
+		if (PrayerList.NarrowPanels.isScreenNarrow()) {
+			this.$.rootPanels.setIndex(2);
+		} else {
+			this.$.rootPanels.setIndex(1);
+		}
 	},
 
 	editCategory: function(inSender, inEvent) {
@@ -125,6 +135,8 @@ enyo.kind({
 			this.$.rootPanels.render();
 			if (PrayerList.NarrowPanels.isScreenNarrow()) {
 				this.$.rootPanels.setIndex(2);
+			} else {
+				this.$.rootPanels.setIndex(1);
 			}
 		}
 	},
@@ -133,51 +145,57 @@ enyo.kind({
 		this.$.basement.$.groups.render();
 		this.$.categoryView.refreshBindings();
 		inSender.destroy();
-		this.log();
-	},
-
-	hidePrayerView: function(inSender, inEvent) {
-		this.log();
-		inSender.parent.destroy();
-		this.$.rootPanels.refresh();
-	},
-
-	rootTransitionComplete: function(inSender, inEvent) {
-		if (this.hidingPrayerView) {
-			this.destroyPrayerView();
-			this.log("Prayerview")
-		} else { 
-			if(this.hidingEditGroup) {
-				this.destroyEditGroup();
-				this.log("edit group")
-			}
-		}
-	},
-
-	contentTransitionComplete: function(inSender, inEvent) {
-		if(this.hidingEditGroup) {
-			this.destroyEditGroup();
-			this.log("edit group")
-		}
-	},
-
-	prayerViewTransitionComplete: function(inSender, inEvent) {
-		this.log("prayerview panels")
-	},
-
-	destroyEditGroup: function() {
-		if (this.$.editGroup) {
-			this.$.editGroup.destroy();
-			this.hidingEditGroup = false;
+		if (! PrayerList.NarrowPanels.isScreenNarrow()) {
+			this.$.rootPanels.setIndex(0);
 		}
 		this.log();
 	},
 
-	destroyPrayerView: function() {
-		this.$.prayerView.destroy();
-		this.hidingPrayerView = false;
-		this.log();
-	},
+	// hidePrayerView: function(inSender, inEvent) {
+	// 	this.log();
+	// 	inSender.parent.destroy();
+	// 	this.$.rootPanels.refresh();
+	// },
+
+	// rootTransitionComplete: function(inSender, inEvent) {
+	// 	if (this.hidingPrayerView) {
+	// 		this.destroyPrayerView();
+	// 		this.log("Prayerview")
+	// 	} else { 
+	// 		if(this.hidingEditGroup) {
+	// 			this.destroyEditGroup();
+	// 			this.log("edit group")
+	// 		}
+	// 	}
+	// },
+
+	// contentTransitionComplete: function(inSender, inEvent) {
+	// 	if(this.hidingEditGroup) {
+	// 		this.destroyEditGroup();
+	// 		this.log("edit group")
+	// 	}
+	// },
+
+	// prayerViewTransitionComplete: function(inSender, inEvent) {
+	// 	this.log("prayerview panels")
+	// },
+
+	// destroyEditGroup: function() {
+	// 	if (this.$.editGroup) {
+	// 		this.$.editGroup.destroy();
+	// 		this.hidingEditGroup = false;
+	// 	}
+	// 	if (! PrayerList.NarrowPanels.isScreenNarrow()) {
+	// 		this.$.rootPanels.setIndex(0);
+	// 	}
+	// 	this.log();
+	// },
+
+	// destroyPrayerView: function() {
+	// 	this.$.prayerView.destroy();
+	// 	this.hidingPrayerView = false;
+	// 	this.log();
+	// },
 
 	addPrayerItem: function(inSender, inEvent) {
 		this.log();
@@ -203,25 +221,27 @@ enyo.kind({
 			);
 			newComponent.render();
 			this.$.rootPanels.render();
-			if (PrayerList.NarrowPanels.isScreenNarrow()) {
-				this.$.rootPanels.setIndex(2);
-			}
-			this.log();
 		} else {
 			// necessary for PrayerView to display the title:
 			prayerPanel.$.prayerView.rebuildBindings();
 			// necessary for Scroller in PrayerView to work right:
 			prayerPanel.$.prayerView.render();
-			if (PrayerList.NarrowPanels.isScreenNarrow()) {
-				this.$.rootPanels.setIndex(2);
-			}
 		}
+		if (PrayerList.NarrowPanels.isScreenNarrow()) {
+			this.$.rootPanels.setIndex(2);
+		} else if (enyo.dom.getWindowWidth() < 930) {
+			this.$.rootPanels.setIndex(1);
+		}
+		this.log();
 	},
 
 	closePrayerPanels: function() {
 		this.log();
 		var panels = this.$.rootPanels.$.prayerPanels;
 		if (panels) panels.destroy();
+		if (! PrayerList.NarrowPanels.isScreenNarrow()) {
+			this.$.rootPanels.setIndex(0);
+		}
 	},
 
 	viewCategoryItems: function(inSender, inEvent) {
