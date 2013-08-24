@@ -211,55 +211,11 @@ enyo.kind({
 			// necessary for PrayerView to display the title:
 			prayerPanel.$.prayerView.rebuildBindings();
 			// necessary for Scroller in PrayerView to work right:
-			this.$.rootPanels.render();
+			prayerPanel.$.prayerView.render();
 			if (PrayerList.NarrowPanels.isScreenNarrow()) {
 				this.$.rootPanels.setIndex(2);
 			}
 		}
-		
-		// if (! this.$.prayerView) {  
-		//     var newComponent = this.$.rootPanels.createComponent(
-		//         {name: "prayerViewPanels",
-		//             // kind: "enyo.Panels",
-		//             // arrangerKind:"CollapsingArranger", 
-		//             kind: "PrayerList.TwoPlyPanel",
-		//             draggable:false, 
-		//             classes:"panels enyo-fit plist-groundfloor", 
-		//             //onTransitionFinish: "prayerViewPanelsTransitionComplete",
-		//             components: [
-		//                 {name: "prayerView", 
-		//                     kind: "PrayerList.PrayerView",
-		//                     mixins: ["enyo.AutoBindingSupport"],
-		//                     //onDoneEditing: "hidePrayerView",
-		//                     onGrabberTap: "toggleGF",
-		//                     //onAddVerseItem: "addVerseItem"
-		//                 }
-		//             ]
-		//         }, 
-		//         {owner: this}
-		//     );
-		//     this.$.prayerView.set("model", inModel);
-		//     pl.prayersCollection.select(inModel.id);
-		//     pl.journalEntriesCollection.filterPrayer(inModel);
-		//     pl.bibleVersesCollection.filterPrayer(inModel);
-		//     //newComponent.$.journals.set("controller", pl.journalEntriesCollection);
-		//     newComponent.render();
-		//     this.$.rootPanels.render();
-		//     if (enyo.Panels.isScreenNarrow()) {
-		//         this.$.rootPanels.setIndex(2);
-		//     }
-		//     this.log("New: " + inModel.title);
-		// } else {
-		//     this.$.prayerView.set("model", inModel);
-		//     pl.prayersCollection.select(inModel.id);
-		//     pl.journalEntriesCollection.filterPrayer(inModel);
-		//     pl.bibleVersesCollection.filterPrayer(inModel);
-		//     if (enyo.Panels.isScreenNarrow()) {
-		//         this.$.rootPanels.setIndex(2);
-		//     }
-		//     //this.$.prayerView.$.journals.set("controller", pl.journalEntriesCollection);
-		//     this.log("Changed: " + inModel.title);
-		// };
 	},
 
 	closePrayerPanels: function() {

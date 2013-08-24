@@ -40,7 +40,7 @@ enyo.kind({
 					// 		style: "float: right"
 					// 	}
 					// ]},
-					{ name: "prayerItem", bindFrom: ".selected.title", classes: "dropcap-text decent-padding", fit: true, ontap: "editItem" },
+					{ name: "prayerItem", bindFrom: ".selected.title", classes: "dropcap-text decent-padding", ontap: "editItem" },
 					// { kind: "onyx.IconButton", 
 					// 	src: "assets/Onyx-Icons-Examples-DarkBkgrnd-Forward.png",
 					// 	style: "position:relative; right: 16px"
@@ -62,7 +62,7 @@ enyo.kind({
 					{ name: "verses", kind: "PrayerList.BibleVerseList" },
 					{ tag: "br" },
 					{ kind: "swash", type: "w", shade: "dark" },
-					//{ fit: true }, 
+					{ fit: true }, 
 					//{ style: "margin-top:20px" }
 				]}
 			]
