@@ -32,11 +32,28 @@ enyo.kind({
 					style: "width: 95%",
 					components: [
 						{ name: "title", kind: "enyo.TextArea", 
-							defaultFocus: true, style: "font-size: 18px;", 
+							defaultFocus: true,  
 							placeholder: "Prayer request"
 						}
 					]
-				}
+				},
+				// {tag: "br"},
+				// {kind: "onyx.MenuDecorator", onSelect: "itemSelected", components: [
+				// 	{content: "Scrolling Popup menu"},
+				// 	{kind: "onyx.Menu", components: [
+				// 		{name: "menuScroller", kind: "enyo.Scroller", defaultKind: "onyx.MenuItem", vertical: "auto", classes: "enyo-unselectable", maxHeight: "200px", strategyKind: "TouchScrollStrategy", components: [
+				// 			{content: "1"},
+				// 			{content: "2"},
+				// 			{classes: "onyx-menu-divider"},
+				// 			{content: "3"},
+				// 			{content: "4"},
+				// 			{content: "5"},
+				// 			{classes: "onyx-menu-divider"},
+				// 			{content: "6"},
+				// 			{content: "7"}
+				// 		]}
+				// 	]}
+				// ]},
 			]
 		},
 		// { tag: "br" },

@@ -10,7 +10,8 @@ enyo.kind({
 		{from: ".model.entryDate", to: ".$.journalDate.calendarDate", oneWay: true},
 		{from: ".model.content", to: ".$.journalInput.value", oneWay: true},
 		{from: ".model.answer", to: ".$.answerCheckbox.checked", oneWay: true},
-		{from: ".model.entryDate", to: ".$.datePicker.value", transform: function(v) {return new Date(v)}}
+		{from: ".model.entryDate", to: ".$.datePicker.value", transform: "convertDate" },
+		{from: ".model.entryDate", to: ".$.datedebug.content" }
 	],
 	components: [
 		{ name: "VITopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", 
@@ -54,13 +55,14 @@ enyo.kind({
 						{ content: "Mark as answer", classes: "enyo-inline checkbox-label" }
 					]
 				},
-				{ style:"margin: 20px 35px", components: [
+				{ style:"margin-top: 20px; text-align:center", components: [
 					{ name:"datePicker", 
 						kind:"onyx.DatePicker", 
 						showing: false, 
 						minYear:1900, maxYear:2100,
 						onSelect: "setDate"
-					}
+					},
+					{ name: "datedebug" }
 				]}
 			]
 		},
@@ -109,6 +111,14 @@ enyo.kind({
 
 	formatDate: function(date) {
 		return date.toUTCString().match(/\d{1,2}\s\w{3}\s\d{4}/)[0]
+	},
+
+	convertDate: function(src) {
+		var date = new Date(src);
+		if (date == "Invalid Date") {
+			date = new Date();
+		}
+		return date;
 	},
 
 	setDate: function(inSender, inEvent) {

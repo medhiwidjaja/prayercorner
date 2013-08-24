@@ -32,6 +32,12 @@
 @lightGray:				#ccc;
 @darkGray:				#222;
 
+// From Theme.less
+
+@onyx-toolbar-font-size: 30px;
+@onyx-font-size-small: 20px;
+@onyx-font-size-medium: 26px;
+@onyx-font-size-large: 36px;
 
 /* Toolbar */
 
@@ -175,7 +181,7 @@
 }
 .plist-panels > * {
 	width: 320px;
-	min-width: 300px;
+	min-width: 290px;
 	box-shadow: -4px 0px 4px rgba(0,0,0,0.3);
 	-moz-box-shadow: -4px 0px 4px rgba(0,0,0,0.3);
 	-webkit-box-shadow: -4px 0px 4px rgba(0,0,0,0.3);
@@ -481,7 +487,7 @@
 	color: @grayDark;
 	background-color: @lightBackground;
 	border: none;
-	font-size: 18px;
+	font-size: @onyx-font-size-small;
 	font-family: "Alegreya SC";
 	font-weight: normal;
 };
@@ -498,7 +504,7 @@
 		font-family: Alegreya;
 		width: 100%;
 		border-bottom: 1px dotted @grayDark;
-		font-size: 18px;
+		font-size: @onyx-font-size-small;
 	}
 	border: none;
 }

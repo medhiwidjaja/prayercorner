@@ -39,7 +39,7 @@ enyo.kind({
 				},
 				{ kind: "onyx.InputDecorator", 
 					//classes: "pl-input-decorator", 
-					style: "margin-top: 10px; width: 95%",
+					style: "margin-top: 10px; width: 92%",
 					components: [
 						{ name: "verseAddress", kind: "onyx.Input", 
 							style: "width:100%;font-size: 18px;font-family: 'Alegreya SC';font-size: 0.9em;text-align: right;", 

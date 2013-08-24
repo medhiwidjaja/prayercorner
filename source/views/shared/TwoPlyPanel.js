@@ -30,6 +30,7 @@ enyo.kind({
 
     destroyView: function() {
         this.$.topView.destroy();
+        this.render();
         this.hidingView = false;
     },
 });
