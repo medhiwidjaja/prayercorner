@@ -184,15 +184,21 @@ enyo.kind({
 	},
 
 	viewPrayerItem: function(inSender, inModel) {
+		// close edit panel if it's open
 		if (this.$.editGroup) {
 			this.$.editGroup.controller.cancel();
 		}
-		if (! this.$.rootPanels.$.prayerPanels) {
+		// close any open edit (journal or verse) panel
+		var prayerPanel = this.$.rootPanels.$.prayerPanels;
+		if (prayerPanel) {
+			if (prayerPanel.$.topView)
+				prayerPanel.popView();
+		}
+		// now create the panel if one doesn't exist yet
+		if (! prayerPanel) {
 			var newComponent = this.$.rootPanels.createComponent(
 				{ name: "prayerPanels", 
 					kind: "PrayerList.PrayerPanels", 
-					// onTogglePanel: "toggleGF", 
-					// onClosePanel: "closePrayerPanels" 
 				}
 			);
 			newComponent.render();
@@ -203,7 +209,7 @@ enyo.kind({
 			this.log();
 		} else {
 			// necessary for PrayerView to display the title:
-			this.$.rootPanels.$.prayerPanels.$.prayerView.rebuildBindings();
+			prayerPanel.$.prayerView.rebuildBindings();
 			// necessary for Scroller in PrayerView to work right:
 			this.$.rootPanels.render();
 			if (PrayerList.NarrowPanels.isScreenNarrow()) {
