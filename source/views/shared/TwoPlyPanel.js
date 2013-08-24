@@ -30,7 +30,8 @@ enyo.kind({
 
     destroyView: function() {
         this.$.topView.destroy();
-        this.render();
+        this.reflow(); 	// reflow seems to solve problem of PrayerView panel 
+        				// blanking after the topView is destroyed (on iOS device)
         this.hidingView = false;
     },
 });

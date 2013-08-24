@@ -17,10 +17,11 @@ enyo.kind({
 		}
 	],
 	handlers: {
-		onCancel: 		"closeTopPanel",
+		//onClose: 			"closeTopPanel",
 		// onSaveVerse:    "saveVerseItem",
 		// onSaveJournal:  "saveJournalItem"
 	},
+
 	openVersePanel: function(inSender, inEvent) {
 		this.log();
 		var model;

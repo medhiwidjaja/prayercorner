@@ -32,7 +32,7 @@ enyo.kind({
 					style: "width: 95%",
 					components: [
 						{ name: "verseText", kind: "onyx.RichText", allowHtml: true,
-							defaultFocus: true, style: "font-size: 18px;", classes: "verse-item",
+							defaultFocus: true, classes: "verse-item",
 							placeholder: "Verse text"
 						}
 					]
