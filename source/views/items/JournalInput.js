@@ -10,8 +10,7 @@ enyo.kind({
 		{from: ".model.entryDate", to: ".$.journalDate.calendarDate", oneWay: true},
 		{from: ".model.content", to: ".$.journalInput.value", oneWay: true},
 		{from: ".model.answer", to: ".$.answerCheckbox.checked", oneWay: true},
-		{from: ".model.entryDate", to: ".$.datePicker.value", transform: "convertDate" },
-		{from: ".model.entryDate", to: ".$.datedebug.content" }
+		{from: ".model.entryDate", to: ".$.datePicker.value", transform: "convertDate" }
 	],
 	components: [
 		{ name: "VITopToolbar", kind: "onyx.Toolbar", classes: "top-toolbar", 
@@ -61,8 +60,7 @@ enyo.kind({
 						showing: false, 
 						minYear:1900, maxYear:2100,
 						onSelect: "setDate"
-					},
-					{ name: "datedebug" }
+					}
 				]}
 			]
 		},
@@ -97,10 +95,6 @@ enyo.kind({
 		} else {
 			pl.journalEntriesCollection.addItem({content: input, entryDate: date, answer: answer});
 		}
-		// var journal = new PrayerList.JournalEntry({content: input, entryDate: date, prayerId: this.prayerId});
-		// journal.commit();
-		// pl.journalEntriesCollection.add(journal);
-		this.$.journalInput.setValue("");
 		this.doClose();
 		this.log({title:input, date:date, answer:answer});
 	},

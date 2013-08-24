@@ -1,11 +1,26 @@
 enyo.kind({
+	name:				"PrayerList.NarrowPanels",
+	kind:				enyo.Panels,
+	statics: {
+		/*
+			Returns true when the window width is 640px or less. This value must be
+			the same as the "max-width" media query used for panel sizing in the
+			matching Panels.css
+		*/
+		isScreenNarrow: function() {
+			return enyo.dom.getWindowWidth() <= 640;
+		}
+	}
+});
+
+enyo.kind({
 	name: "PrayerList.RootView",
 	kind: "enyo.View",
 	classes: "plist",
 	components: [
 		{
 			name: "rootPanels", 
-			kind: "enyo.Panels",
+			kind: "PrayerList.NarrowPanels",
 			arrangerKind: "enyo.CollapsingArranger",
 			classes: "plist-panels enyo-fit",
 			realtimeFit: false,
@@ -108,7 +123,7 @@ enyo.kind({
 			);
 			newComponent.render();
 			this.$.rootPanels.render();
-			if (enyo.Panels.isScreenNarrow()) {
+			if (PrayerList.NarrowPanels.isScreenNarrow()) {
 				this.$.rootPanels.setIndex(2);
 			}
 		}
@@ -182,7 +197,7 @@ enyo.kind({
 			);
 			newComponent.render();
 			this.$.rootPanels.render();
-			if (enyo.Panels.isScreenNarrow()) {
+			if (PrayerList.NarrowPanels.isScreenNarrow()) {
 				this.$.rootPanels.setIndex(2);
 			}
 			this.log();
@@ -191,7 +206,7 @@ enyo.kind({
 			this.$.rootPanels.$.prayerPanels.$.prayerView.rebuildBindings();
 			// necessary for Scroller in PrayerView to work right:
 			this.$.rootPanels.render();
-			if (enyo.Panels.isScreenNarrow()) {
+			if (PrayerList.NarrowPanels.isScreenNarrow()) {
 				this.$.rootPanels.setIndex(2);
 			}
 		}
@@ -248,7 +263,7 @@ enyo.kind({
 	},
 
 	viewCategoryItems: function(inSender, inEvent) {
-		if (enyo.Panels.isScreenNarrow()) {
+		if (PrayerList.NarrowPanels.isScreenNarrow()) {
 			this.$.rootPanels.setIndex(1);
 		}
 		// This will make sure the categoryView's DOM dimensions are recomputed to fit the contents
