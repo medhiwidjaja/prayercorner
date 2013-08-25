@@ -4,8 +4,11 @@ enyo.kind({
 	classes: "plist-groundfloor wide bg",
 	//draggable: false,
 	published: {
-
+		toolbarTitle: ""
 	},
+	bindings: [
+		{from: ".toolbarTitle", to: ".$.toolbarHeader.title"}
+	],
 	controller: "pl.editCategoryController",
 	components: [
 		{ name: "ECTopToolbar", 
@@ -14,7 +17,7 @@ enyo.kind({
 			layoutKind: "FittableColumnsLayout",
 			components: [
 				{ kind: "enyo.Button", content: "Cancel", classes: "text-button", ontap: "cancel" },
-				{ name: "toolbarHeader", kind: "StylishHeader", title: "Edit Category", fit: true, watermark: false },
+				{ name: "toolbarHeader", kind: "StylishHeader", fit: true, watermark: false },
 				{ kind: "enyo.Button", content: "Done", classes: "text-button", ontap: "done" }
 			]
 		},

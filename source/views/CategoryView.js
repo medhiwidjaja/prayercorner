@@ -56,8 +56,6 @@ enyo.kind({
 	],
 
 	editCategory: function(inSender, inEvent) {
-		// TODO: close any open PrayerView panels first
-		this.doClosePanel();
 		this.doEditCategory(inSender, inEvent);
 		this.log();
 	},

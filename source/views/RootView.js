@@ -112,7 +112,11 @@ enyo.kind({
 
 	editCategory: function(inSender, inEvent) {
 		this.log();
+		// close any open PrayerView panels first
+		this.closePrayerPanels();
+		
 		pl.editCategoryController.set("isAddingNew", inSender.name === "basement" ? true : false); 
+		var title = (inSender.name  === "basement") ? "New category" : "Edit category";
 		if (this.$.prayerView) {
 			this.$.prayerView.destroy();
 		}
@@ -125,7 +129,7 @@ enyo.kind({
 					bindFrom: ".model",
 					bindTo: "model",
 					bindSource: "pl.selectedCategoryController",
-					
+					toolbarTitle: title,
 					category: inSender.name === "editGroup" ? inEvent : "",
 					onDoneEditing: "hideEditGroup"
 				}, 
