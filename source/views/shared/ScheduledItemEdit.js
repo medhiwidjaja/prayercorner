@@ -3,7 +3,7 @@ enyo.kind({
 	name: "PrayerList.ScheduledItemEdit",
 	//controller: "pl.editCategoryController",
 	bindings: [
-		{ from: ".controller.model.title", to: ".$.groupName.value", oneWay: false },
+		{ from: ".controller.model.title", to: ".$.groupName.value", oneWay: false, transform: "checkNull" },
 		{ from: ".controller.model.daily", to: ".$.scheduleDailyCheckbox.checked", oneWay: false },
 		{ from: ".controller.model.weekly", to: ".$.scheduleWeeklyCheckbox.checked", oneWay: false },
 		{ from: ".controller.model.weekDays", to: ".dayMap" }  // This doesn't work
@@ -108,5 +108,9 @@ enyo.kind({
 		var weekDays = this.dayMap || 0;
 		this.controller.model.set("weekDays", weekDays ^ 1<<num);
 		this.log(originator.name + " (" + this.weekDays[num] + ") : " + originator.checked);
+	},
+
+	checkNull: function(x) {
+		return x ? x : ""
 	}
 })
